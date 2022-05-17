@@ -25,4 +25,5 @@ autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_
 " NordVim
 
 set termguicolors
+set guifont=Bitstream\ Vera\ Sans\ Mono:h13
 colorscheme nord
