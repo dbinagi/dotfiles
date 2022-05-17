@@ -7,6 +7,3 @@
 [submodule ".vim/bundle/vim-airline"]
 	path = .vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline
-[submodule "Vim-Lua"]
-	path = .vim
-	url = https://github.com/tbastos/vim-lua.git
