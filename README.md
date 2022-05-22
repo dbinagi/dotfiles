@@ -6,11 +6,13 @@
 
 ## Windows
 
+1) Install VIM for Windows, add VIM_DESTINATION_PATH\vim82 to Path environment variables
+
+1) Make sure the ~\vimfiles folder has the default files from installation (syntax, indent and all folders)
+
 1) Create a new system variable called VIM to ~\vimfiles
 
 1) Execute install_windows.bat
-
-1) Make sure the ~\vimfiles folder has the default files from installation (syntax, indent and all folders)
 
 ## MAC
 
