@@ -1,9 +1,13 @@
 
+" PLUGIN - PATHOGEN
+" -----------------
+
 call pathogen#infect()
 syntax on
 filetype plugin indent on
 
-" NerdTree Conf
+" PLUGIN - NerdTree
+" -----------------
 
 " Start NERDTree and leave the cursor in it.
 autocmd VimEnter * NERDTree
@@ -22,8 +26,46 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
-" NordVim
+" PLUGIN - ctrlp.vim
+" ------------------
 
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" KEYS
+" ----
+
+set backspace=indent,eol,start  " Backspacing
+
+" FONTS
+" -----
+
+"set guifont=Bitstream\ Vera\ Sans\ Mono:h13
+"set guifont=Lotion\ With\ Ligatures:h13
+"set guifont=Meslo\ LG\ M:h13
+set guifont=CozetteVector:h11
+
+" COLOR - NordVim
+" ---------------
 set termguicolors
-set guifont=Bitstream\ Vera\ Sans\ Mono:h13
 colorscheme nord
+
+" UI Config
+" ---------
+set guioptions-=T  "remove menu bar
+set guioptions-=m  "remove menu bar
+set guioptions-=r  "remove scrollbar
+set belloff=all "Mute audio
+
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window.
+  set lines=999 columns=999
+else
+  " This is console Vim.
+  if exists("+lines")
+    set lines=50
+  endif
+  if exists("+columns")
+    set columns=100
+  endif
+endif
