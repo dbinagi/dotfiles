@@ -35,6 +35,7 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 " ----
 
 set backspace=indent,eol,start  " Backspacing
+set expandtab ts=4 sw=4 ai
 
 " FONTS
 " -----
@@ -55,6 +56,8 @@ set guioptions-=T  "remove menu bar
 set guioptions-=m  "remove menu bar
 set guioptions-=r  "remove scrollbar
 set belloff=all "Mute audio
+
+set encoding=utf-8
 
 if has("gui_running")
   " GUI is running or is about to start.

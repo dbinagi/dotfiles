@@ -2,7 +2,11 @@
 
 1) Install plugins dependencies
 
-    `git submodule update --init`
+    `git submodule update --init --recursive`
+
+1) Add plugin with pathogen
+
+    `git submodule add [url_clone_github] .vim/bundle/[module_name]`
 
 ## Windows
 
