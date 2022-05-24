@@ -31,6 +31,12 @@ autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
+" PLUGIN - vim-mucomplete
+" -----------------------
+
+set completeopt+=menuone
+set completeopt+=noselect
+
 " KEYS
 " ----
 
