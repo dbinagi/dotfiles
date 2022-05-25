@@ -49,7 +49,7 @@ set expandtab ts=4 sw=4 ai
 "set guifont=Bitstream\ Vera\ Sans\ Mono:h13
 "set guifont=Lotion\ With\ Ligatures:h13
 "set guifont=Meslo\ LG\ M:h13
-set guifont=CozetteVector:h11
+set guifont=CozetteVector:h13
 
 " COLOR - NordVim
 " ---------------
@@ -78,3 +78,13 @@ else
     set columns=100
   endif
 endif
+
+
+" Put these lines at the very end of your vimrc file.
+
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL

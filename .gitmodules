@@ -22,3 +22,6 @@
 [submodule ".vim/bundle/vim-mucomplete"]
 	path = .vim/bundle/vim-mucomplete
 	url = https://github.com/lifepillar/vim-mucomplete.git
+[submodule ".vim/bundle/ale"]
+	path = .vim/bundle/ale
+	url = https://github.com/dense-analysis/ale.git
