@@ -1,2 +1,5 @@
-copy .vimrc %VIM%\_vimrc
-xcopy .vim %VIM% /E/H/C/I
+copy init.vim %LocalAppData%\nvim\init.vim
+copy ginit.vim %LocalAppData%\nvim\ginit.vim
+
+xcopy autoload %LocalAppData%\nvim\autoload /E/H/C/I
+xcopy colors %LocalAppData%\nvim\colors /E/H/C/I
