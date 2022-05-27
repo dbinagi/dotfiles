@@ -30,6 +30,15 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'goolord/alpha-nvim'
 
+" Control P
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Color scheme
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+
+" Improve terminal
+Plug 'vimlab/split-term.vim'
+
 call plug#end()
 
 " PLUGIN - NVIM-TREE
@@ -95,7 +104,7 @@ nnoremap <leader>n :NvimTreeFindFile<CR>
 " NvimTreeCollapseKeepBuffers
 
 " a list of groups can be found at `:help nvim_tree_highlight`
-highlight NvimTreeFolderIcon guibg=blue
+" highlight NvimTreeFolderIcon guibg=blue
 
 lua require('nvim-tree').setup()
 
@@ -176,7 +185,16 @@ lua <<EOF
 EOF
 
 
-lua require('lualine').setup()
+" lua require('lualine').setup()
+
+lua <<EOF
+    local lualine = require'lualine'
+    lualine.setup({
+        options = {
+            theme = 'tokyonight'
+        }
+    })
+EOF
 
 " PLUGIN - alpha-vim
 " ==================
@@ -186,7 +204,8 @@ lua require('alpha').setup(require('alpha.themes.dashboard').config)
 " COLORS
 " ======
 set termguicolors
-colorscheme nord
+" colorscheme nord
+colorscheme tokyonight
 
 " GENERAL CONFIGURATION
 " ---------------------
@@ -205,5 +224,6 @@ syntax on                   " Syntax highlight
 set mouse=a                 " Enable mouse click
 set cursorline              " Highlight current cursorline
 set noswapfile              " Disable creating swap file
+set splitright
 
 let mapleader=";"
