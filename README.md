@@ -18,3 +18,9 @@
 **VIM**
 
 1) Execute `npm install -g vim-language-server`
+
+### Troubleshooting
+
+#### Error with VCRUNTIME140.DLL
+
+1) Install c++ 2015: https://www.microsoft.com/en-us/download/details.aspx?id=52685
