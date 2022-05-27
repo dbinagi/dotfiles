@@ -24,3 +24,7 @@
 #### Error with VCRUNTIME140.DLL
 
 1) Install c++ 2015: https://www.microsoft.com/en-us/download/details.aspx?id=52685
+
+#### Error "No C compiler found!"
+
+1) Install: `choco install mingw`
