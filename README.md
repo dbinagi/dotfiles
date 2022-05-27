@@ -22,6 +22,8 @@
 **C#**
 
 1) Execute `dotnet tool install --global csharp-ls`
+2) For Unity solutions install corresponding version of SDK
+   https://dotnet.microsoft.com/en-us/download/dotnet-framework/net471
 
 ### Troubleshooting
 
