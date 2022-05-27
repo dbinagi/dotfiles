@@ -19,6 +19,10 @@
 
 1) Execute `npm install -g vim-language-server`
 
+**C#**
+
+1) Execute `dotnet tool install --global csharp-ls`
+
 ### Troubleshooting
 
 #### Error with VCRUNTIME140.DLL
