@@ -54,6 +54,8 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
 
+Plug 'OmniSharp/omnisharp-vim'
+
 call plug#end()
 
 " Load Custom LUA configuration
@@ -81,6 +83,16 @@ nnoremap <C-f> :NERDTreeFind<CR>
 
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" au Syntax cs    runtime! syntax/csharp.vim
+augroup filetype                                                     
+  au BufRead,BufNewFile *.cs    set filetype=csharp         
+augroup END                                                          
+au Syntax csharp    so ~/.vim/syntax/csharp.vim          
+
+
+let g:OmniSharp_selector_ui = 'ctrlp'
+
 
 " COLORS
 " ======
