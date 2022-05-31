@@ -50,6 +50,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
+" PlantUML
+Plug 'scrooloose/vim-slumlord'
+Plug 'aklt/plantuml-syntax'
 " Telescope
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
@@ -92,6 +95,9 @@ au Syntax csharp    so ~/.vim/syntax/csharp.vim
 
 
 let g:OmniSharp_selector_ui = 'ctrlp'
+
+
+let g:plantuml_executable_script = 'C:\Users\Bini\Downloads\plantuml-1.2022.5.jar'
 
 
 " COLORS
