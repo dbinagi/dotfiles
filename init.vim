@@ -57,6 +57,12 @@ Plug 'aklt/plantuml-syntax'
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
 
+" Autosave
+Plug 'Pocco81/AutoSave.nvim'
+
+" Git functions
+Plug 'airblade/vim-gitgutter'
+
 Plug 'OmniSharp/omnisharp-vim'
 
 call plug#end()
@@ -75,7 +81,10 @@ lua require('customalpha')
 lua require('customtreesitter')
 " vim-nerdtree-syntax-highlight
 lua require('customtreesyntaxhighlight')
-
+" vim-gitgutter
+lua require('customgitgutter')
+" Autosave
+lua require('customautosave')
 " PLUGIN - NERDTree configuration
 " ===============================
 

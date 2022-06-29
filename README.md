@@ -25,6 +25,11 @@
 2) For Unity solutions install corresponding version of SDK
    https://dotnet.microsoft.com/en-us/download/dotnet-framework/net471
 
+**Python**
+
+1) Execute: `python -m pip install python-lsp-server`
+2) Execute: `python -m pip install python-language-server[all]`
+
 ### Troubleshooting
 
 #### Error with VCRUNTIME140.DLL

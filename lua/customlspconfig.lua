@@ -24,3 +24,5 @@ require'lspconfig'.sumneko_lua.setup {
 require'lspconfig'.vimls.setup{}
 
 require'lspconfig'.csharp_ls.setup{}
+
+require'lspconfig'.pylsp.setup{}
