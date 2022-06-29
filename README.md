@@ -15,6 +15,10 @@
 1) Install: https://github.com/sumneko/lua-language-server/releases
 1) Add it to PATH
 
+#### On MAC
+
+Run the command: brew install lua-language-server
+
 **VIM**
 
 1) Execute `npm install -g vim-language-server`
