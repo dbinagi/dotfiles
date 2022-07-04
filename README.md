@@ -43,3 +43,7 @@ Run the command: brew install lua-language-server
 #### Error "No C compiler found!"
 
 1) Install: `choco install mingw`
+
+#### No fonts on MAC
+
+1) Install patched font, complete version: https://www.nerdfonts.com/font-downloads
