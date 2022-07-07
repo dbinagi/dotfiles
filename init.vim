@@ -64,7 +64,7 @@ Plug 'Pocco81/AutoSave.nvim'
 Plug 'airblade/vim-gitgutter'
 
 " Bar
-Plug 'romgrk/barbar.nvim'
+" Plug 'romgrk/barbar.nvim'
 
 Plug 'OmniSharp/omnisharp-vim'
 
@@ -89,7 +89,7 @@ lua require('customgitgutter')
 " Autosave
 lua require('customautosave')
 " Bar
-lua require('custombar')
+" lua require('custombar')
 " PLUGIN - NERDTree configuration
 " ===============================
 
