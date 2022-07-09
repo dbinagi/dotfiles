@@ -53,9 +53,10 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " PlantUML
 Plug 'scrooloose/vim-slumlord'
 Plug 'aklt/plantuml-syntax'
+
 " Telescope
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 " Autosave
 Plug 'Pocco81/AutoSave.nvim'
@@ -63,8 +64,13 @@ Plug 'Pocco81/AutoSave.nvim'
 " Git functions
 Plug 'airblade/vim-gitgutter'
 
+" Which key
+Plug 'liuchengxu/vim-which-key'
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
 " Bar
 " Plug 'romgrk/barbar.nvim'
+" Plug 'noib3/nvim-cokeline'
 
 Plug 'OmniSharp/omnisharp-vim'
 
@@ -72,6 +78,7 @@ call plug#end()
 
 " Load Custom LUA configuration
 " =============================
+
 "lspconfig
 lua require('customlspconfig')
 "nvim-cmp
@@ -88,8 +95,11 @@ lua require('customtreesyntaxhighlight')
 lua require('customgitgutter')
 " Autosave
 lua require('customautosave')
-" Bar
-" lua require('custombar')
+" Telescope
+lua require('ctelescope')
+" WhichKey
+lua require('cwhichkey')
+
 " PLUGIN - NERDTree configuration
 " ===============================
 
@@ -109,10 +119,6 @@ au Syntax csharp    so ~/.vim/syntax/csharp.vim
 
 
 let g:OmniSharp_selector_ui = 'ctrlp'
-
-
-let g:plantuml_executable_script = 'C:\Users\Bini\Downloads\plantuml-1.2022.5.jar'
-
 
 " COLORS
 " ======
@@ -139,3 +145,4 @@ set noswapfile              " Disable creating swap file
 set splitright
 set completeopt=menu,menuone,noselect
 set showcmd
+set timeoutlen=500          " Reduce timeout for leader (default 1000ms)

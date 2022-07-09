@@ -34,6 +34,10 @@ Run the command: brew install lua-language-server
 1) Execute: `python -m pip install python-lsp-server`
 2) Execute: `python -m pip install python-language-server[all]`
 
+## Grep config for telescope
+
+Install dependency: `https://github.com/BurntSushi/ripgrep`
+
 ### Troubleshooting
 
 #### Error with VCRUNTIME140.DLL
