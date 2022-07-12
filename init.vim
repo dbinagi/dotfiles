@@ -74,6 +74,8 @@ Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
 Plug 'OmniSharp/omnisharp-vim'
 
+Plug 'ahmedkhalf/project.nvim'
+
 call plug#end()
 
 " Load Custom LUA configuration
@@ -99,7 +101,8 @@ lua require('customautosave')
 lua require('ctelescope')
 " WhichKey
 lua require('cwhichkey')
-
+" project management
+lua require('cproject')
 " PLUGIN - NERDTree configuration
 " ===============================
 
