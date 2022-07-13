@@ -80,7 +80,7 @@ call plug#end()
 
 " Load Custom LUA configuration
 " =============================
-
+lua require('ckeys')
 "lspconfig
 lua require('customlspconfig')
 "nvim-cmp
@@ -103,6 +103,7 @@ lua require('ctelescope')
 lua require('cwhichkey')
 " project management
 lua require('cproject')
+
 " PLUGIN - NERDTree configuration
 " ===============================
 
