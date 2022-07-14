@@ -15,6 +15,7 @@ Plug 'neovim/nvim-lspconfig'                                    " LSP
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " Highlight
 Plug 'nvim-lua/plenary.nvim'                                    " Library for Telescope
 Plug 'nvim-telescope/telescope.nvim'                            " Telescope
+Plug 'nvim-telescope/telescope-file-browser.nvim'               " File explorer (using Telescope)
 Plug 'Pocco81/AutoSave.nvim'                                    " Autosave
 Plug 'airblade/vim-gitgutter'                                   " Git functions
 Plug 'liuchengxu/vim-which-key'                                 " Which key
@@ -34,17 +35,6 @@ Plug 'hrsh7th/vim-vsnip-integ'
 
 " Improve terminal
 Plug 'vimlab/split-term.vim'
-
-" File Explorer
-"Plug 'scrooloose/nerdtree'
-
-" NERDTree complementary plugins
-"Plug 'ryanoasis/vim-devicons'
-"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
-Plug 'nvim-telescope/telescope-file-browser.nvim'
-
-" Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
 Plug 'OmniSharp/omnisharp-vim'
 

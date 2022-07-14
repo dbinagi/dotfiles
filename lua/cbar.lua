@@ -63,7 +63,7 @@ require'bufferline'.setup {
   clickable = true,
 
   -- Excludes buffers from the tabline
-  exclude_ft = {'javascript'},
+  exclude_ft = {},
   exclude_name = {'package.json'},
 
   -- Enable/disable icons
@@ -86,7 +86,7 @@ require'bufferline'.setup {
 
   -- If true, new buffers will be inserted at the start/end of the list.
   -- Default is to insert after current buffer.
-  insert_at_end = false,
+  insert_at_end = true,
   insert_at_start = false,
 
   -- Sets the maximum padding width with which to surround each tab
