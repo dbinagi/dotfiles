@@ -7,21 +7,19 @@ let maplocalleader=" "
 
 call plug#begin()
 
-" Welcome screen
-Plug 'goolord/alpha-nvim'
-" Plug 'mhinz/vim-startify'
-
-" Status Line
-Plug 'nvim-lualine/lualine.nvim'
-
-" Color scheme
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-
-" Icons (dependency with other plugins)
-Plug 'kyazdani42/nvim-web-devicons'
-
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neovim/nvim-lspconfig'
+Plug 'goolord/alpha-nvim'                                       " Welcome screen
+Plug 'nvim-lualine/lualine.nvim'                                " Status Line
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }              " Color scheme
+Plug 'kyazdani42/nvim-web-devicons'                             " Icons (dependency with other plugins)
+Plug 'neovim/nvim-lspconfig'                                    " LSP
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " Highlight
+Plug 'nvim-lua/plenary.nvim'                                    " Library for Telescope
+Plug 'nvim-telescope/telescope.nvim'                            " Telescope
+Plug 'Pocco81/AutoSave.nvim'                                    " Autosave
+Plug 'airblade/vim-gitgutter'                                   " Git functions
+Plug 'liuchengxu/vim-which-key'                                 " Which key
+Plug 'romgrk/barbar.nvim'                                       " Improved bar/tabs
+Plug 'ahmedkhalf/project.nvim'                                  " Project management
 
 " Completition Engine
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -34,47 +32,21 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
-" Control P
-Plug 'ctrlpvim/ctrlp.vim'
-
 " Improve terminal
 Plug 'vimlab/split-term.vim'
 
-" Highlight
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
 " File Explorer
-Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdtree'
 
 " NERDTree complementary plugins
-Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-" PlantUML
-Plug 'scrooloose/vim-slumlord'
-Plug 'aklt/plantuml-syntax'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 
-" Telescope
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
-" Autosave
-Plug 'Pocco81/AutoSave.nvim'
-
-" Git functions
-Plug 'airblade/vim-gitgutter'
-
-" Which key
-Plug 'liuchengxu/vim-which-key'
-Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
-
-" Bar
-" Plug 'romgrk/barbar.nvim'
-" Plug 'noib3/nvim-cokeline'
+" Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
 Plug 'OmniSharp/omnisharp-vim'
-
-Plug 'ahmedkhalf/project.nvim'
 
 call plug#end()
 
@@ -103,24 +75,15 @@ lua require('ctelescope')
 lua require('cwhichkey')
 " project management
 lua require('cproject')
-
-" PLUGIN - NERDTree configuration
-" ===============================
-
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" bar
+lua require('cbar')
 
 " au Syntax cs    runtime! syntax/csharp.vim
 augroup filetype                                                     
   au BufRead,BufNewFile *.cs    set filetype=csharp         
 augroup END                                                          
-au Syntax csharp    so ~/.vim/syntax/csharp.vim          
 
+au Syntax csharp    so ~/.vim/syntax/csharp.vim          
 
 let g:OmniSharp_selector_ui = 'ctrlp'
 

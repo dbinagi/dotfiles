@@ -9,6 +9,8 @@ require('telescope').setup({
   },
 })
 
+require("telescope").load_extension "file_browser"
+
 map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files({layout_strategy='vertical'})<cr>", opts)
 map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', opts)
 map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', opts)
@@ -18,3 +20,4 @@ map('n', '<leader>fp', '<cmd>Telescope projects<cr>', opts)
 map('n', '<leader>fs', "<cmd>lua require('telescope.builtin').git_status()<cr>", opts)
 map('n', '<leader>fl', "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
 
+map('n', '<leader>tf', '<cmd>Telescope file_browser<cr>', opts)
