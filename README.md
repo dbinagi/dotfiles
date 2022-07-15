@@ -29,6 +29,9 @@ Run the command: brew install lua-language-server
 2) For Unity solutions install corresponding version of SDK
    https://dotnet.microsoft.com/en-us/download/dotnet-framework/net471
 
+Variable de entorno:
+OMNISHARP_BIN
+
 **Python**
 
 1) Execute: `python -m pip install python-lsp-server`

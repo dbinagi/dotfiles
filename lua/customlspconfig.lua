@@ -60,12 +60,10 @@ require'lspconfig'.html.setup {
 -- C#
 
 local pid = vim.fn.getpid()
--- local omnisharp_bin = "D:\\Development\\omnisharp.http-win-x64\\OmniSharp.exe"
-local omnisharp_bin = "D:/Development/omnisharp.http-win-x64/OmniSharp.exe"
+local omnisharp_bin = os.getenv("OMNISHARP_BIN") .. "/OmniSharp.exe"
 
 require'lspconfig'.omnisharp.setup{
     cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
     capabilities = capabilities
-    --use_mono = true
 }
 
