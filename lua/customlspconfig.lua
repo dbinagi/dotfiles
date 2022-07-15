@@ -1,4 +1,6 @@
 
+require("nvim-lsp-installer").setup {}
+
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -40,20 +42,30 @@ require'lspconfig'.pylsp.setup{
     capabilities = capabilities
 }
 
-
-require'lspconfig'.csharp_ls.setup{}
-
-
 -- JavaScript
 
-require'lspconfig'.eslint.setup{
-    --root_dir = vim.fn.getcwd(),
+require'lspconfig'.tsserver.setup{
     capabilities = capabilities,
-    single_file_support = true,
 }
 
 -- HTML
 
 require'lspconfig'.html.setup {
     capabilities = capabilities,
+    cmd = {
+        "vscode-eslint-language-server", "--stdio"
+    }
 }
+
+-- C#
+
+local pid = vim.fn.getpid()
+-- local omnisharp_bin = "D:\\Development\\omnisharp.http-win-x64\\OmniSharp.exe"
+local omnisharp_bin = "D:/Development/omnisharp.http-win-x64/OmniSharp.exe"
+
+require'lspconfig'.omnisharp.setup{
+    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+    capabilities = capabilities
+    --use_mono = true
+}
+

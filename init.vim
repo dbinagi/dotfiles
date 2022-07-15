@@ -21,6 +21,7 @@ Plug 'airblade/vim-gitgutter'                                   " Git functions
 Plug 'liuchengxu/vim-which-key'                                 " Which key
 Plug 'romgrk/barbar.nvim'                                       " Improved bar/tabs
 Plug 'ahmedkhalf/project.nvim'                                  " Project management
+Plug 'williamboman/nvim-lsp-installer'                          " LSP Installer
 
 " Completition Engine
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -69,13 +70,14 @@ lua require('cproject')
 lua require('cbar')
 
 " au Syntax cs    runtime! syntax/csharp.vim
-augroup filetype                                                     
-  au BufRead,BufNewFile *.cs    set filetype=csharp         
-augroup END                                                          
 
-au Syntax csharp    so ~/.vim/syntax/csharp.vim          
+" augroup filetype                                                     
+"   au BufRead,BufNewFile *.cs    set filetype=csharp         
+" augroup END                                                          
 
-let g:OmniSharp_selector_ui = 'ctrlp'
+" au Syntax csharp    so ~/.vim/syntax/csharp.vim          
+
+" let g:OmniSharp_selector_ui = 'ctrlp'
 
 " COLORS
 " ======
