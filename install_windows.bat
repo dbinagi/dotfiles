@@ -1,4 +1,4 @@
-copy init.vim %LocalAppData%\nvim\init.vim
+copy init.lua %LocalAppData%\nvim\init.lua
 copy ginit.vim %LocalAppData%\nvim\ginit.vim
 
 xcopy autoload %LocalAppData%\nvim\autoload /E/H/C/I/Y
