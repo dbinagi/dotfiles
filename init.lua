@@ -1,3 +1,4 @@
+
 -- *=========*
 -- | PLUGINS |
 -- *=========*
@@ -11,16 +12,16 @@ Plug 'nvim-lualine/lualine.nvim'                                        -- Statu
 Plug('folke/tokyonight.nvim', { branch= 'main' })                      -- Color scheme
 Plug 'kyazdani42/nvim-web-devicons'                                     -- Icons (dependency with other plugins)
 Plug 'neovim/nvim-lspconfig'                                            -- LSP
---Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn[':TSUpdate']})  -- Highlight
-Plug 'nvim-treesitter/nvim-treesitter'                                  -- Highlight
+Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn[':TSUpdate']}) -- Highlight
 Plug 'nvim-lua/plenary.nvim'                                            -- Library for Telescope
 Plug 'nvim-telescope/telescope.nvim'                                    -- Telescope
 Plug 'nvim-telescope/telescope-file-browser.nvim'                       -- File explorer (using Telescope)
+Plug 'ahmedkhalf/project.nvim'                                          -- Project management
 Plug 'Pocco81/AutoSave.nvim'                                            -- Autosave
 Plug 'airblade/vim-gitgutter'                                           -- Git functions
 Plug 'liuchengxu/vim-which-key'                                         -- Which key
+Plug 'AckslD/nvim-whichkey-setup.lua'                                   -- Which key: Setup in LUA
 Plug 'romgrk/barbar.nvim'                                               -- Improved bar/tabs
-Plug 'ahmedkhalf/project.nvim'                                          -- Project management
 Plug 'williamboman/nvim-lsp-installer'                                  -- LSP Installer
 Plug 'hrsh7th/cmp-nvim-lsp'                                             -- Completition LSP
 Plug 'hrsh7th/cmp-buffer'                                               -- Completition Buffer
@@ -44,29 +45,16 @@ vim.g.maplocalleader = " "
 
 require('ckeys')
 require('custom.nvim-lspconfig')                            -- nvim-lspconfig
--- nvim-cmp
-require('customnvimcmp')
--- lualine
-require('customlualine')
--- alpha
-require('customalpha')
--- nvim-treesitter
-require('customtreesitter')
--- vim-nerdtree-syntax-highlight
-require('customtreesyntaxhighlight')
--- vim-gitgutter
-require('customgitgutter')
--- Autosave
-require('customautosave')
--- Telescope
-require('ctelescope')
--- WhichKey
-require('cwhichkey')
--- project management
-require('cproject')
--- bar
-require('cbar')
-
+require('custom.nvim-cmp')                                  -- nvim-cmp
+require('custom.lualine')                                   -- lualine
+require('custom.alpha-nvim')                                -- Alpha
+require('custom.nvim-treesitter')                           -- nvim-treesitter
+require('custom.vim-gitgutter')                             -- vim-gitgutter
+require('custom.AutoSave')                                  -- AutoSave
+require('custom.telescope_nvim')                            -- Telescope
+require('custom.project_nvim')                              -- Telescope: Project
+require('custom.barbar')                                    -- barbar
+require('custom.nvim-whichkey-setup')                       -- Which key setup
 -- *========*
 -- | COLORS |
 -- *========*
@@ -78,23 +66,33 @@ vim.cmd('colorscheme tokyonight')
 -- | GENERAL CONFIGURATION |
 -- *=======================*
 
-vim.o.number = true			            -- Show line number
-vim.o.showmatch = true			        -- Show matching
-vim.o.hlsearch = true			        -- Highlight search
-vim.o.clipboard = "unnamedplus"                  -- Copy and Paste from system clipboard
-vim.o.tabstop = 4			            -- Columns occupied by tab
-vim.o.softtabstop = 4		            -- Multiple spaces as tab
-vim.o.shiftwidth = 4                    -- Width for autoindents
-vim.o.expandtab = true			        -- Converts tab to spaces
-vim.o.autoindent = true                 -- Indent a new lines the same as before
-vim.o.cc = 80                           -- Border of 80
-vim.cmd("syntax on")                    -- Syntax highlight
-vim.o.mouse = "a"                      -- Enable mouse click
-vim.o.cursorline = true                 -- Highlight current cursorline
-vim.cmd("noswapfile")                 -- Disable creating swap file
-vim.o.splitright = true
-vim.o.completeopt = "menu,menuone,noselect"
-vim.o.showcmd = true
-vim.o.timeoutlen = 500                  -- Reduce timeout for leader (default 1000ms)
-vim.o.termguicolors = true
+vim.o.number            = true                          -- Show line number
+vim.o.relativenumber    = true                          -- Show relative from cursor to other lines
+vim.o.showmatch         = true			                -- Show matching
+vim.o.hlsearch          = true			                -- Highlight search
+vim.o.clipboard         = "unnamedplus"                 -- Copy and Paste from system clipboard
+vim.o.tabstop           = 4			                    -- Columns occupied by tab
+vim.o.softtabstop       = 4		                        -- Multiple spaces as tab
+vim.o.shiftwidth        = 4                             -- Width for autoindents
+vim.o.expandtab         = true			                -- Converts tab to spaces
+vim.o.autoindent        = true                          -- Indent a new lines the same as before
+vim.o.mouse             = "a"                           -- Enable mouse click
+vim.o.cursorline        = true                          -- Highlight current cursorline
+vim.o.splitright        = true
+vim.o.completeopt       = "menu,menuone,noselect"
+vim.o.showcmd           = true
+vim.o.timeoutlen        = 500                           -- Reduce timeout for leader (default 1000ms)
+vim.o.termguicolors     = true
+vim.o.ignorecase        = true                          -- Ignore case when searching
+vim.o.smartcase         = true                          -- Switch search to case sensitive when upperletter
+-- vim.o.foldmethod        = "indent"                      -- Fold based on indention levels
+-- vim.o.foldnestmax       = 3                             -- Fold up to 3 nested levels
+
+vim.cmd("noswapfile")                               -- Disable creating swap file
+vim.cmd("set cc=80")
+--vim.cmd("filetype plugin on")                               -- Disable creating swap file
+
+-- Turn manually syntax on on .cs files
+vim.cmd('au BufRead,BufNewFile *.cs syntax on')
+vim.cmd("syntax enable")                               -- Disable creating swap file
 
