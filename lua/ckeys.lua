@@ -46,6 +46,21 @@ map('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
 map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 
 ------------------------------
+--        Telescope         --
+------------------------------
+
+map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files({layout_strategy='vertical'})<cr>", opts)
+map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', opts)
+map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', opts)
+map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)
+
+map('n', '<leader>fp', '<cmd>Telescope projects<cr>', opts)
+map('n', '<leader>fs', "<cmd>lua require('telescope.builtin').git_status()<cr>", opts)
+map('n', '<leader>fl', "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
+
+map('n', '<leader>tf', '<cmd>Telescope file_browser<cr>', opts)
+
+------------------------------
 --        which-key         --
 ------------------------------
 
