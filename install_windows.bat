@@ -1,9 +1,9 @@
-copy init.lua %LocalAppData%\nvim\init.lua
-copy ginit.vim %LocalAppData%\nvim\ginit.vim
+copy nvim\init.lua %LocalAppData%\nvim\init.lua
+copy nvim\ginit.vim %LocalAppData%\nvim\ginit.vim
 
-xcopy autoload %LocalAppData%\nvim\autoload /E/H/C/I/Y
-xcopy colors %LocalAppData%\nvim\colors /E/H/C/I/Y
-xcopy lua %LocalAppData%\nvim\lua /E/H/C/I/Y
-xcopy syntax %LocalAppData%\nvim\syntax /E/H/C/I/Y
+xcopy nvim\autoload %LocalAppData%\nvim\autoload /E/H/C/I/Y
+xcopy nvim\colors %LocalAppData%\nvim\colors /E/H/C/I/Y
+xcopy nvim\lua %LocalAppData%\nvim\lua /E/H/C/I/Y
+xcopy nvim\syntax %LocalAppData%\nvim\syntax /E/H/C/I/Y
 
-read -n 1 -s
+set /p DUMMY=Hit ENTER to continue...

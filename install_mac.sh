@@ -1,7 +1,7 @@
-cp init.vim ~/.config/nvim
-cp ginit.vim ~/.config/nvim
+cp nvim/init.lua ~/.config/nvim
+cp nvim/ginit.vim ~/.config/nvim
 
-cp -R autoload ~/.config/nvim
-cp -R colors ~/.config/nvim
-cp -R lua ~/.config/nvim
-cp -R syntax ~/.config/nvim
+cp -R nvim/autoload ~/.config/nvim
+cp -R nvim/colors ~/.config/nvim
+cp -R nvim/lua ~/.config/nvim
+cp -R nvim/syntax ~/.config/nvim

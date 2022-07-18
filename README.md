@@ -1,12 +1,24 @@
-# My personal configuration for NVIM
+# My personal Dotfiles
 
-## Windows
+## Setup environments
 
-1) Install NVIM with MSI installer
+### Windows (With WSL)
+
+1) Install WSL to support Linux terminal
+    `wsl --install -d Ubuntu`
+1) Install tmux
+    `sudo apt install tmux`
+1) Install Fish
+    `sudo apt install fish`
+1) Install NeoVim
+    `sudo apt install neovim`
+
+### Windows (Without WSL)
+
+1) Install NeoVim
 2) Create folder nvim in `C:\Users\USER-NAME\AppData\Local\nvim`
 3) Execute install_windows.bat
 4) Open nvim from a command prompt and write `:PlugInstall`
-5) For C# execute: `:CocInstall coc-omnisharp`
 
 ### LSP Config
 
