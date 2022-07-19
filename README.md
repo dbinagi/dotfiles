@@ -24,6 +24,12 @@
 3) Execute install_windows.bat
 4) Open nvim from a command prompt and write `:PlugInstall`
 
+### MAC
+
+1) Install Alacritty from web: https://github.com/alacritty/alacritty/releases
+1) Install tmux: `brew install tmux`
+1) Install fish: `brew install fish`
+1) Run `./install_mac.sh`
 ## Troubleshooting
 
 ### Error with VCRUNTIME140.DLL

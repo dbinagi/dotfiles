@@ -5,3 +5,6 @@ cp -R nvim/autoload ~/.config/nvim
 cp -R nvim/colors ~/.config/nvim
 cp -R nvim/lua ~/.config/nvim
 cp -R nvim/syntax ~/.config/nvim
+
+cp -R fish ~/.config
+mkdir -p ~/.config/alacritty && cp alacritty/alacritty_mac.yml ~/.config/alacritty/alacritty.yml
