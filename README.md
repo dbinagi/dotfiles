@@ -10,8 +10,12 @@
     `sudo apt install tmux`
 1) Install Fish
     `sudo apt install fish`
+1) Configure fish as default shell
+    `chsh -s $(which fish)`
 1) Install NeoVim
     `sudo apt install neovim`
+1) Execute install_wsl.bat
+1) Open nvim from a command prompt and write `:PlugInstall`
 
 ### Windows (Without WSL)
 
@@ -20,49 +24,40 @@
 3) Execute install_windows.bat
 4) Open nvim from a command prompt and write `:PlugInstall`
 
-### LSP Config
+## Troubleshooting
 
-**LUA**
-
-1) Install: https://github.com/sumneko/lua-language-server/releases
-1) Add it to PATH
-
-#### On MAC
-
-Run the command: brew install lua-language-server
-
-**VIM**
-
-1) Execute `npm install -g vim-language-server`
-
-**C#**
-
-1) Execute `dotnet tool install --global csharp-ls`
-2) For Unity solutions install corresponding version of SDK
-   https://dotnet.microsoft.com/en-us/download/dotnet-framework/net471
-
-Variable de entorno:
-OMNISHARP_BIN
-
-**Python**
-
-1) Execute: `python -m pip install python-lsp-server`
-2) Execute: `python -m pip install python-language-server[all]`
-
-## Grep config for telescope
-
-Install dependency: `https://github.com/BurntSushi/ripgrep`
-
-### Troubleshooting
-
-#### Error with VCRUNTIME140.DLL
+### Error with VCRUNTIME140.DLL
 
 1) Install c++ 2015: https://www.microsoft.com/en-us/download/details.aspx?id=52685
 
-#### Error "No C compiler found!"
+### Error "No C compiler found!"
 
+**On Windows**
 1) Install: `choco install mingw`
 
-#### No fonts on MAC
+**On Linux**
+1) Install: `sudo apt install build-essential`
+
+### No fonts on MAC
 
 1) Install patched font, complete version: https://www.nerdfonts.com/font-downloads
+
+### NVIM: Grep config for telescope
+
+Install dependency: `https://github.com/BurntSushi/ripgrep`
+
+### NVIM: LSP not working
+
+Run the command: `:LspInstall` in the file not working
+
+### NVIM: Syntax colors not working
+
+Run the command: `:TSUpdate`
+
+### NVIM: LSPInstaller: No directory .cache
+
+Creates the folders `.cache/nvim`
+
+### NVIM: LSPInstaller: No unzip installer
+
+Install: `sudo apt-get install unzip`

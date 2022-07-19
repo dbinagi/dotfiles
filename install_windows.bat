@@ -6,4 +6,8 @@ xcopy nvim\colors %LocalAppData%\nvim\colors /E/H/C/I/Y
 xcopy nvim\lua %LocalAppData%\nvim\lua /E/H/C/I/Y
 xcopy nvim\syntax %LocalAppData%\nvim\syntax /E/H/C/I/Y
 
+xcopy alacritty\alacritty.yml %APPDATA%\alacritty\alacritty.yml* /Y
+
+xcopy fish \\wsl$\Ubuntu\home\bini\.config\fish /E/H/C/I/Y
+
 set /p DUMMY=Hit ENTER to continue...
