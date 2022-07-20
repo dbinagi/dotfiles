@@ -48,6 +48,16 @@
 
 1) Install patched font, complete version: https://www.nerdfonts.com/font-downloads
 
+### Click not working in Alacritty
+
+1) Close all running cmd program, like cmd or running alacritty.
+1) Rename your original conhost.exe to other names like conhost.exe_bak in C:\Windows\System32\
+1) Go to Windows Terminal path C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_<VERSION information>\OpenConsole.exe
+    1) e.g.:C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.0.1811.0_x64__8wekyb3d8bbwe\OpenConsole.exe
+1) Copy and rename OpenConsole.exe to C:\Windows\System32\conhost.exe
+
+Reference: https://github.com/alacritty/alacritty/issues/1663
+
 ### NVIM: Grep config for telescope
 
 Install dependency: `https://github.com/BurntSushi/ripgrep`
