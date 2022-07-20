@@ -30,6 +30,8 @@
 1) Install tmux: `brew install tmux`
 1) Install fish: `brew install fish`
 1) Run `./install_mac.sh`
+1) Set fish as default shell (https://gist.github.com/gagarine/cf3f65f9be6aa0e105b184376f765262)
+
 ## Troubleshooting
 
 ### Error with VCRUNTIME140.DLL
