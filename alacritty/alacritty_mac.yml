@@ -8,10 +8,14 @@ window:
     lines: 0
   dynamic_padding: false
   decorations: full
-  opacity: 1
+  opacity: 0.9
   startup_mode: Windowed 
   dynamic_title: true
-    #gtk_theme_variant: dark
+  gtk_theme_variant: dark
+
+scrolling:
+  history: 10000
+  multiplier: 3
 
 font:
   normal:
