@@ -6,7 +6,7 @@ cd ..
 xcopy nvim_tmp \\wsl$\Ubuntu\home\bini\.config\nvim /E/H/C/I/Y
 xcopy fish \\wsl$\Ubuntu\home\bini\.config\fish /E/H/C/I/Y
 
-dos2unix -n tmux\.tmux.conf tmux\.tmux_tmp.conf
+dos2unix -n tmux\.tmux_wsl.conf tmux\.tmux_tmp.conf
 xcopy tmux\.tmux_tmp.conf \\wsl$\Ubuntu\home\bini\.tmux.conf /E/H/C/I/Y
 DEL /F /Q tmux\.tmux_tmp.conf
 

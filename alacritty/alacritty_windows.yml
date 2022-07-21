@@ -1,6 +1,6 @@
 env:
   #TERM: xterm-256color
-  TERM: alacritty 
+  TERM: alacritty
 
 window:
   dimensions:
@@ -43,3 +43,6 @@ shell:
 
 mouse:
   hide_when_typing: false
+
+key_bindings:
+  - { key: Space, mods: Control, chars: "\x00" }
