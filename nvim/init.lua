@@ -9,7 +9,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
 Plug 'goolord/alpha-nvim'                                               -- Welcome screen
 Plug 'nvim-lualine/lualine.nvim'                                        -- Status Line
-Plug('folke/tokyonight.nvim', { branch= 'main' })                      -- Color scheme
+Plug('folke/tokyonight.nvim', { branch= 'main' })                       -- Color scheme
 Plug 'kyazdani42/nvim-web-devicons'                                     -- Icons (dependency with other plugins)
 Plug 'neovim/nvim-lspconfig'                                            -- LSP
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn[':TSUpdate']}) -- Highlight
@@ -30,7 +30,6 @@ Plug 'hrsh7th/cmp-cmdline'                                              -- Compl
 Plug 'hrsh7th/nvim-cmp'                                                 -- Completition
 Plug 'hrsh7th/vim-vsnip'                                                -- Snippet
 Plug 'hrsh7th/vim-vsnip-integ'                                          -- Snippet dependency
-Plug 'vimlab/split-term.vim'                                            -- Terminal improvements
 
 vim.call('plug#end')
 
@@ -55,6 +54,7 @@ require('custom.telescope_nvim')                            -- Telescope
 require('custom.project_nvim')                              -- Telescope: Project
 require('custom.barbar')                                    -- barbar
 require('custom.nvim-whichkey-setup')                       -- Which key setup
+
 -- *========*
 -- | COLORS |
 -- *========*
@@ -90,7 +90,6 @@ vim.o.smartcase         = true                          -- Switch search to case
 
 vim.cmd("noswapfile")                               -- Disable creating swap file
 vim.cmd("set cc=80")
---vim.cmd("filetype plugin on")                               -- Disable creating swap file
 
 -- Turn manually syntax on on .cs files
 vim.cmd('au BufRead,BufNewFile *.cs syntax on')
