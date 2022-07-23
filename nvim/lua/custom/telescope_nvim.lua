@@ -12,11 +12,11 @@ require('telescope').setup({
         },
         file_ignore_patterns = { "^.git/" }
     },
-    pickers = {
-        find_files = {
-            find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
-        },
-    }
+    -- pickers = {
+    --     find_files = {
+    --         find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
+    --     },
+    -- }
 })
 
 require("telescope").load_extension "file_browser"

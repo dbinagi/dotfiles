@@ -60,9 +60,10 @@
 
 Reference: https://github.com/alacritty/alacritty/issues/1663
 
-### NVIM: Grep config for telescope
+### NVIM: Grep and find config for telescope
 
-Install dependency: `https://github.com/BurntSushi/ripgrep`
+For Grep install: `https://github.com/BurntSushi/ripgrep`
+For Find install: `https://github.com/sharkdp/fd`
 
 ### NVIM: LSP not working
 
