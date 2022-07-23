@@ -1,0 +1,2 @@
+require('cosmic-ui').setup()
+

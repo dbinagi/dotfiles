@@ -14,6 +14,14 @@ end
 vim.keymap.set('n', '<f11>', toggle_fullscreen, { noremap = true, silent = true, expr = true })
 
 ------------------------------
+--        cosmic-ui         --
+------------------------------
+
+map('n', '<leader>ga', '<cmd>lua require("cosmic-ui").code_actions()<cr>', opts)
+map('v', '<leader>ga', '<cmd>lua require("cosmic-ui").range_code_actions()<cr>', opts)
+map('n', '<leader>gn', '<cmd>lua require("cosmic-ui").rename()<cr>', opts)
+
+------------------------------
 --         barbar           --
 ------------------------------
 

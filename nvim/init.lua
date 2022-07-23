@@ -31,6 +31,11 @@ Plug 'hrsh7th/nvim-cmp'                                                 -- Compl
 Plug 'hrsh7th/vim-vsnip'                                                -- Snippet
 Plug 'hrsh7th/vim-vsnip-integ'                                          -- Snippet dependency
 
+Plug 'numToStr/Comment.nvim'
+
+Plug 'MunifTanjim/nui.nvim'
+Plug 'CosmicNvim/cosmic-ui'
+
 vim.call('plug#end')
 
 -- *===================*
@@ -54,6 +59,8 @@ require('custom.telescope_nvim')                            -- Telescope
 require('custom.project_nvim')                              -- Telescope: Project
 require('custom.barbar')                                    -- barbar
 require('custom.nvim-whichkey-setup')                       -- Which key setup
+require('custom.Comment_nvim')
+require('custom.cosmic-ui')
 
 -- *========*
 -- | COLORS |
