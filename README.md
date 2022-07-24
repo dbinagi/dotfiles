@@ -80,3 +80,8 @@ Creates the folders `.cache/nvim`
 ### NVIM: LSPInstaller: No unzip installer
 
 Install: `sudo apt-get install unzip`
+
+### NVIM: Python LSP not working
+
+1) Install `pip install neovim`
+1) Install dependency: https://github.com/williamboman/nvim-lsp-installer/blob/main/lua/nvim-lsp-installer/servers/pylsp/README.md
