@@ -7,6 +7,7 @@ xcopy nvim_tmp \\wsl$\Ubuntu\home\bini\.config\nvim /E/H/C/I/Y
 
 xcopy fish \\wsl$\Ubuntu\home\bini\.config\fish /E/H/C/I/Y
 xcopy omf \\wsl$\Ubuntu\home\bini\.config\omf /E/H/C/I/Y
+xcopy dircolors\.dircolors \\wsl$\Ubuntu\home\bini\.dircolors* /Y
 
 dos2unix -n tmux\.tmux_wsl.conf tmux\.tmux_tmp.conf
 xcopy tmux\.tmux_tmp.conf \\wsl$\Ubuntu\home\bini\.tmux.conf /E/H/C/I/Y
