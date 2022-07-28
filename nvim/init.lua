@@ -36,6 +36,12 @@ Plug 'numToStr/Comment.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'CosmicNvim/cosmic-ui'
 
+Plug 'rmagatti/goto-preview'
+Plug 'stevearc/overseer.nvim'
+
+-- Plug 'wthollingsworth/pomodoro.nvim'
+
+
 vim.call('plug#end')
 
 -- *===================*
@@ -61,6 +67,9 @@ require('custom.barbar')                                    -- barbar
 require('custom.nvim-whichkey-setup')                       -- Which key setup
 require('custom.Comment_nvim')
 require('custom.cosmic-ui')
+require('custom.goto-preview')
+require('custom.overseer_nvim')
+-- require('custom.pomodoro_nvim')
 
 -- *========*
 -- | COLORS |

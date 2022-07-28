@@ -22,6 +22,15 @@ map('v', '<leader>ga', '<cmd>lua require("cosmic-ui").range_code_actions()<cr>',
 map('n', '<leader>gn', '<cmd>lua require("cosmic-ui").rename()<cr>', opts)
 
 ------------------------------
+--      goto-preview        --
+------------------------------
+map('n', '<leader>gpd', '<cmd>lua require("goto-preview").goto_preview_definition()<CR>', opts)
+map('n', '<leader>gpt', '<cmd>lua require("goto-preview").goto_preview_type_definition()<CR>', opts)
+map('n', '<leader>gpi', '<cmd>lua require("goto-preview").goto_preview_implementation()<CR>', opts)
+map('n', '<leader>gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>', opts)
+map('n', '<leader>gP', '<cmd>lua require("goto-preview").close_all_win()<CR>', opts)
+
+------------------------------
 --         barbar           --
 ------------------------------
 
