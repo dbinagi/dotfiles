@@ -30,6 +30,8 @@ Plug 'hrsh7th/cmp-cmdline'                                              -- Compl
 Plug 'hrsh7th/nvim-cmp'                                                 -- Completition
 Plug 'hrsh7th/vim-vsnip'                                                -- Snippet
 Plug 'hrsh7th/vim-vsnip-integ'                                          -- Snippet dependency
+Plug 'dbinagi/nomodoro'                                                 -- Pomodoro clock
+
 
 Plug 'numToStr/Comment.nvim'
 
@@ -40,6 +42,9 @@ Plug 'rmagatti/goto-preview'
 Plug 'stevearc/overseer.nvim'
 
 -- Plug 'wthollingsworth/pomodoro.nvim'
+--Plug '/mnt/d/Development/Repo/nomodoro'
+
+Plug 'Pocco81/true-zen.nvim'
 
 
 vim.call('plug#end')
@@ -69,6 +74,8 @@ require('custom.Comment_nvim')
 require('custom.cosmic-ui')
 require('custom.goto-preview')
 require('custom.overseer_nvim')
+require('custom.true-zen_nvim')
+require('custom.nomodoro')
 -- require('custom.pomodoro_nvim')
 
 -- *========*
