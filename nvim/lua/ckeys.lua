@@ -32,14 +32,14 @@ map('n', '<leader>gpr', '<cmd>lua require("goto-preview").goto_preview_reference
 map('n', '<leader>gP', '<cmd>lua require("goto-preview").close_all_win()<CR>', opts)
 
 
-
--- Toggle using count
---vim.keymap.set('n', 'gcc', "v:count == 0 ? '<Plug>(comment_toggle_current_linewise)' : '<Plug>(comment_toggle_linewise_count)'", )
-vim.keymap.set('n', 'gbc', "v:count == 0 ? '<Plug>(comment_toggle_current_blockwise)' : '<Plug>(comment_toggle_blockwise_count)'", { expr = true, remap = true, replace_keycodes = false })
+------------------------------
+--         Comment          --
+------------------------------
 
 wk.register({
     ["<leader>"] = {
-        ["c"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment"},
+        ["cc"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment"},
+        ["cl"] = { "<CMD>lua require('Comment.api').call('toggle_linewise_op')<CR>g@", "Comment"},
     },
 })
 
@@ -53,20 +53,19 @@ wk.register({
         ["."] = { "<Cmd>BufferNext<CR>", "Next Buffer"},
         ["<"] = { "<Cmd>BufferMovePrevious<CR>", "Move Tab Left"},
         [">"] = { "<Cmd>BufferMoveNext<CR>", "Move Tab Right"},
+        ["1"] = { "<Cmd>BufferGoto 1<CR>", "Tab 1"},
+        ["2"] = { "<Cmd>BufferGoto 2<CR>", "Tab 2"},
+        ["3"] = { "<Cmd>BufferGoto 3<CR>", "Tab 3"},
+        ["4"] = { "<Cmd>BufferGoto 4<CR>", "Tab 4"},
+        ["5"] = { "<Cmd>BufferGoto 5<CR>", "Tab 5"},
+        ["6"] = { "<Cmd>BufferGoto 6<CR>", "Tab 6"},
+        ["7"] = { "<Cmd>BufferGoto 7<CR>", "Tab 7"},
+        ["8"] = { "<Cmd>BufferGoto 8<CR>", "Tab 8"},
+        ["9"] = { "<Cmd>BufferGoto 9<CR>", "Tab 9"},
+        ["0"] = { "<Cmd>BufferLast<CR>", "Last Tab"},
     },
 })
 
--- Goto buffer in position...
-map('n', '<leader>1', '<Cmd>BufferGoto 1<CR>', opts)
-map('n', '<leader>2', '<Cmd>BufferGoto 2<CR>', opts)
-map('n', '<leader>3', '<Cmd>BufferGoto 3<CR>', opts)
-map('n', '<leader>4', '<Cmd>BufferGoto 4<CR>', opts)
-map('n', '<leader>5', '<Cmd>BufferGoto 5<CR>', opts)
-map('n', '<leader>6', '<Cmd>BufferGoto 6<CR>', opts)
-map('n', '<leader>7', '<Cmd>BufferGoto 7<CR>', opts)
-map('n', '<leader>8', '<Cmd>BufferGoto 8<CR>', opts)
-map('n', '<leader>9', '<Cmd>BufferGoto 9<CR>', opts)
-map('n', '<leader>0', '<Cmd>BufferLast<CR>', opts)
 -- Pin/unpin buffer
 map('n', '<leader>p', '<Cmd>BufferPin<CR>', opts)
 -- Close buffer
