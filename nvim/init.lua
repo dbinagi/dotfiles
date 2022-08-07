@@ -17,10 +17,11 @@ Plug 'nvim-lua/plenary.nvim'                                            -- Libra
 Plug 'nvim-telescope/telescope.nvim'                                    -- Telescope
 Plug 'nvim-telescope/telescope-file-browser.nvim'                       -- File explorer (using Telescope)
 Plug 'ahmedkhalf/project.nvim'                                          -- Project management
-Plug 'Pocco81/AutoSave.nvim'                                            -- Autosave
+Plug 'Pocco81/auto-save.nvim'                                            -- Autosave
 Plug 'airblade/vim-gitgutter'                                           -- Git functions
-Plug 'liuchengxu/vim-which-key'                                         -- Which key
-Plug 'AckslD/nvim-whichkey-setup.lua'                                   -- Which key: Setup in LUA
+--Plug 'liuchengxu/vim-which-key'                                         -- Which key
+--Plug 'AckslD/nvim-whichkey-setup.lua'                                   -- Which key: Setup in LUA
+Plug 'folke/which-key.nvim'
 Plug 'romgrk/barbar.nvim'                                               -- Improved bar/tabs
 Plug 'williamboman/nvim-lsp-installer'                                  -- LSP Installer
 Plug 'hrsh7th/cmp-nvim-lsp'                                             -- Completition LSP
@@ -32,7 +33,6 @@ Plug 'hrsh7th/vim-vsnip'                                                -- Snipp
 Plug 'hrsh7th/vim-vsnip-integ'                                          -- Snippet dependency
 Plug 'dbinagi/nomodoro'                                                 -- Pomodoro clock
 
-
 Plug 'numToStr/Comment.nvim'
 
 Plug 'MunifTanjim/nui.nvim'
@@ -40,9 +40,6 @@ Plug 'CosmicNvim/cosmic-ui'
 
 Plug 'rmagatti/goto-preview'
 Plug 'stevearc/overseer.nvim'
-
--- Plug 'wthollingsworth/pomodoro.nvim'
---Plug '/mnt/d/Development/Repo/nomodoro'
 
 Plug 'Pocco81/true-zen.nvim'
 
@@ -65,11 +62,12 @@ require('custom.lualine')                                   -- lualine
 require('custom.alpha-nvim')                                -- Alpha
 require('custom.nvim-treesitter')                           -- nvim-treesitter
 require('custom.vim-gitgutter')                             -- vim-gitgutter
-require('custom.AutoSave')                                  -- AutoSave
+require('custom.auto-save_nvim')                                  -- AutoSave
 require('custom.telescope_nvim')                            -- Telescope
 require('custom.project_nvim')                              -- Telescope: Project
 require('custom.barbar')                                    -- barbar
-require('custom.nvim-whichkey-setup')                       -- Which key setup
+--require('custom.nvim-whichkey-setup')                       -- Which key setup
+require('custom.which-key_nvim')                       -- Which key setup
 require('custom.Comment_nvim')
 require('custom.cosmic-ui')
 require('custom.goto-preview')

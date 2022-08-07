@@ -5,4 +5,8 @@ require("whichkey_setup").config{
         noremap=true,
     },
     default_mode = 'n',
+    window = {
+        border = "shadow",
+        padding = {2,3,2,3}
+    }
 }

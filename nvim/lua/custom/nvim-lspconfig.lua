@@ -55,3 +55,8 @@ require'lspconfig'.csharp_ls.setup{
     capabilities = capabilities
 }
 
+-- require'lspconfig'.omnisharp.setup{
+--     cmd = { "dotnet", "/usr/bin/dotnet" },
+--     capabilities = capabilities
+-- }
+
