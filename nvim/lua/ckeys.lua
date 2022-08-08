@@ -25,12 +25,43 @@ map('n', '<leader>gn', '<cmd>lua require("cosmic-ui").rename()<cr>', opts)
 ------------------------------
 --      goto-preview        --
 ------------------------------
-map('n', '<leader>gpd', '<cmd>lua require("goto-preview").goto_preview_definition()<CR>', opts)
-map('n', '<leader>gpt', '<cmd>lua require("goto-preview").goto_preview_type_definition()<CR>', opts)
 map('n', '<leader>gpi', '<cmd>lua require("goto-preview").goto_preview_implementation()<CR>', opts)
 map('n', '<leader>gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>', opts)
 map('n', '<leader>gP', '<cmd>lua require("goto-preview").close_all_win()<CR>', opts)
 
+
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+-- Mappings.
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+vim.keymap.set('n', '<space>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+end, opts)
+vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+vim.keymap.set('n', '<leader>fo', vim.lsp.buf.formatting, opts)
+
+------------------------------
+--          LSP             --
+------------------------------
+
+wk.register({
+    ["<leader>"] = {
+        l = {
+            d = { vim.lsp.buf.definition,                                                                   "Definition"},
+            D = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",                         "Preview Definition"},
+            t = { vim.lsp.buf.type_definition,                                                              "Type Def"},
+            T = { "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",                    "Preview Type Def"},
+        }
+    }
+})
 
 ------------------------------
 --         Comment          --
@@ -91,7 +122,6 @@ wk.register({
             h = { "<cmd>Telescope help_tags<cr>",                                                           "Search Help" },
             p = { "<cmd>Telescope projects<cr>",                                                            "Search in Projects" },
             s = { "<cmd>lua require('telescope.builtin').git_status()<cr>",                                 "Search Git diff" },
-            l = { "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>",                            "Go to LSP definition" },
             t = { "<cmd>Telescope file_browser<cr>",                                                        "Show File Tree" },
     },
   },
