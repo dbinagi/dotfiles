@@ -43,6 +43,7 @@ Plug 'stevearc/overseer.nvim'
 
 Plug 'Pocco81/true-zen.nvim'
 
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 vim.call('plug#end')
 
@@ -74,6 +75,7 @@ require('custom.goto-preview')
 require('custom.overseer_nvim')
 require('custom.true-zen_nvim')
 require('custom.nomodoro')
+require('custom.indent-blankline_nvim')
 -- require('custom.pomodoro_nvim')
 
 -- *========*
