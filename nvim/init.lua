@@ -43,6 +43,8 @@ Plug 'Pocco81/true-zen.nvim'
 
 Plug 'lukas-reineke/indent-blankline.nvim'
 
+Plug 'rcarriga/nvim-notify'
+
 vim.call('plug#end')
 
 -- *===================*
