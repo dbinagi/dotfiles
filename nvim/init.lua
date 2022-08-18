@@ -19,9 +19,7 @@ Plug 'nvim-telescope/telescope-file-browser.nvim'                       -- File 
 Plug 'ahmedkhalf/project.nvim'                                          -- Project management
 Plug 'Pocco81/auto-save.nvim'                                            -- Autosave
 Plug 'airblade/vim-gitgutter'                                           -- Git functions
---Plug 'liuchengxu/vim-which-key'                                         -- Which key
---Plug 'AckslD/nvim-whichkey-setup.lua'                                   -- Which key: Setup in LUA
-Plug 'folke/which-key.nvim'
+Plug 'folke/which-key.nvim'                                             -- Which Key
 Plug 'romgrk/barbar.nvim'                                               -- Improved bar/tabs
 Plug 'williamboman/nvim-lsp-installer'                                  -- LSP Installer
 Plug 'hrsh7th/cmp-nvim-lsp'                                             -- Completition LSP
@@ -56,19 +54,17 @@ vim.call('plug#end')
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-require('ckeys')
 require('custom.nvim-lspconfig')                            -- nvim-lspconfig
 require('custom.nvim-cmp')                                  -- nvim-cmp
 require('custom.lualine')                                   -- lualine
 require('custom.alpha-nvim')                                -- Alpha
 require('custom.nvim-treesitter')                           -- nvim-treesitter
 require('custom.vim-gitgutter')                             -- vim-gitgutter
-require('custom.auto-save_nvim')                                  -- AutoSave
+require('custom.auto-save_nvim')                            -- AutoSave
 require('custom.telescope_nvim')                            -- Telescope
 require('custom.project_nvim')                              -- Telescope: Project
 require('custom.barbar')                                    -- barbar
---require('custom.nvim-whichkey-setup')                       -- Which key setup
-require('custom.which-key_nvim')                       -- Which key setup
+require('custom.which-key_nvim')                            -- Which key setup
 require('custom.Comment_nvim')
 require('custom.cosmic-ui')
 require('custom.goto-preview')
@@ -76,7 +72,8 @@ require('custom.overseer_nvim')
 require('custom.true-zen_nvim')
 require('custom.nomodoro')
 require('custom.indent-blankline_nvim')
--- require('custom.pomodoro_nvim')
+
+require('ckeys')
 
 -- *========*
 -- | COLORS |
@@ -91,13 +88,13 @@ vim.cmd('colorscheme tokyonight')
 
 vim.o.number            = true                          -- Show line number
 vim.o.relativenumber    = true                          -- Show relative from cursor to other lines
-vim.o.showmatch         = true			                -- Show matching
-vim.o.hlsearch          = true			                -- Highlight search
+vim.o.showmatch         = true                          -- Show matching
+vim.o.hlsearch          = true                          -- Highlight search
 vim.o.clipboard         = "unnamedplus"                 -- Copy and Paste from system clipboard
-vim.o.tabstop           = 4			                    -- Columns occupied by tab
-vim.o.softtabstop       = 4		                        -- Multiple spaces as tab
+vim.o.tabstop           = 4                             -- Columns occupied by tab
+vim.o.softtabstop       = 4                             -- Multiple spaces as tab
 vim.o.shiftwidth        = 4                             -- Width for autoindents
-vim.o.expandtab         = true			                -- Converts tab to spaces
+vim.o.expandtab         = true                          -- Converts tab to spaces
 vim.o.autoindent        = true                          -- Indent a new lines the same as before
 vim.o.mouse             = "a"                           -- Enable mouse click
 vim.o.cursorline        = true                          -- Highlight current cursorline
