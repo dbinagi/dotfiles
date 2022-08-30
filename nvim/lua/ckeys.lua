@@ -14,14 +14,18 @@ local wk = require('which-key')
 local keys = {
     l = {
         name = "+ LSP",
-        d = { vim.lsp.buf.definition,                                                                   "Definition"},
-        D = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",                         "Preview Definition"},
-        t = { vim.lsp.buf.type_definition,                                                              "Type Def"},
-        T = { "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",                    "Preview Type Def"},
-        a = { '<cmd>lua require("cosmic-ui").code_actions()<cr>',                                       "Actions"}
+        d = {vim.lsp.buf.definition,                                                                    "Definition"},
+        D = {"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",                          "Preview Definition"},
+        t = {vim.lsp.buf.type_definition,                                                               "Type Def"},
+        T = {"<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",                     "Preview Type Def"},
+        a = {'<cmd>lua require("cosmic-ui").code_actions()<cr>',                                        "Actions"},
+        f = {'<cmd>lua vim.lsp.buf.format { async = true }<cr>',                                        "Format"},
+        r = {vim.lsp.buf.references,                                                                    "References"},
+        R = {'<cmd>lua require("goto-preview").goto_preview_references()<CR>',                          "Preview References"},
+        h = {vim.lsp.buf.signature_help,                                                                "Signature Help"},
     },
     c = {
-        name = "+Commands",
+        name = "+ Commands",
         c = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>",                          "Comment"},
         l = { "<CMD>lua require('Comment.api').call('toggle_linewise_op')<CR>g@",                       "Comment Lines"},
     },
@@ -36,13 +40,12 @@ local keys = {
         t = { "<cmd>Telescope file_browser<cr>",                                                        "Show File Tree" },
     },
     t = {
+        name = "+ Tabs",
         c = {"<Cmd>BufferClose<CR>",                                                                    "Tab Close"},
         p = {"<Cmd>BufferPin<CR>",                                                                      "Tab Pin"},
         [">"] = { "<Cmd>BufferMoveNext<CR>", "Move Tab Right"},
         ["<"] = { "<Cmd>BufferMovePrevious<CR>", "Move Tab Left"},
     },
-    [","] = { "<Cmd>BufferPrevious<CR>", "Previous Buffer"},
-    ["."] = { "<Cmd>BufferNext<CR>", "Next Buffer"},
     ["1"] = { "<Cmd>BufferGoto 1<CR>", "Tab 1"},
     ["2"] = { "<Cmd>BufferGoto 2<CR>", "Tab 2"},
     ["3"] = { "<Cmd>BufferGoto 3<CR>", "Tab 3"},
@@ -53,6 +56,8 @@ local keys = {
     ["8"] = { "<Cmd>BufferGoto 8<CR>", "Tab 8"},
     ["9"] = { "<Cmd>BufferGoto 9<CR>", "Tab 9"},
     ["0"] = { "<Cmd>BufferLast<CR>", "Last Tab"},
+    [","] = { "<Cmd>BufferPrevious<CR>", "Previous Buffer"},
+    ["."] = { "<Cmd>BufferNext<CR>", "Next Buffer"},
 }
 
 -- map('n', '<leader><', '<Cmd>BufferMovePrevious<CR>', opts)
@@ -76,6 +81,5 @@ local keys = {
 -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
 -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
 -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
--- vim.keymap.set('n', '<leader>fo', vim.lsp.buf.formatting, opts)
 
 wk.register(keys, { prefix = "<leader>" })

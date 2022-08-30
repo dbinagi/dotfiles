@@ -23,6 +23,7 @@ Plug 'folke/which-key.nvim'                                             -- Which
 Plug 'romgrk/barbar.nvim'                                               -- Improved bar/tabs
 Plug 'williamboman/nvim-lsp-installer'                                  -- LSP Installer
 Plug 'hrsh7th/cmp-nvim-lsp'                                             -- Completition LSP
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'                      -- Completition LSP current param
 Plug 'hrsh7th/cmp-buffer'                                               -- Completition Buffer
 Plug 'hrsh7th/cmp-path'                                                 -- Completition Path
 Plug 'hrsh7th/cmp-cmdline'                                              -- Completition command line
