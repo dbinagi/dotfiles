@@ -23,7 +23,7 @@ Plug 'folke/which-key.nvim'                                             -- Which
 Plug 'romgrk/barbar.nvim'                                               -- Improved bar/tabs
 Plug 'williamboman/nvim-lsp-installer'                                  -- LSP Installer
 Plug 'hrsh7th/cmp-nvim-lsp'                                             -- Completition LSP
-Plug 'hrsh7th/cmp-nvim-lsp-signature-help'                      -- Completition LSP current param
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'                              -- Completition LSP current param
 Plug 'hrsh7th/cmp-buffer'                                               -- Completition Buffer
 Plug 'hrsh7th/cmp-path'                                                 -- Completition Path
 Plug 'hrsh7th/cmp-cmdline'                                              -- Completition command line
@@ -31,8 +31,9 @@ Plug 'hrsh7th/nvim-cmp'                                                 -- Compl
 Plug 'hrsh7th/vim-vsnip'                                                -- Snippet
 Plug 'hrsh7th/vim-vsnip-integ'                                          -- Snippet dependency
 Plug 'dbinagi/nomodoro'                                                 -- Pomodoro clock
-
-Plug 'numToStr/Comment.nvim'
+Plug 'rcarriga/nvim-notify'                                             -- Notifications
+Plug 'numToStr/Comment.nvim'                                            -- Comment multiple lines
+Plug 'lukas-reineke/indent-blankline.nvim'                              -- Indentation
 
 Plug 'MunifTanjim/nui.nvim'
 Plug 'CosmicNvim/cosmic-ui'
@@ -42,9 +43,8 @@ Plug 'stevearc/overseer.nvim'
 
 Plug 'Pocco81/true-zen.nvim'
 
-Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
-Plug 'rcarriga/nvim-notify'
 
 vim.call('plug#end')
 
