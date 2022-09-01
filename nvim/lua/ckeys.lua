@@ -3,10 +3,6 @@ local opts = { noremap = true, silent = true }
 
 local wk = require('which-key')
 
--- Force set of WhichKey keys (should not do it)
---map('n', '<leader>', '<cmd>WhichKey <leader><cr>', opts)
---map('v', '<leader>', '<cmd>WhichKey <leader> v<cr>', opts)
-
 ------------------------------
 --        cosmic-ui         --
 ------------------------------
@@ -33,10 +29,10 @@ local keys = {
         name = "+ File",
         f = { "<cmd>lua require('telescope.builtin').find_files({layout_strategy='vertical'})<cr>",     "Find File" },
         b = { "<cmd>Telescope buffers<cr>",                                                             "Find File in Buffer" },
-        g = { "<cmd>Telescope live_grep<cr>",                                                           "Search String" },
+        g = { "<cmd>lua require('telescope.builtin').live_grep({layout_strategy='vertical'})<cr>",      "Search String" },
         h = { "<cmd>Telescope help_tags<cr>",                                                           "Search Help" },
         p = { "<cmd>Telescope projects<cr>",                                                            "Search in Projects" },
-        s = { "<cmd>lua require('telescope.builtin').git_status()<cr>",                                 "Search Git diff" },
+        s = { "<cmd>lua require('telescope.builtin').git_status({layout_strategy='vertical'})<cr>",     "Search Git diff" },
         t = { "<cmd>Telescope file_browser<cr>",                                                        "Show File Tree" },
     },
     t = {
@@ -45,6 +41,11 @@ local keys = {
         p = {"<Cmd>BufferPin<CR>",                                                                      "Tab Pin"},
         [">"] = { "<Cmd>BufferMoveNext<CR>", "Move Tab Right"},
         ["<"] = { "<Cmd>BufferMovePrevious<CR>", "Move Tab Left"},
+    },
+    g = {
+        name = "+ Git",
+        n = {"<Cmd>GitGutterNextHunk<cr>",                                                              "Next Change"},
+        p = {"<Cmd>GitGutterPrevHunk<cr>",                                                              "Prev Change"},
     },
     ["1"] = { "<Cmd>BufferGoto 1<CR>", "Tab 1"},
     ["2"] = { "<Cmd>BufferGoto 2<CR>", "Tab 2"},
@@ -59,8 +60,6 @@ local keys = {
     [","] = { "<Cmd>BufferPrevious<CR>", "Previous Buffer"},
     ["."] = { "<Cmd>BufferNext<CR>", "Next Buffer"},
 }
-
--- map('n', '<leader><', '<Cmd>BufferMovePrevious<CR>', opts)
 
 -- map('v', '<leader>ga', '<cmd>lua require("cosmic-ui").range_code_actions()<cr>', opts)
 -- map('n', '<leader>gn', '<cmd>lua require("cosmic-ui").rename()<cr>', opts)
