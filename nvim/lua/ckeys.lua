@@ -24,6 +24,7 @@ local keys = {
         name = "+ Commands",
         c = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>",                          "Comment"},
         l = { "<CMD>lua require('Comment.api').call('toggle_linewise_op')<CR>g@",                       "Comment Lines"},
+        r = { "<cmd>lua require('cosmic-ui').rename()<cr>",                                             "Rename Var"},
     },
     f = {
         name = "+ File",
