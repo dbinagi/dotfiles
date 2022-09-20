@@ -29,7 +29,7 @@ local keys = {
         name = "+ File",
         f = { "<cmd>lua require('telescope.builtin').find_files({layout_strategy='vertical'})<cr>",     "Find File" },
         b = { "<cmd>Telescope buffers<cr>",                                                             "Find File in Buffer" },
-        g = { "<cmd>lua require('telescope.builtin').live_grep({layout_strategy='vertical'})<cr>",      "Search String" },
+        g = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args({layout_strategy='vertical'})<cr>",      "Search String" },
         h = { "<cmd>Telescope help_tags<cr>",                                                           "Search Help" },
         p = { "<cmd>Telescope projects<cr>",                                                            "Search in Projects" },
         s = { "<cmd>lua require('telescope.builtin').git_status({layout_strategy='vertical'})<cr>",     "Search Git diff" },

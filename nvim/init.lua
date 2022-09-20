@@ -35,6 +35,8 @@ Plug 'rcarriga/nvim-notify'                                             -- Notif
 Plug 'numToStr/Comment.nvim'                                            -- Comment multiple lines
 Plug 'lukas-reineke/indent-blankline.nvim'                              -- Indentation
 
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+
 Plug 'MunifTanjim/nui.nvim'
 Plug 'CosmicNvim/cosmic-ui'
 
