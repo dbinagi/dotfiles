@@ -16,6 +16,7 @@ Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn[':TSUpdate']}) -- Highl
 Plug 'nvim-lua/plenary.nvim'                                            -- Library for Telescope
 Plug 'nvim-telescope/telescope.nvim'                                    -- Telescope
 Plug 'nvim-telescope/telescope-file-browser.nvim'                       -- File explorer (using Telescope)
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'                     -- Args to Grep (using Telescope)
 Plug 'ahmedkhalf/project.nvim'                                          -- Project management
 Plug 'Pocco81/auto-save.nvim'                                            -- Autosave
 Plug 'airblade/vim-gitgutter'                                           -- Git functions
@@ -35,7 +36,7 @@ Plug 'rcarriga/nvim-notify'                                             -- Notif
 Plug 'numToStr/Comment.nvim'                                            -- Comment multiple lines
 Plug 'lukas-reineke/indent-blankline.nvim'                              -- Indentation
 
-Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+Plug 'xiyaowong/nvim-transparent'
 
 Plug 'MunifTanjim/nui.nvim'
 Plug 'CosmicNvim/cosmic-ui'
