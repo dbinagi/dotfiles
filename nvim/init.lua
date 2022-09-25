@@ -13,12 +13,13 @@ Plug('folke/tokyonight.nvim', { branch= 'main' })                       -- Color
 Plug 'kyazdani42/nvim-web-devicons'                                     -- Icons (dependency with other plugins)
 Plug 'neovim/nvim-lspconfig'                                            -- LSP
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn[':TSUpdate']}) -- Highlight
+Plug 'nvim-treesitter/nvim-treesitter-context'                          -- Shows context of function
 Plug 'nvim-lua/plenary.nvim'                                            -- Library for Telescope
 Plug 'nvim-telescope/telescope.nvim'                                    -- Telescope
 Plug 'nvim-telescope/telescope-file-browser.nvim'                       -- File explorer (using Telescope)
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'                     -- Args to Grep (using Telescope)
 Plug 'ahmedkhalf/project.nvim'                                          -- Project management
-Plug 'Pocco81/auto-save.nvim'                                            -- Autosave
+Plug 'Pocco81/auto-save.nvim'                                           -- Autosave
 Plug 'airblade/vim-gitgutter'                                           -- Git functions
 Plug 'folke/which-key.nvim'                                             -- Which Key
 Plug 'romgrk/barbar.nvim'                                               -- Improved bar/tabs
@@ -33,21 +34,17 @@ Plug 'hrsh7th/vim-vsnip'                                                -- Snipp
 Plug 'hrsh7th/vim-vsnip-integ'                                          -- Snippet dependency
 Plug 'dbinagi/nomodoro'                                                 -- Pomodoro clock
 Plug 'rcarriga/nvim-notify'                                             -- Notifications
-Plug 'numToStr/Comment.nvim'                                            -- Comment multiple lines
+Plug ('numToStr/Comment.nvim', { tag = 'v0.6.1' })                      -- Comment multiple lines
 Plug 'lukas-reineke/indent-blankline.nvim'                              -- Indentation
+Plug 'Pocco81/true-zen.nvim'                                            -- Focus plugin for clean windows
+Plug 'xiyaowong/nvim-transparent'                                       -- Makes transparent background
+Plug 'MunifTanjim/nui.nvim'                                             -- UI component Library
+Plug 'CosmicNvim/cosmic-ui'                                             -- UI component windows
+Plug 'rmagatti/goto-preview'                                            -- Preview LSP definition in modal
 
-Plug 'xiyaowong/nvim-transparent'
-
-Plug 'MunifTanjim/nui.nvim'
-Plug 'CosmicNvim/cosmic-ui'
-
-Plug 'rmagatti/goto-preview'
+-- Testing plugins
 Plug 'stevearc/overseer.nvim'
-
-Plug 'Pocco81/true-zen.nvim'
-
-Plug 'nvim-treesitter/nvim-treesitter-context'
-
+Plug ('nvim-neorg/neorg', {tag = '0.0.12'})
 
 vim.call('plug#end')
 
@@ -78,6 +75,7 @@ require('custom.overseer_nvim')
 require('custom.true-zen_nvim')
 require('custom.nomodoro')
 require('custom.indent-blankline_nvim')
+require('custom.neorg')
 
 require('ckeys')
 
