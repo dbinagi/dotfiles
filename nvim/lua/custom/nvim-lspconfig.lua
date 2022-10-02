@@ -49,6 +49,11 @@ require'lspconfig'.html.setup {
     }
 }
 
+-- CSS, JS
+require'lspconfig'.cssls.setup{
+    capabilities = capabilities,
+}
+
 -- C#
 
 require'lspconfig'.omnisharp.setup{
