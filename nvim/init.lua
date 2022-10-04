@@ -76,6 +76,7 @@ require('custom.true-zen_nvim')
 require('custom.nomodoro')
 require('custom.indent-blankline_nvim')
 require('custom.neorg')
+require('custom.nvim-transparent')
 
 require('ckeys')
 
@@ -84,7 +85,7 @@ require('ckeys')
 -- *========*
 
 -- vim.cmd('colorscheme nord')
-vim.cmd('colorscheme tokyonight')
+vim.cmd('colorscheme tokyonight-night')
 
 -- *=======================*
 -- | GENERAL CONFIGURATION |
