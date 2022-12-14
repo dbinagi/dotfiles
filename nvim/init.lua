@@ -45,6 +45,7 @@ Plug 'rmagatti/goto-preview'                                            -- Previ
 -- Testing plugins
 Plug 'stevearc/overseer.nvim'
 Plug ('nvim-neorg/neorg', {tag = '0.0.12'})
+Plug 'ThePrimeagen/harpoon'
 
 vim.call('plug#end')
 
