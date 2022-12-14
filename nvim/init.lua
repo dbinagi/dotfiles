@@ -117,6 +117,7 @@ vim.o.smartcase         = true                          -- Switch search to case
 vim.cmd("noswapfile")                               -- Disable creating swap file
 vim.cmd("set cc=80")
 vim.cmd("set autoread")
+vim.cmd("set ffs=unix,dos")
 
 -- Turn manually syntax on on .cs files
 vim.cmd('au BufRead,BufNewFile *.cs syntax on')
