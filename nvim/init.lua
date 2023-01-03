@@ -45,6 +45,7 @@ Plug 'rmagatti/goto-preview'                                            -- Previ
 -- Testing plugins
 Plug 'stevearc/overseer.nvim'
 Plug ('nvim-neorg/neorg', {tag = '0.0.12'})
+Plug 'ThePrimeagen/harpoon'
 
 vim.call('plug#end')
 
@@ -116,8 +117,12 @@ vim.o.smartcase         = true                          -- Switch search to case
 vim.cmd("noswapfile")                               -- Disable creating swap file
 vim.cmd("set cc=80")
 vim.cmd("set autoread")
+vim.cmd("set ffs=unix,dos")
 
 -- Turn manually syntax on on .cs files
 vim.cmd('au BufRead,BufNewFile *.cs syntax on')
-vim.cmd("syntax enable")                               -- Disable creating swap file
 
+-- Enable tabs on makefiles
+vim.cmd('au BufRead,BufNewFile FileType make set noexpandtab')
+
+vim.cmd("syntax enable")                               -- Disable creating swap file
