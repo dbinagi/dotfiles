@@ -121,5 +121,8 @@ vim.cmd("set ffs=unix,dos")
 
 -- Turn manually syntax on on .cs files
 vim.cmd('au BufRead,BufNewFile *.cs syntax on')
-vim.cmd("syntax enable")                               -- Disable creating swap file
 
+-- Enable tabs on makefiles
+vim.cmd('au BufRead,BufNewFile FileType make set noexpandtab')
+
+vim.cmd("syntax enable")                               -- Disable creating swap file
