@@ -41,6 +41,10 @@ require'lspconfig'.tsserver.setup{
     capabilities = capabilities,
 }
 
+require'lspconfig'.ccls.setup{
+    capabilities = capabilities,
+}
+
 -- HTML
 require'lspconfig'.html.setup {
     capabilities = capabilities,
