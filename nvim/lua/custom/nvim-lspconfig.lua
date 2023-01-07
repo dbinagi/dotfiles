@@ -58,6 +58,12 @@ require'lspconfig'.cssls.setup{
     capabilities = capabilities,
 }
 
+
+-- C++
+require'lspconfig'.ccls.setup{
+    capabilities = capabilities,
+}
+
 -- C#
 
 require'lspconfig'.omnisharp.setup{
