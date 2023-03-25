@@ -46,6 +46,8 @@ Plug 'rmagatti/goto-preview'                                            -- Previ
 Plug 'stevearc/overseer.nvim'
 Plug ('nvim-neorg/neorg', {tag = '0.0.12'})
 Plug 'ThePrimeagen/harpoon'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 
 vim.call('plug#end')
 
@@ -58,6 +60,7 @@ vim.call('plug#end')
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+require('custom.mason')
 require('custom.nvim-lspconfig')                            -- nvim-lspconfig
 require('custom.nvim-cmp')                                  -- nvim-cmp
 require('custom.lualine')                                   -- lualine
