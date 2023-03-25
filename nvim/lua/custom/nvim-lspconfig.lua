@@ -66,8 +66,16 @@ require'lspconfig'.ccls.setup{
 
 -- C#
 
-require'lspconfig'.omnisharp.setup{
-    capabilities = capabilities,
-    use_mono = true
-}
+if vim.loop.os_uname().sysname == 'Linux' then
+    require'lspconfig'.omnisharp.setup{
+        cmd = { "dotnet", "/usr/lib/omnisharp-roslyn/OmniSharp.dll"},
+        capabilities = capabilities,
+        use_mono = true
+    }
+else
+    require'lspconfig'.omnisharp.setup{
+        capabilities = capabilities,
+    }
+end
+
 
