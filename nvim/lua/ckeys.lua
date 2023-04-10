@@ -48,6 +48,11 @@ local keys = {
         n = {"<Cmd>GitGutterNextHunk<cr>",                                                              "Next Change"},
         p = {"<Cmd>GitGutterPrevHunk<cr>",                                                              "Prev Change"},
     },
+    h = {
+        name = "+ Harpoon",
+        m = {"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",                                  "Harpoon Menu"},
+        a = {"<cmd>lua require('harpoon.mark').add_file()<cr>",                                         "Harpoon Mark"},
+    },
     ["1"] = { "<Cmd>BufferGoto 1<CR>", "Tab 1"},
     ["2"] = { "<Cmd>BufferGoto 2<CR>", "Tab 2"},
     ["3"] = { "<Cmd>BufferGoto 3<CR>", "Tab 3"},
