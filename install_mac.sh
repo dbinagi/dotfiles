@@ -10,4 +10,7 @@ cp -R fish ~/.config
 cp -R omf ~/.config
 cp -R tmux/.tmux.conf ~/
 
+cp wezterm/.wezterm_mac.lua ~/.wezterm.lua 
+cp "backgrounds/Twilight Prophet.jpg" ~/wezterm/background.jpg
+
 mkdir -p ~/.config/alacritty && cp alacritty/alacritty_mac.yml ~/.config/alacritty/alacritty.yml

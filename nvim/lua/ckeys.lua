@@ -47,6 +47,7 @@ local keys = {
         name = "+ Git",
         n = {"<Cmd>GitGutterNextHunk<cr>",                                                              "Next Change"},
         p = {"<Cmd>GitGutterPrevHunk<cr>",                                                              "Prev Change"},
+        b = {"<Cmd>GitBlameToggle<cr>",                                                                 "Git Blame Toggle"},
     },
     h = {
         name = "+ Harpoon",
