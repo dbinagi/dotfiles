@@ -27,6 +27,16 @@ end
 config.wsl_domains = wsl_domains
 config.default_domain = 'WSL:Ubuntu'
 
+-- Map keys
+local act = wezterm.action
+
+config.keys = {
+  -- paste from the clipboard
+  { key = 'V', mods = 'CTRL', action = act.PasteFrom 'Clipboard' },
+  -- paste from the primary selection
+  { key = 'V', mods = 'CTRL', action = act.PasteFrom 'PrimarySelection' },
+}
+
 -- Set background
 config.background = {
     {

@@ -48,9 +48,11 @@ Plug ('nvim-neorg/neorg', {tag = '0.0.12'})
 Plug 'ThePrimeagen/harpoon'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'rmagatti/auto-session'
+-- Plug 'rmagatti/auto-session'
 Plug 'tpope/vim-fugitive'
 Plug 'f-person/git-blame.nvim'
+Plug 'j-hui/fidget.nvim'
+
 
 vim.call('plug#end')
 
@@ -73,7 +75,7 @@ require('custom.vim-gitgutter')                             -- vim-gitgutter
 require('custom.auto-save_nvim')                            -- AutoSave
 require('custom.telescope_nvim')                            -- Telescope
 require('custom.project_nvim')                              -- Telescope: Project
---require('custom.barbar')                                    -- barbar
+-- require('custom.barbar')                                    -- barbar
 require('custom.which-key_nvim')                            -- Which key setup
 require('custom.Comment_nvim')
 require('custom.cosmic-ui')
@@ -84,11 +86,12 @@ require('custom.nomodoro')
 require('custom.indent-blankline_nvim')
 require('custom.neorg')
 require('custom.nvim-transparent')
+require"fidget".setup{}
 
-    require("auto-session").setup {
-      log_level = "error",
-      auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
-    }
+-- require("auto-session").setup {
+--   log_level = "error",
+--   auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+-- }
 
 --let g:gitblame_enabled = 0
 vim.g.gitblame_enabled = " "

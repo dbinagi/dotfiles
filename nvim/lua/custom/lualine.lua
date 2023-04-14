@@ -1,12 +1,20 @@
 local overseer = require'overseer'
 
+
+local function current_session()
+	return ''
+	--if require('auto-session-library') then
+	--	return require('auto-session-library').current_session_name
+	--end
+end
+
 local lualine = require'lualine'
 lualine.setup({
     options = {
         theme = 'tokyonight'
     },
     sections = {
-        lualine_c = {require('auto-session-library').current_session_name},
+        lualine_c = {current_session()},
         lualine_x = {
             require('nomodoro').status,
             {
