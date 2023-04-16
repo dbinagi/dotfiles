@@ -48,7 +48,7 @@ config.background = {
             hue = 1.0,
             saturation = 1.0,
         },
-        opacity = 0.9
+        opacity = 1,
     }
 }
 
