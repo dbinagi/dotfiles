@@ -13,15 +13,16 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- *=========*
--- | PLUGINS |
--- *=========*
-
 local plugins = {}
+
+-- *==================*
+-- | NON-LAZY PLUGINS |
+-- *==================*
 
 -- Welcome screen
 table.insert(plugins, {
     'goolord/alpha-nvim',
+    enabled = true,
     lazy = false,
     priority = 700,
     config = function()
@@ -29,8 +30,10 @@ table.insert(plugins, {
     end
 })
 
+-- Indent colors
 table.insert(plugins, {
     'lukas-reineke/indent-blankline.nvim',
+    enabled = true,
     lazy = false,
     priority = 800,
     config = function()
@@ -65,21 +68,20 @@ table.insert(plugins, {
     end
 })
 
+-- Transparent Background
 table.insert(plugins, {
     'xiyaowong/nvim-transparent',
+    enabled = true,
     lazy = false,
     priority = 900,
-    config = function()
-        require("transparent").setup({})
-        vim.api.nvim_command(':TransparentEnable')
-    end
+    build = ':TransparentEnable',
 })
 
 -- Color scheme
 table.insert(plugins,
     {
         'folke/tokyonight.nvim',
-        branch = 'main',
+        enabled = true,
         lazy = false,
         priority = 1000,
         config = function()
@@ -88,19 +90,19 @@ table.insert(plugins,
     }
 )
 
-table.insert(plugins, { 'williamboman/nvim-lsp-installer' })
-
+-- LSP
 table.insert(plugins, {
     'neovim/nvim-lspconfig',
+    enabled = true,
     lazy = false,
+    dependencies = {
+        'williamboman/nvim-lsp-installer'
+    },
     config = function()
-        -- Installer must go before LSP config
-        require("nvim-lsp-installer").setup {}
 
         -- Variable to support completition from LSP
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 
         local custom_attach = function(client)
             -- Temporal until fix omnisharp
@@ -136,7 +138,7 @@ table.insert(plugins, {
                     },
                     workspace = {
                         library = vim.api.nvim_get_runtime_file("", true),
-                        checkThirdParty = false,
+                        checkThirdParty = false, -- To disable luassert prompt on start
                     },
                     telemetry = {
                         enable = false,
@@ -155,17 +157,6 @@ table.insert(plugins, {
 
         -- JavaScript
         require 'lspconfig'.tsserver.setup {
-            capabilities = capabilities,
-            on_attach = custom_attach,
-        }
-
-        -- JavaScript
-        require 'lspconfig'.tsserver.setup {
-            capabilities = capabilities,
-            on_attach = custom_attach,
-        }
-
-        require 'lspconfig'.ccls.setup {
             capabilities = capabilities,
             on_attach = custom_attach,
         }
@@ -201,6 +192,7 @@ table.insert(plugins, {
         else
             require 'lspconfig'.omnisharp.setup {
                 capabilities = capabilities,
+                on_attach = custom_attach,
             }
         end
     end
@@ -208,14 +200,17 @@ table.insert(plugins, {
 
 table.insert(plugins, {
     'williamboman/mason.nvim',
+    enabled = true,
     lazy = false,
     config = function()
         require("mason").setup()
-    end
+    end,
+    build = ':MasonUpdate'
 })
 
 table.insert(plugins, {
     'williamboman/mason-lspconfig.nvim',
+    enabled = true,
     lazy = false,
     init = function()
         require("mason-lspconfig").setup {
@@ -224,29 +219,26 @@ table.insert(plugins, {
     end
 })
 
--- Icons
-table.insert(plugins, {'nvim-tree/nvim-web-devicons', lazy = true})
-
--- Comment lines
 table.insert(plugins, {
-    'numToStr/Comment.nvim',
-    tag = 'v0.6.1',
-    lazy = true,
+    'airblade/vim-gitgutter',
+    enabled = true,
+    lazy = false,
     config = function()
-        require('Comment').setup({
-            mappings = {
-                basic = false,
-                extra = false,
-                extended = false,
-            },
-        })
+        vim.g.gitgutter_enabled = 1
+        vim.g.gitgutter_map_keys = 0 -- Disables all keys
+
+        local set = vim.opt
+
+        set.signcolumn = "yes"
+        set.updatetime = 100
     end
 })
 
 -- Completition
-
 table.insert(plugins, {
     'hrsh7th/nvim-cmp',
+    enabled = true,
+    lazy = false,
     dependencies = {
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
@@ -265,10 +257,6 @@ table.insert(plugins, {
                     vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
                 end,
             },
-            -- window = {
-                -- completion = cmp.config.window.bordered(),
-                -- documentation = cmp.config.window.bordered(),
-            -- },
             mapping = cmp.mapping.preset.insert({
                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
                 ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -314,107 +302,11 @@ table.insert(plugins, {
     end
 })
 
--- Telescope
-table.insert(plugins, { 'nvim-lua/plenary.nvim' })
-table.insert(plugins, {
-    'nvim-telescope/telescope.nvim',
-    dependencies = {
-        'nvim-telescope/telescope-file-browser.nvim',
-        'nvim-telescope/telescope-live-grep-args.nvim',
-    },
-    config = function()
-        local actions = require("telescope.actions")
-
-        local filter_file_extensions = {
-            -- Unity
-            ".meta",
-            ".prefab",
-            ".shader",
-        }
-
-        local find_files_commands = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" }
-        for _, extension in ipairs(filter_file_extensions) do
-            table.insert(find_files_commands, "-g")
-            table.insert(find_files_commands, "!*" .. extension)
-        end
-
-        require('telescope').setup({
-            defaults = {
-                mappings = {
-                    i = {
-                        ["<esc>"] = actions.close
-                    },
-                },
-                layout_config = {
-                    vertical = { width = 0.9 }
-                },
-                file_ignore_patterns = { "^.git/" }
-            },
-            pickers = {
-                find_files = {
-                    find_command = find_files_commands,
-                },
-            }
-        })
-
-        require("telescope").load_extension "file_browser"
-        require("telescope").load_extension "live_grep_args"
-        require("telescope").load_extension('harpoon')
-    end
-})
-
-table.insert(plugins, {
-    'folke/which-key.nvim',
-    lazy = true,
-    config = function()
-        require("which-key").setup {
-            window = {
-                border = "double",
-                padding = { 2, 3, 2, 3 }
-            },
-            triggers = { "<leader>" },
-        }
-    end
-})
-
--- Highlight
-table.insert(plugins, {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    config = function()
-        require 'nvim-treesitter.configs'.setup {
-            -- A list of parser names, or "all"
-            ensure_installed = { "lua", "vim", "c_sharp", "javascript", "html", "css", "python" },
-
-            -- Install parsers synchronously (only applied to `ensure_installed`)
-            sync_install = false,
-
-            -- List of parsers to ignore installing (for "all")
-            -- ignore_install = { "javascript" },
-
-            highlight = {
-                -- `false` will disable the whole extension
-                enable = true,
-                -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-                -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-                -- the name of the parser)
-                -- list of language that will be disabled
-                -- disable = { "c", "rust" },
-
-                -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-                -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-                -- Using this option may slow down your editor, and you may see some duplicate highlights.
-                -- Instead of true it can also be a list of languages
-                additional_vim_regex_highlighting = false,
-            },
-        }
-    end
-})
-
-table.insert(plugins, { 'nvim-treesitter/nvim-treesitter-context' })
-
+-- Lualine
 table.insert(plugins, {
     'nvim-lualine/lualine.nvim',
+    enabled = true,
+    lazy = false,
     config = function()
         local function current_session()
             return ''
@@ -461,21 +353,140 @@ table.insert(plugins, {
 })
 
 table.insert(plugins, {
-    'ahmedkhalf/project.nvim',
+    'romgrk/barbar.nvim',
+    enabled = true,
+    lazy = false,
+    dependencies = {
+        'nvim-tree/nvim-web-devicons'
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {
+        insert_at_end = true,
+    }
+})
+
+-- *==============*
+-- | LAZY PLUGINS |
+-- *==============*
+
+-- Comment lines
+table.insert(plugins, {
+    'numToStr/Comment.nvim',
+    enabled = true,
+    tag = 'v0.6.1',
+    lazy = true,
     config = function()
-        require("project_nvim").setup {
+        require('Comment').setup({
+            mappings = {
+                basic = false,
+                extra = false,
+                extended = false,
+            },
+        })
+    end
+})
+
+-- Telescope
+table.insert(plugins, {
+    'nvim-telescope/telescope.nvim',
+    enabled = true,
+    lazy = true,
+    dependencies = {
+        'nvim-telescope/telescope-file-browser.nvim',
+        'nvim-telescope/telescope-live-grep-args.nvim',
+        'nvim-lua/plenary.nvim',
+        'ahmedkhalf/project.nvim',
+        'ThePrimeagen/harpoon',
+    },
+    config = function()
+        local actions = require("telescope.actions")
+
+        local filter_file_extensions = {
+            -- Unity
+            ".meta",
+            ".prefab",
+            ".shader",
         }
 
+        local find_files_commands = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" }
+        for _, extension in ipairs(filter_file_extensions) do
+            table.insert(find_files_commands, "-g")
+            table.insert(find_files_commands, "!*" .. extension)
+        end
+
+        require('telescope').setup({
+            defaults = {
+                mappings = {
+                    i = {
+                        ["<esc>"] = actions.close
+                    },
+                },
+                layout_config = {
+                    vertical = { width = 0.9 }
+                },
+                file_ignore_patterns = { "^.git/" }
+            },
+            pickers = {
+                find_files = {
+                    find_command = find_files_commands,
+                },
+            }
+        })
+
+        require("telescope").load_extension "file_browser"
+        require("telescope").load_extension "live_grep_args"
+        require("telescope").load_extension('harpoon')
         require('telescope').load_extension('projects')
+    end
+})
+
+-- Key Mapping viewer
+table.insert(plugins, {
+    'folke/which-key.nvim',
+    enabled = true,
+    lazy = true,
+    config = function()
+        require("which-key").setup {
+            window = {
+                border = "double",
+                padding = { 2, 3, 2, 3 }
+            },
+            triggers = { "<leader>" },
+        }
+    end
+})
+
+-- Highlight
+table.insert(plugins, {
+    'nvim-treesitter/nvim-treesitter',
+    enabled = true,
+    lazy = true,
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter-context'
+    },
+    build = ':TSUpdate',
+    config = function()
+        require 'nvim-treesitter.configs'.setup {
+            ensure_installed = { "lua", "vim", "c_sharp", "javascript", "html", "css", "python" },
+            sync_install = false,
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = false,
+            },
+        }
     end
 })
 
 table.insert(plugins, {
     'Pocco81/auto-save.nvim',
+    enabled = true,
+    lazy = true,
+    event = {
+        'InsertLeave',
+        'TextChanged',
+    },
     config = function()
-        local autosave = require("auto-save")
-
-        autosave.setup({
+        require("auto-save").setup({
             enabled = true,
             execution_message = {
                 message = function() -- message to print on save
@@ -483,147 +494,14 @@ table.insert(plugins, {
                 end
             },
             trigger_events = { "InsertLeave", "TextChanged" },
-            --dim = 0.18, -- dim the color of `message`
-            --cleaning_interval = 1250, -- (milliseconds) automatically clean MsgArea after displaying `message`. See :h MsgArea
         })
     end
 })
 
 table.insert(plugins, {
-    'airblade/vim-gitgutter',
-    config = function()
-        vim.g.gitgutter_enabled = 1
-        vim.g.gitgutter_map_keys = 0 -- Disables all keys
-
-        local set = vim.opt
-
-        set.signcolumn = "yes"
-        set.updatetime = 100
-    end
-})
-
-
-table.insert(plugins, {
-    'romgrk/barbar.nvim',
-    config = function()
-        vim.g.barbar_auto_setup = false -- disable auto-setup
-        require 'barbar'.setup {
-            -- WARN: do not copy everything below into your config!
-            --       It is just an example of what configuration options there are.
-            --       The defaults are suitable for most people.
-
-            -- Enable/disable animations
-            animation = true,
-
-            -- Enable/disable auto-hiding the tab bar when there is a single buffer
-            auto_hide = true,
-
-            -- Enable/disable current/total tabpages indicator (top right corner)
-            tabpages = true,
-
-            -- Enables/disable clickable tabs
-            --  - left-click: go to buffer
-            --  - middle-click: delete buffer
-            clickable = true,
-
-            -- Excludes buffers from the tabline
-            exclude_ft = { 'javascript' },
-            exclude_name = { 'package.json' },
-
-            -- A buffer to this direction will be focused (if it exists) when closing the current buffer.
-            -- Valid options are 'left' (the default) and 'right'
-            focus_on_close = 'left',
-
-            -- Hide inactive buffers and file extensions. Other options are `alternate`, `current`, and `visible`.
-            hide = { extensions = true, inactive = true },
-
-            -- Disable highlighting alternate buffers
-            highlight_alternate = false,
-
-            -- Disable highlighting file icons in inactive buffers
-            highlight_inactive_file_icons = false,
-
-            -- Enable highlighting visible buffers
-            highlight_visible = true,
-
-            icons = {
-                -- Configure the base icons on the bufferline.
-                buffer_index = false,
-                buffer_number = false,
-                button = '',
-                -- Enables / disables diagnostic symbols
-                diagnostics = {
-                    [vim.diagnostic.severity.ERROR] = { enabled = true, icon = 'ﬀ' },
-                    [vim.diagnostic.severity.WARN] = { enabled = false },
-                    [vim.diagnostic.severity.INFO] = { enabled = false },
-                    [vim.diagnostic.severity.HINT] = { enabled = true },
-                },
-                filetype = {
-                    -- Sets the icon's highlight group.
-                    -- If false, will use nvim-web-devicons colors
-                    custom_colors = false,
-                    -- Requires `nvim-web-devicons` if `true`
-                    enabled = true,
-                },
-                separator = { left = '▎', right = '' },
-                -- Configure the icons on the bufferline when modified or pinned.
-                -- Supports all the base icon options.
-                modified = { button = '●' },
-                pinned = { button = '車', filename = true, separator = { right = '' } },
-                -- Configure the icons on the bufferline based on the visibility of a buffer.
-                -- Supports all the base icon options, plus `modified` and `pinned`.
-                alternate = { filetype = { enabled = false } },
-                current = { buffer_index = true },
-                inactive = { button = '×' },
-                visible = { modified = { buffer_number = false } },
-            },
-
-            -- If true, new buffers will be inserted at the start/end of the list.
-            -- Default is to insert after current buffer.
-            insert_at_end = true,
-            insert_at_start = false,
-
-            -- Sets the maximum padding width with which to surround each tab
-            maximum_padding = 1,
-
-            -- Sets the minimum padding width with which to surround each tab
-            minimum_padding = 1,
-
-            -- Sets the maximum buffer name length.
-            maximum_length = 30,
-
-            -- If set, the letters for each buffer in buffer-pick mode will be
-            -- assigned based on their name. Otherwise or in case all letters are
-            -- already assigned, the behavior is to assign letters in order of
-            -- usability (see order below)
-            semantic_letters = true,
-
-            -- Set the filetypes which barbar will offset itself for
-            sidebar_filetypes = {
-                -- Use the default values: {event = 'BufWinLeave', text = nil}
-                NvimTree = true,
-                -- Or, specify the text used for the offset:
-                undotree = { text = 'undotree' },
-                -- Or, specify the event which the sidebar executes when leaving:
-                ['neo-tree'] = { event = 'BufWipeout' },
-                -- Or, specify both
-                Outline = { event = 'BufWinLeave', text = 'symbols-outline' },
-            },
-
-            -- New buffer letters are assigned in this order. This order is
-            -- optimal for the qwerty keyboard layout but might need adjustment
-            -- for other layouts.
-            letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
-
-            -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
-            -- where X is the buffer number. But only a static string is accepted here.
-            no_name_title = nil,
-        }
-    end
-})
-
-table.insert(plugins, {
     'dbinagi/nomodoro',
+    enabled = true,
+    lazy = true,
     config = function()
         require('nomodoro').setup({
             on_break_complete = function()
@@ -636,31 +514,18 @@ table.insert(plugins, {
     end
 })
 
-table.insert(plugins, { 'rcarriga/nvim-notify', lazy = true })
+table.insert(plugins, {'rcarriga/nvim-notify', enabled = true, lazy = true})
 
-table.insert(plugins, {
-    'Pocco81/true-zen.nvim',
-    lazy = true,
-    config = function()
-        require("true-zen").setup {
-            -- your config goes here
-            -- or just leave it empty :)
-        }
-    end
-})
+table.insert(plugins, {'Pocco81/true-zen.nvim', enabled = true, lazy = true})
 
+table.insert(plugins, {'MunifTanjim/nui.nvim', enabled = true, lazy = true})
 
-table.insert(plugins, { 'MunifTanjim/nui.nvim' })
-
-table.insert(plugins, {
-    'CosmicNvim/cosmic-ui',
-    config = function()
-        require('cosmic-ui').setup()
-    end
-})
+table.insert(plugins, {'CosmicNvim/cosmic-ui', enabled = true, lazy = true})
 
 table.insert(plugins, {
     'rmagatti/goto-preview',
+    enabled = true,
+    lazy = true,
     config = function()
         local telescope_themes = require('telescope.themes')
 
@@ -685,22 +550,20 @@ table.insert(plugins, {
     end
 })
 
-table.insert(plugins, { 'ThePrimeagen/harpoon' })
-
 table.insert(plugins, {
     'f-person/git-blame.nvim',
+    enabled = true,
     lazy = true,
+    cmd = {'GitBlameToggle'},
     config = function()
         vim.g.gitblame_enabled = " "
     end
 })
 
-
 -- Testing plugins
 -- Plug 'stevearc/overseer.nvim'
 -- Plug ('nvim-neorg/neorg', {tag = '0.0.12'})
--- Plug 'ThePrimeagen/harpoon'
--- -- Plug 'rmagatti/auto-session'
+-- Plug 'rmagatti/auto-session'
 -- Plug 'tpope/vim-fugitive'
 -- Plug 'j-hui/fidget.nvim'
 
@@ -713,56 +576,35 @@ table.insert(plugins, {
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- LOAD PLUGINS
 require("lazy").setup(plugins, {
     install = {
         colorscheme = { "tokyonight-night" }
     }
 })
 
---require('custom.lualine')                                   -- lualine
---require('custom.vim-gitgutter')                             -- vim-gitgutter
---require('custom.telescope_nvim')                            -- Telescope
---require('custom.which-key_nvim')                            -- Which key setup
---require('custom.cosmic-ui')
-----require('custom.overseer_nvim')
---require('custom.true-zen_nvim')
----- require('custom.neorg')
---require"fidget".setup{}
-
--- require("auto-session").setup {
---   log_level = "error",
---   auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
--- }
-
-
 require('ckeys')
-
--- *========*
--- | COLORS |
--- *========*
-
--- vim.cmd('colorscheme nord')
 
 -- *=======================*
 -- | GENERAL CONFIGURATION |
 -- *=======================*
 
-vim.o.number         = true          -- Show line number
-vim.o.relativenumber = true          -- Show relative from cursor to other lines
-vim.o.showmatch      = true          -- Show matching
-vim.o.hlsearch       = true          -- Highlight search
-vim.o.clipboard      = "unnamedplus" -- Copy and Paste from system clipboard
-vim.o.tabstop        = 4             -- Columns occupied by tab
-vim.o.softtabstop    = 4             -- Multiple spaces as tab
-vim.o.shiftwidth     = 4             -- Width for autoindents
-vim.o.expandtab      = true          -- Converts tab to spaces
-vim.o.autoindent     = true          -- Indent a new lines the same as before
-vim.o.mouse          = "a"           -- Enable mouse click
-vim.o.cursorline     = true          -- Highlight current cursorline
+vim.o.number         = true             -- Show line number
+vim.o.relativenumber = true             -- Show relative from cursor to other lines
+vim.o.showmatch      = true             -- Show matching
+vim.o.hlsearch       = true             -- Highlight search
+vim.o.clipboard      = "unnamedplus"    -- Copy and Paste from system clipboard
+vim.o.tabstop        = 4                -- Columns occupied by tab
+vim.o.softtabstop    = 4                -- Multiple spaces as tab
+vim.o.shiftwidth     = 4                -- Width for autoindents
+vim.o.expandtab      = true             -- Converts tab to spaces
+vim.o.autoindent     = true             -- Indent a new lines the same as before
+vim.o.mouse          = "a"              -- Enable mouse click
+vim.o.cursorline     = true             -- Highlight current cursorline
 vim.o.splitright     = true
 vim.o.completeopt    = "menu,menuone,noselect"
 vim.o.showcmd        = true
-vim.o.timeoutlen     = 500  -- Reduce timeout for leader (default 1000ms)
+vim.o.timeoutlen     = 500              -- Reduce timeout for leader (default 1000ms)
 vim.o.termguicolors  = true
 vim.o.ignorecase     = true -- Ignore case when searching
 vim.o.smartcase      = true -- Switch search to case sensitive when upperletter
