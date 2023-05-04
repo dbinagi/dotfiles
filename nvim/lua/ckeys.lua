@@ -25,6 +25,7 @@ local keys = {
         c = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>",                          "Comment"},
         l = { "<CMD>lua require('Comment.api').call('toggle_linewise_op')<CR>g@",                       "Comment Lines"},
         r = { "<cmd>lua require('cosmic-ui').rename()<cr>",                                             "Rename Var"},
+        f = { "<cmd>lua if vim.o.scrolloff > 0 then vim.o.scrolloff=0 else vim.o.scrolloff=999 end<cr>","Fixed Cursror"},
     },
     f = {
         name = "+ File",
