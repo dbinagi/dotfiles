@@ -9,7 +9,12 @@ end
 -- This is where you actually apply your config choices
 
 config.color_scheme = 'Tokyo Night (Gogh)'
-config.font = wezterm.font 'Hack'
+config.font = wezterm.font_with_fallback {
+  'Hack Nerd Font',
+  'Hack Nerd Font Mono',
+  'Hack',
+  'Hack Nerd',
+}
 config.hide_tab_bar_if_only_one_tab = true
 
 -- Starts full screen

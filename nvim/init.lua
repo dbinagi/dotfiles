@@ -250,7 +250,6 @@ table.insert(plugins, {
     },
     config = function()
         local cmp = require 'cmp'
-
         cmp.setup({
             snippet = {
                 expand = function(args)
@@ -365,6 +364,12 @@ table.insert(plugins, {
     init = function() vim.g.barbar_auto_setup = false end,
     opts = {
         insert_at_end = true,
+        icons = {
+            alternate = {button = 'X', filetype = {enabled = false}},
+            current = {buffer_index = true, button = 'X'},
+            inactive = {button = 'X'},
+            visible = {button = 'X', modified = {buffer_number = false}},
+        },
     }
 })
 
