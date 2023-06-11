@@ -99,7 +99,6 @@ table.insert(plugins, {
         'williamboman/nvim-lsp-installer'
     },
     config = function()
-
         -- Variable to support completition from LSP
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -107,16 +106,29 @@ table.insert(plugins, {
         local custom_attach = function(client)
             -- Temporal until fix omnisharp
             if client.name == 'omnisharp' then
-                client.server_capabilities.semanticTokensProvider.legend = {
-                    tokenModifiers = { "static" },
-                    tokenTypes = { "comment", "excluded", "identifier", "keyword", "keyword", "number", "operator",
-                        "operator", "preprocessor", "string", "whitespace", "text", "static", "preprocessor",
-                        "punctuation", "string", "string", "class", "delegate", "enum", "interface", "module", "struct",
-                        "typeParameter", "field", "enumMember", "constant", "local", "parameter", "method", "method",
-                        "property", "event", "namespace", "label", "xml", "xml", "xml", "xml", "xml", "xml", "xml",
-                        "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml",
-                        "regexp", "regexp", "regexp", "regexp", "regexp", "regexp", "regexp", "regexp", "regexp" }
-                }
+                local function toSnakeCase(str)
+                    return string.gsub(str, "%s*[- ]%s*", "_")
+                end
+
+                local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
+                for i, v in ipairs(tokenModifiers) do
+                    tokenModifiers[i] = toSnakeCase(v)
+                end
+                local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
+                for i, v in ipairs(tokenTypes) do
+                    tokenTypes[i] = toSnakeCase(v)
+                end
+
+                --     client.server_capabilities.semanticTokensProvider.legend = {
+                --         tokenModifiers = { "static" },
+                --         tokenTypes = { "comment", "excluded", "identifier", "keyword", "keyword", "number", "operator",
+                --             "operator", "preprocessor", "string", "whitespace", "text", "static", "preprocessor",
+                --             "punctuation", "string", "string", "class", "delegate", "enum", "interface", "module", "struct",
+                --             "typeParameter", "field", "enumMember", "constant", "local", "parameter", "method", "method",
+                --             "property", "event", "namespace", "label", "xml", "xml", "xml", "xml", "xml", "xml", "xml",
+                --             "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml",
+                --             "regexp", "regexp", "regexp", "regexp", "regexp", "regexp", "regexp", "regexp", "regexp" }
+                --     }
             end
         end
 
@@ -365,10 +377,10 @@ table.insert(plugins, {
     opts = {
         insert_at_end = true,
         icons = {
-            alternate = {button = 'X', filetype = {enabled = false}},
-            current = {buffer_index = true, button = 'X'},
-            inactive = {button = 'X'},
-            visible = {button = 'X', modified = {buffer_number = false}},
+            alternate = { button = 'X', filetype = { enabled = false } },
+            current = { buffer_index = true, button = 'X' },
+            inactive = { button = 'X' },
+            visible = { button = 'X', modified = { buffer_number = false } },
         },
     }
 })
@@ -522,13 +534,13 @@ table.insert(plugins, {
     end
 })
 
-table.insert(plugins, {'rcarriga/nvim-notify', enabled = true, lazy = true})
+table.insert(plugins, { 'rcarriga/nvim-notify', enabled = true, lazy = true })
 
-table.insert(plugins, {'Pocco81/true-zen.nvim', enabled = true, lazy = true})
+table.insert(plugins, { 'Pocco81/true-zen.nvim', enabled = true, lazy = true })
 
-table.insert(plugins, {'MunifTanjim/nui.nvim', enabled = true, lazy = true})
+table.insert(plugins, { 'MunifTanjim/nui.nvim', enabled = true, lazy = true })
 
-table.insert(plugins, {'CosmicNvim/cosmic-ui', enabled = true, lazy = true})
+table.insert(plugins, { 'CosmicNvim/cosmic-ui', enabled = true, lazy = true })
 
 table.insert(plugins, {
     'rmagatti/goto-preview',
@@ -562,7 +574,7 @@ table.insert(plugins, {
     'f-person/git-blame.nvim',
     enabled = true,
     lazy = true,
-    cmd = {'GitBlameToggle'},
+    cmd = { 'GitBlameToggle' },
     config = function()
         vim.g.gitblame_enabled = " "
     end
@@ -597,22 +609,22 @@ require('ckeys')
 -- | GENERAL CONFIGURATION |
 -- *=======================*
 
-vim.o.number         = true             -- Show line number
-vim.o.relativenumber = true             -- Show relative from cursor to other lines
-vim.o.showmatch      = true             -- Show matching
-vim.o.hlsearch       = true             -- Highlight search
-vim.o.clipboard      = "unnamedplus"    -- Copy and Paste from system clipboard
-vim.o.tabstop        = 4                -- Columns occupied by tab
-vim.o.softtabstop    = 4                -- Multiple spaces as tab
-vim.o.shiftwidth     = 4                -- Width for autoindents
-vim.o.expandtab      = true             -- Converts tab to spaces
-vim.o.autoindent     = true             -- Indent a new lines the same as before
-vim.o.mouse          = "a"              -- Enable mouse click
-vim.o.cursorline     = true             -- Highlight current cursorline
+vim.o.number         = true          -- Show line number
+vim.o.relativenumber = true          -- Show relative from cursor to other lines
+vim.o.showmatch      = true          -- Show matching
+vim.o.hlsearch       = true          -- Highlight search
+vim.o.clipboard      = "unnamedplus" -- Copy and Paste from system clipboard
+vim.o.tabstop        = 4             -- Columns occupied by tab
+vim.o.softtabstop    = 4             -- Multiple spaces as tab
+vim.o.shiftwidth     = 4             -- Width for autoindents
+vim.o.expandtab      = true          -- Converts tab to spaces
+vim.o.autoindent     = true          -- Indent a new lines the same as before
+vim.o.mouse          = "a"           -- Enable mouse click
+vim.o.cursorline     = true          -- Highlight current cursorline
 vim.o.splitright     = true
 vim.o.completeopt    = "menu,menuone,noselect"
 vim.o.showcmd        = true
-vim.o.timeoutlen     = 500              -- Reduce timeout for leader (default 1000ms)
+vim.o.timeoutlen     = 500  -- Reduce timeout for leader (default 1000ms)
 vim.o.termguicolors  = true
 vim.o.ignorecase     = true -- Ignore case when searching
 vim.o.smartcase      = true -- Switch search to case sensitive when upperletter
@@ -625,7 +637,7 @@ vim.cmd("set autoread")
 vim.cmd("set ffs=unix,dos")
 
 -- Turn manually syntax on on .cs files
-vim.cmd('au BufRead,BufNewFile *.cs syntax on')
+-- vim.cmd('au BufRead,BufNewFile *.cs syntax on')
 
 -- Enable tabs on makefiles
 vim.cmd('au BufRead,BufNewFile FileType make set noexpandtab')

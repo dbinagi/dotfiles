@@ -26,6 +26,15 @@ copy tmux\.tmux_tmp.conf \\wsl$\Ubuntu\home\bini\.tmux.conf
 xcopy "backgrounds\Twilight Prophet.jpg" C:\Users\Bini\wezterm\background.jpg* /I /Y
 copy wezterm\.wezterm.lua %USERPROFILE%
 
+:: KITTY
+
+vendor\dos2unix -n kitty\kitty.conf kitty\kitty_tmp.conf
+copy kitty\kitty_tmp.conf \\wsl$\Ubuntu\home\bini\kitty\kitty.conf
+
+:: FONTS
+
+xcopy fonts \\wsl$\Ubuntu\home\bini\.fonts /E/H/C/I/Y
+
 :: Colors for ls
 
 xcopy dircolors\.dircolors \\wsl$\Ubuntu\home\bini\.dircolors* /Y
