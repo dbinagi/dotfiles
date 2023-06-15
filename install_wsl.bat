@@ -44,4 +44,5 @@ xcopy dircolors\.dircolors \\wsl$\Ubuntu\home\bini\.dircolors* /Y
 rmdir /s /q nvim_tmp
 rmdir /s /q omf_tmp
 DEL /F /Q tmux\.tmux_tmp.conf
+DEL /F /Q kitty\kitty_tmp.conf
 set /p DUMMY=Hit ENTER to continue...
