@@ -540,7 +540,14 @@ table.insert(plugins, { 'Pocco81/true-zen.nvim', enabled = true, lazy = true })
 
 table.insert(plugins, { 'MunifTanjim/nui.nvim', enabled = true, lazy = true })
 
-table.insert(plugins, { 'CosmicNvim/cosmic-ui', enabled = true, lazy = true })
+table.insert(plugins, {
+    'CosmicNvim/cosmic-ui',
+    enabled = true,
+    lazy = true,
+    config = function()
+        require('cosmic-ui').setup()
+    end
+})
 
 table.insert(plugins, {
     'rmagatti/goto-preview',

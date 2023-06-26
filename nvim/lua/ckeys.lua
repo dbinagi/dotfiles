@@ -16,7 +16,7 @@ local keys = {
         T = {"<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",                     "Preview Type Def"},
         a = {'<cmd>lua require("cosmic-ui").code_actions()<cr>',                                        "Actions"},
         f = {'<cmd>lua vim.lsp.buf.format { async = true }<cr>',                                        "Format"},
-        r = {vim.lsp.buf.references,                                                                    "References"},
+        r = {'<cmd>lua require("telescope.builtin").lsp_references()<cr>',                              "References"},
         R = {'<cmd>lua require("goto-preview").goto_preview_references()<CR>',                          "Preview References"},
         h = {vim.lsp.buf.signature_help,                                                                "Signature Help"},
     },
@@ -69,8 +69,6 @@ local keys = {
     ["."] = { "<Cmd>BufferNext<CR>", "Next Buffer"},
 }
 
--- map('v', '<leader>ga', '<cmd>lua require("cosmic-ui").range_code_actions()<cr>', opts)
--- map('n', '<leader>gn', '<cmd>lua require("cosmic-ui").rename()<cr>', opts)
 -- map('n', '<leader>gpi', '<cmd>lua require("goto-preview").goto_preview_implementation()<CR>', opts)
 -- map('n', '<leader>gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>', opts)
 -- map('n', '<leader>gP', '<cmd>lua require("goto-preview").close_all_win()<CR>', opts)
