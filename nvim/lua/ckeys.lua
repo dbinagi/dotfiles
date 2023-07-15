@@ -18,7 +18,8 @@ local keys = {
         f = {'<cmd>lua vim.lsp.buf.format { async = true }<cr>',                                        "Format"},
         r = {'<cmd>lua require("telescope.builtin").lsp_references()<cr>',                              "References"},
         R = {'<cmd>lua require("goto-preview").goto_preview_references()<CR>',                          "Preview References"},
-        h = {vim.lsp.buf.signature_help,                                                                "Signature Help"},
+        s = {vim.lsp.buf.signature_help,                                                                "Signature Help"},
+        h = {vim.lsp.buf.hover,                                                                         "Hover"},
     },
     c = {
         name = "+ Commands",
