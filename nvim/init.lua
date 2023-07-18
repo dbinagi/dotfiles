@@ -184,7 +184,7 @@ table.insert(plugins, {
         }
 
         -- C++
-        require 'lspconfig'.ccls.setup {
+        require 'lspconfig'.clangd.setup {
             capabilities = capabilities,
             on_attach = custom_attach,
         }
