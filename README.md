@@ -85,3 +85,8 @@ Install: `sudo apt-get install unzip`
 
 1) Install `pip install neovim`
 1) Install dependency: https://github.com/williamboman/nvim-lsp-installer/blob/main/lua/nvim-lsp-installer/servers/pylsp/README.md
+
+### NVIM: Fix trailing characters ^M in WSL files
+
+Go to Lazy Path: `/home/bini/.local/share/nvim`
+Run: `find . -type f -exec dos2unix {} \;`

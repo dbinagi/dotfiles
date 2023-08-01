@@ -406,9 +406,11 @@ table.insert(plugins, {
     'nvim-telescope/telescope.nvim',
     enabled = true,
     lazy = true,
+    cmd = {"Telescope"},
     dependencies = {
         'nvim-telescope/telescope-file-browser.nvim',
         'nvim-telescope/telescope-live-grep-args.nvim',
+        'GustavoKatel/telescope-asynctasks.nvim',
         'nvim-lua/plenary.nvim',
         'ahmedkhalf/project.nvim',
         'ThePrimeagen/harpoon',
@@ -452,6 +454,7 @@ table.insert(plugins, {
         require("telescope").load_extension "live_grep_args"
         require("telescope").load_extension('harpoon')
         require('telescope').load_extension('projects')
+        require('telescope').load_extension('asynctasks')
     end
 })
 
@@ -579,6 +582,20 @@ table.insert(plugins, {
     cmd = { 'GitBlameToggle' },
     config = function()
         vim.g.gitblame_enabled = " "
+    end
+})
+
+table.insert(plugins, {
+    'skywind3000/asynctasks.vim',
+    enabled = true,
+    lazy = true,
+    dependencies = {
+        'skywind3000/asyncrun.vim'
+    },
+    cmd = { 'AsyncTask', 'AsyncTaskEdit' },
+    config = function()
+        vim.g.asyncrun_open = 6
+        vim.g.asynctasks_term_pos = 'tab'
     end
 })
 

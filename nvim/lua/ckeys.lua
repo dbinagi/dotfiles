@@ -56,6 +56,10 @@ local keys = {
         m = {"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",                                  "Harpoon Menu"},
         a = {"<cmd>lua require('harpoon.mark').add_file()<cr>",                                         "Harpoon Mark"},
     },
+    p = {
+        name = "+ Project",
+        t = {"<cmd>Telescope asynctasks all<cr>",                                                       "List Project Tasks"},
+    },
     ["1"] = { "<Cmd>BufferGoto 1<CR>", "Tab 1"},
     ["2"] = { "<Cmd>BufferGoto 2<CR>", "Tab 2"},
     ["3"] = { "<Cmd>BufferGoto 3<CR>", "Tab 3"},
