@@ -647,6 +647,7 @@ vim.o.timeoutlen     = 500  -- Reduce timeout for leader (default 1000ms)
 vim.o.termguicolors  = true
 vim.o.ignorecase     = true -- Ignore case when searching
 vim.o.smartcase      = true -- Switch search to case sensitive when upperletter
+vim.o.foldmethod     = "syntax" -- Fold based on syntax
 -- vim.o.foldmethod        = "indent"                      -- Fold based on indention levels
 -- vim.o.foldnestmax       = 3                             -- Fold up to 3 nested levels
 
@@ -655,8 +656,10 @@ vim.cmd("set cc=80")
 vim.cmd("set autoread")
 vim.cmd("set ffs=unix,dos")
 
--- Turn manually syntax on on .cs files
--- vim.cmd('au BufRead,BufNewFile *.cs syntax on')
+-- Turn manually syntax on on .cs files and include region folding
+vim.cmd('au BufRead,BufNewFile *.cs syntax on')
+vim.cmd('au BufRead,BufNewFile *.cs syn region csregion start=/#region/ end=/#endregion/ transparent fold')
+vim.cmd('au BufRead,BufNewFile *.cs normal zR')
 
 -- Enable tabs on makefiles
 vim.cmd('au BufRead,BufNewFile FileType make set noexpandtab')
