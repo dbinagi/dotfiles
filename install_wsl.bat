@@ -21,6 +21,15 @@ xcopy omf_tmp \\wsl$\Ubuntu\home\bini\.config\omf /E/H/C/I/Y
 vendor\dos2unix -n tmux\.tmux_wsl.conf tmux\.tmux_tmp.conf
 copy tmux\.tmux_tmp.conf \\wsl$\Ubuntu\home\bini\.tmux.conf
 
+:: TMUXINATOR
+
+xcopy tmuxinator tmuxinator_tmp /E/H/C/I/Y
+cd tmuxinator_tmp
+for /R %%G in (*) do ..\vendor\dos2unix -n "%%G" "%%G"
+cd ..
+xcopy tmuxinator_tmp \\wsl$\Ubuntu\home\bini\.config\tmuxinator /E/H/C/I/Y
+rmdir /s /q tmuxinator_tmp
+
 :: WEZTERM
 
 xcopy "backgrounds\Twilight Prophet.jpg" C:\Users\Bini\wezterm\background.jpg* /I /Y

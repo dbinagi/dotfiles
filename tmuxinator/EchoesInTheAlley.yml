@@ -1,0 +1,12 @@
+name: EchoesInTheAlley
+root: /mnt/d/dev/EchoesInTheAlley
+
+windows:
+  - IDE:
+    - cd lib/bifrost_engine
+    - nvim
+  - Compile:
+    - cd build/crosscompile
+  - Game:
+    - nvim
+
