@@ -1,0 +1,16 @@
+name: KR5
+root: /Users/diego/Development/kr-love-prototype
+
+windows:
+  - IDE:
+    - cd src
+    - nvim
+  - Execute:
+  - Tools:
+    layout: main-vertical
+    panes:
+      - cd tools
+      - cd dist
+      - cd tools
+      - cd tools
+

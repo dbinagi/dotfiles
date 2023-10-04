@@ -9,6 +9,7 @@ cp -R nvim/syntax ~/.config/nvim
 cp -R fish ~/.config
 cp -R omf ~/.config
 cp -R tmux/.tmux.conf ~/
+cp -R tmuxinator ~/.config
 
 cp wezterm/.wezterm_mac.lua ~/.wezterm.lua 
 cp "backgrounds/Twilight Prophet.jpg" ~/wezterm/background.jpg
