@@ -617,6 +617,17 @@ table.insert(plugins, {
     end
 })
 
+table.insert(plugins, {
+    "karb94/neoscroll.nvim",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+        require('neoscroll').setup({
+        })
+    end
+
+})
+
 -- *===================*
 -- | LUA configuration |
 -- *===================*
