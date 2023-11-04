@@ -36,35 +36,37 @@ table.insert(plugins, {
     enabled = true,
     lazy = false,
     priority = 800,
+    main = "ibl",
     config = function()
-        vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-        vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-        vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-        vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-        vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-        vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-        vim.cmd [[highlight IndentBlanklineIndent7 guifg=#E06C75 gui=nocombine]]
-        vim.cmd [[highlight IndentBlanklineIndent8 guifg=#E5C07B gui=nocombine]]
-
-        vim.opt.list = true
-        vim.opt.listchars:append "space:⋅"
-        --vim.opt.listchars:append "eol:↴"
-
-        require("indent_blankline").setup {
-            space_char_blankline = " ",
-            show_current_context = true,
-            show_current_context_start = true,
-            char_highlight_list = {
-                "IndentBlanklineIndent1",
-                "IndentBlanklineIndent2",
-                "IndentBlanklineIndent3",
-                "IndentBlanklineIndent4",
-                "IndentBlanklineIndent5",
-                "IndentBlanklineIndent6",
-                "IndentBlanklineIndent7",
-                "IndentBlanklineIndent8",
-            },
-        }
+        require("ibl").setup()
+        -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent7 guifg=#E06C75 gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent8 guifg=#E5C07B gui=nocombine]]
+        --
+        -- vim.opt.list = true
+        -- vim.opt.listchars:append "space:⋅"
+        -- --vim.opt.listchars:append "eol:↴"
+        --
+        -- require("indent_blankline").setup {
+        --     space_char_blankline = " ",
+        --     show_current_context = true,
+        --     show_current_context_start = true,
+        --     char_highlight_list = {
+        --         "IndentBlanklineIndent1",
+        --         "IndentBlanklineIndent2",
+        --         "IndentBlanklineIndent3",
+        --         "IndentBlanklineIndent4",
+        --         "IndentBlanklineIndent5",
+        --         "IndentBlanklineIndent6",
+        --         "IndentBlanklineIndent7",
+        --         "IndentBlanklineIndent8",
+        --     },
+        -- }
     end
 })
 
@@ -406,7 +408,7 @@ table.insert(plugins, {
     'nvim-telescope/telescope.nvim',
     enabled = true,
     lazy = true,
-    cmd = {"Telescope"},
+    cmd = { "Telescope" },
     dependencies = {
         'nvim-telescope/telescope-file-browser.nvim',
         'nvim-telescope/telescope-live-grep-args.nvim',
@@ -664,10 +666,10 @@ vim.o.cursorline     = true          -- Highlight current cursorline
 vim.o.splitright     = true
 vim.o.completeopt    = "menu,menuone,noselect"
 vim.o.showcmd        = true
-vim.o.timeoutlen     = 500  -- Reduce timeout for leader (default 1000ms)
+vim.o.timeoutlen     = 500      -- Reduce timeout for leader (default 1000ms)
 vim.o.termguicolors  = true
-vim.o.ignorecase     = true -- Ignore case when searching
-vim.o.smartcase      = true -- Switch search to case sensitive when upperletter
+vim.o.ignorecase     = true     -- Ignore case when searching
+vim.o.smartcase      = true     -- Switch search to case sensitive when upperletter
 vim.o.foldmethod     = "syntax" -- Fold based on syntax
 -- vim.o.foldmethod        = "indent"                      -- Fold based on indention levels
 -- vim.o.foldnestmax       = 3                             -- Fold up to 3 nested levels
