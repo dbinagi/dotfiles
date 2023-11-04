@@ -412,6 +412,7 @@ table.insert(plugins, {
     dependencies = {
         'nvim-telescope/telescope-file-browser.nvim',
         'nvim-telescope/telescope-live-grep-args.nvim',
+        'nvim-telescope/telescope-dap.nvim',
         'GustavoKatel/telescope-asynctasks.nvim',
         'nvim-lua/plenary.nvim',
         'ahmedkhalf/project.nvim',
@@ -457,6 +458,7 @@ table.insert(plugins, {
         require("telescope").load_extension('harpoon')
         require('telescope').load_extension('projects')
         require('telescope').load_extension('asynctasks')
+        require('telescope').load_extension('dap')
     end
 })
 
@@ -539,6 +541,33 @@ table.insert(plugins, { 'rcarriga/nvim-notify', enabled = true, lazy = true })
 table.insert(plugins, { 'Pocco81/true-zen.nvim', enabled = true, lazy = true })
 
 table.insert(plugins, { 'MunifTanjim/nui.nvim', enabled = true, lazy = true })
+
+table.insert(plugins, {
+    'mfussenegger/nvim-dap',
+    enabled = true,
+    lazy = true,
+    config = function()
+        local dap = require("dap")
+        dap.adapters.gdb = {
+            type = "executable",
+            command = "gdb",
+            args = { "-i", "dap" }
+        }
+
+        -- local dap = require("dap")
+        dap.configurations.c = {
+            {
+                name = "Launch",
+                type = "gdb",
+                request = "launch",
+                program = function()
+                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                end,
+                cwd = "${workspaceFolder}",
+            },
+        }
+    end
+})
 
 table.insert(plugins, {
     'CosmicNvim/cosmic-ui',
