@@ -382,6 +382,27 @@ table.insert(plugins, {
     }
 })
 
+-- Highlight
+table.insert(plugins, {
+    'nvim-treesitter/nvim-treesitter',
+    enabled = true,
+    lazy = false,
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter-context'
+    },
+    build = ':TSUpdate',
+    config = function()
+        require 'nvim-treesitter.configs'.setup {
+            ensure_installed = { "lua", "vim", "c_sharp", "javascript", "html", "css", "python" },
+            sync_install = false,
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = false,
+            },
+        }
+    end
+})
+
 -- *==============*
 -- | LAZY PLUGINS |
 -- *==============*
@@ -474,27 +495,6 @@ table.insert(plugins, {
                 padding = { 2, 3, 2, 3 }
             },
             triggers = { "<leader>" },
-        }
-    end
-})
-
--- Highlight
-table.insert(plugins, {
-    'nvim-treesitter/nvim-treesitter',
-    enabled = true,
-    lazy = true,
-    dependencies = {
-        'nvim-treesitter/nvim-treesitter-context'
-    },
-    build = ':TSUpdate',
-    config = function()
-        require 'nvim-treesitter.configs'.setup {
-            ensure_installed = { "lua", "vim", "c_sharp", "javascript", "html", "css", "python" },
-            sync_install = false,
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-            },
         }
     end
 })
@@ -623,7 +623,7 @@ table.insert(plugins, {
     dependencies = {
         'skywind3000/asyncrun.vim'
     },
-    cmd = { 'AsyncTask', 'AsyncTaskEdit' },
+    cmd = { 'AsyncTask', 'AsyncTaskEdit', 'Telescope' },
     config = function()
         vim.g.asyncrun_open = 6
         vim.g.asynctasks_term_pos = 'tab'
@@ -656,7 +656,6 @@ table.insert(plugins, {
         require('neoscroll').setup({
         })
     end
-
 })
 
 -- *===================*
@@ -716,4 +715,6 @@ vim.cmd('au BufRead,BufNewFile *.cs normal zR')
 -- Enable tabs on makefiles
 vim.cmd('au BufRead,BufNewFile FileType make set noexpandtab')
 
-vim.cmd("syntax enable") -- Disable creating swap file
+vim.cmd("syntax enable")
+
+vim.cmd("set nofoldenable")
