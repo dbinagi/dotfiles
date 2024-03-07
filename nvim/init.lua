@@ -280,6 +280,8 @@ table.insert(plugins, {
             }, {
                 { name = 'buffer' },
                 { name = 'nvim_lsp_signature_help' }
+            }, {
+                { name = "neorg" },
             }),
             preselect = cmp.PreselectMode.None,
         })
@@ -636,6 +638,40 @@ table.insert(plugins, {
 -- Plug 'rmagatti/auto-session'
 -- Plug 'tpope/vim-fugitive'
 -- Plug 'j-hui/fidget.nvim'
+
+table.insert(plugins, {
+    "nvim-neorg/neorg",
+    build = ":Neorg sync-parsers",
+    lazy = false, -- specify lazy = false because some lazy.nvim distributions set lazy = true by default
+    -- tag = "*",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("neorg").setup {
+        load = {
+          ["core.defaults"] = {}, -- Loads default behaviour
+          ["core.concealer"] = {}, -- Adds pretty icons to your documents
+          ["core.dirman"] = { -- Manages Neorg workspaces
+            config = {
+              workspaces = {
+                notes = "~/notes",
+              },
+            },
+          },
+          ["core.completion"] = { -- A wrapper to interface with several different completion engines.
+            config = {
+                engine = "nvim-cmp"
+            },
+          },
+	      ["core.export.markdown"] = {},
+	      ["core.export"] = {
+              config = {
+                  export_dir = "~/notes_export_dir"
+              }
+          },
+        },
+      }
+    end,
+})
 
 table.insert(plugins, {
     "kylechui/nvim-surround",
