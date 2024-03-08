@@ -668,6 +668,16 @@ table.insert(plugins, {
                   export_dir = "~/notes_export_dir"
               }
           },
+          ["core.keybinds"] = {
+              config = {
+                  default_keybinds = false,
+              }
+          },
+          ["core.qol.toc"] = {
+              config = {
+                  close_after_use = true,
+              }
+          },
         },
       }
     end,

@@ -8,19 +8,6 @@ local wk = require('which-key')
 ------------------------------
 
 local keys = {
-    l = {
-        name = "+ LSP",
-        d = {vim.lsp.buf.definition,                                                                    "Definition"},
-        D = {"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",                          "Preview Definition"},
-        t = {vim.lsp.buf.type_definition,                                                               "Type Def"},
-        T = {"<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",                     "Preview Type Def"},
-        a = {'<cmd>lua require("cosmic-ui").code_actions()<cr>',                                        "Actions"},
-        f = {'<cmd>lua vim.lsp.buf.format { async = true }<cr>',                                        "Format"},
-        r = {'<cmd>lua require("telescope.builtin").lsp_references()<cr>',                              "References"},
-        R = {'<cmd>lua require("goto-preview").goto_preview_references()<CR>',                          "Preview References"},
-        s = {vim.lsp.buf.signature_help,                                                                "Signature Help"},
-        h = {vim.lsp.buf.hover,                                                                         "Hover"},
-    },
     c = {
         name = "+ Commands",
         c = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>",                          "Comment"},
@@ -38,13 +25,6 @@ local keys = {
         s = { "<cmd>lua require('telescope.builtin').git_status({layout_strategy='vertical'})<cr>",     "Search Git diff" },
         t = { "<cmd>Telescope file_browser<cr>",                                                        "Show File Tree" },
     },
-    t = {
-        name = "+ Tabs",
-        c = {"<Cmd>BufferClose<CR>",                                                                    "Tab Close"},
-        p = {"<Cmd>BufferPin<CR>",                                                                      "Tab Pin"},
-        [">"] = { "<Cmd>BufferMoveNext<CR>", "Move Tab Right"},
-        ["<"] = { "<Cmd>BufferMovePrevious<CR>", "Move Tab Left"},
-    },
     g = {
         name = "+ Git",
         n = {"<Cmd>GitGutterNextHunk<cr>",                                                              "Next Change"},
@@ -56,9 +36,38 @@ local keys = {
         m = {"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",                                  "Harpoon Menu"},
         a = {"<cmd>lua require('harpoon.mark').add_file()<cr>",                                         "Harpoon Mark"},
     },
+    l = {
+        name = "+ LSP",
+        d = {vim.lsp.buf.definition,                                                                    "Definition"},
+        D = {"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",                          "Preview Definition"},
+        t = {vim.lsp.buf.type_definition,                                                               "Type Def"},
+        T = {"<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",                     "Preview Type Def"},
+        a = {'<cmd>lua require("cosmic-ui").code_actions()<cr>',                                        "Actions"},
+        f = {'<cmd>lua vim.lsp.buf.format { async = true }<cr>',                                        "Format"},
+        r = {'<cmd>lua require("telescope.builtin").lsp_references()<cr>',                              "References"},
+        R = {'<cmd>lua require("goto-preview").goto_preview_references()<CR>',                          "Preview References"},
+        s = {vim.lsp.buf.signature_help,                                                                "Signature Help"},
+        h = {vim.lsp.buf.hover,                                                                         "Hover"},
+    },
+    n = {
+        name = "+ Notes/Neorg",
+        n = {"<cmd>Neorg keybind all core.dirman.new.note<CR>",                                         "New Note"},
+        o = {"<cmd>Neorg workspace notes<CR>",                                                          "Open Workspace"},
+        c = {"<cmd>Neorg return<CR>",                                                                   "Close Workspace"},
+        t = {"<cmd>Neorg toc left<CR>",                                                                 "Open TOC"},
+        e = {"<cmd>Neorg toggle-concealer<CR>",                                                         "Toggle edit mode"},
+        l = {"<cmd>Neorg keybind all core.esupports.hop.hop-link<CR>",                                  "Open Link"},
+    },
     p = {
         name = "+ Project",
         t = {"<cmd>Telescope asynctasks all<cr>",                                                       "List Project Tasks"},
+    },
+    t = {
+        name = "+ Tabs",
+        c = {"<Cmd>BufferClose<CR>",                                                                    "Tab Close"},
+        p = {"<Cmd>BufferPin<CR>",                                                                      "Tab Pin"},
+        [">"] = { "<Cmd>BufferMoveNext<CR>", "Move Tab Right"},
+        ["<"] = { "<Cmd>BufferMovePrevious<CR>", "Move Tab Left"},
     },
     ["1"] = { "<Cmd>BufferGoto 1<CR>", "Tab 1"},
     ["2"] = { "<Cmd>BufferGoto 2<CR>", "Tab 2"},
