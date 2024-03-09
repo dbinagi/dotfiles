@@ -395,7 +395,7 @@ table.insert(plugins, {
     build = ':TSUpdate',
     config = function()
         require 'nvim-treesitter.configs'.setup {
-            ensure_installed = { "lua", "vim", "c_sharp", "javascript", "html", "css", "python" },
+            ensure_installed = { "lua", "vim", "vimdoc", "c_sharp", "javascript", "html", "css", "python", "norg" },
             sync_install = false,
             highlight = {
                 enable = true,
@@ -634,7 +634,6 @@ table.insert(plugins, {
 
 -- Testing plugins
 -- Plug 'stevearc/overseer.nvim'
--- Plug ('nvim-neorg/neorg', {tag = '0.0.12'})
 -- Plug 'rmagatti/auto-session'
 -- Plug 'tpope/vim-fugitive'
 -- Plug 'j-hui/fidget.nvim'
@@ -663,6 +662,12 @@ table.insert(plugins, {
             },
           },
 	      ["core.export.markdown"] = {},
+          ["core.esupports.hop"] = {},
+          ["core.esupports.indent"] = {
+              config = {
+                  format_on_enter = false
+              }
+          },
 	      ["core.export"] = {
               config = {
                   export_dir = "~/notes_export_dir"
@@ -764,3 +769,7 @@ vim.cmd('au BufRead,BufNewFile FileType make set noexpandtab')
 vim.cmd("syntax enable")
 
 vim.cmd("set nofoldenable")
+
+vim.cmd('autocmd FileType norg setlocal conceallevel=1')
+
+
