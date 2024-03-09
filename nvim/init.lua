@@ -663,11 +663,6 @@ table.insert(plugins, {
           },
 	      ["core.export.markdown"] = {},
           ["core.esupports.hop"] = {},
-          ["core.esupports.indent"] = {
-              config = {
-                  format_on_enter = false
-              }
-          },
 	      ["core.export"] = {
               config = {
                   export_dir = "~/notes_export_dir"
@@ -725,6 +720,7 @@ require("lazy").setup(plugins, {
 })
 
 require('ckeys')
+require('cnotes')
 
 -- *=======================*
 -- | GENERAL CONFIGURATION |
@@ -757,19 +753,31 @@ vim.cmd("noswapfile") -- Disable creating swap file
 vim.cmd("set cc=80")
 vim.cmd("set autoread")
 vim.cmd("set ffs=unix,dos")
+vim.cmd("set nofoldenable")
+vim.cmd("syntax enable")
+
+-- *===================*
+-- | LANGUAGE SPECIFIC |
+-- *===================*
+
+-- C#
+-----
 
 -- Turn manually syntax on on .cs files and include region folding
 vim.cmd('au BufRead,BufNewFile *.cs syntax on')
 vim.cmd('au BufRead,BufNewFile *.cs syn region csregion start=/#region/ end=/#endregion/ transparent fold')
 vim.cmd('au BufRead,BufNewFile *.cs normal zR')
 
+-- MAKE
+-------
+
 -- Enable tabs on makefiles
 vim.cmd('au BufRead,BufNewFile FileType make set noexpandtab')
 
-vim.cmd("syntax enable")
+-- NORG
+-------
 
-vim.cmd("set nofoldenable")
-
+-- Show links with name on norg files
 vim.cmd('autocmd FileType norg setlocal conceallevel=1')
 
 
