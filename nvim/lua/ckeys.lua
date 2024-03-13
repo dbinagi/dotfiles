@@ -7,6 +7,16 @@ local wk = require('which-key')
 --        cosmic-ui         --
 ------------------------------
 
+local function pull_and_open_notes()
+    vim.cmd("NotesPull")
+    vim.cmd("Neorg workspace notes")
+end
+
+local function push_and_close_notes()
+    vim.cmd("NotesPush")
+    vim.cmd("Neorg return")
+end
+
 local keys = {
     c = {
         name = "+ Commands",
@@ -52,14 +62,14 @@ local keys = {
     },
     n = {
         name = "+ Notes/Neorg",
-        c = {"<cmd>Neorg return<CR>",                                                                   "Close Workspace"},
+        c = {push_and_close_notes,                                                                      "Close Workspace"},
         d = {"<cmd>Neorg keybind all core.qol.todo_items.todo.task_done<CR>",                           "Task Done"},
         e = {"<cmd>Neorg toggle-concealer<CR>",                                                         "Toggle edit mode"},
         j = {"<cmd>Neorg keybind all core.qol.todo_items.todo.task_cycle<CR>",                          "Task Next"},
         k = {"<cmd>Neorg keybind all core.qol.todo_items.todo.task_cycle_reverse<CR>",                  "Task Previous"},
         l = {"<cmd>Neorg keybind all core.esupports.hop.hop-link<CR>",                                  "Open Link"},
         n = {"<cmd>Neorg keybind all core.dirman.new.note<CR>",                                         "New Note"},
-        o = {"<cmd>Neorg workspace notes<CR>",                                                          "Open Workspace"},
+        o = {pull_and_open_notes,                                                                       "Open Workspace"},
         t = {"<cmd>put =strftime('# %Y-%m-%d %H:%M:%S')<CR>",                                           "Insert timestamp"},
         T = {"<cmd>Neorg toc left<CR>",                                                                 "Open TOC"},
         u = {"<cmd>Neorg keybind all core.qol.todo_items.todo.task_undone<CR>",                         "Task Undone"},
