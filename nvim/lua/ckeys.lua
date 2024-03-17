@@ -17,6 +17,56 @@ local function push_and_close_notes()
     vim.cmd("Neorg return")
 end
 
+local function sync_and_list_notes()
+    vim.cmd("lua require('jopvim.telescope').joplin_notes()")
+end
+
+local function joplin_server_already_running(data)
+    for _, valor in pairs(data) do
+        if string.find(string.upper(valor), "SERVER IS ALREADY RUNNING ON PORT") then
+            return true
+        end
+        return false
+    end
+end
+
+local function joplin_server_started_ok(data)
+    for _, valor in pairs(data) do
+        if string.find(string.upper(valor), "STARTING CLIPPER SERVER ON PORT") then
+            return true
+        end
+        return false
+    end
+end
+
+local function joplin_index()
+    vim.fn.jobstart('joplin server start', {
+        detach = 1,
+        on_exit = function()
+        end,
+        on_stdout = function(_, data, _)
+            if joplin_server_already_running(data) then
+                vim.cmd("JopvimUpdateIndex")
+                print("Sync Complete")
+            else
+                if joplin_server_started_ok(data) then
+                    vim.cmd("JopvimUpdateIndex")
+                    print("Sync Complete")
+                else
+                    for clave, valor in pairs(data) do
+                        print(clave, valor)
+                    end
+                    print("Unexpected error")
+                end
+            end
+        end,
+    })
+end
+
+local function joplin_sync()
+    io.popen("joplin sync")
+end
+
 local keys = {
     c = {
         name = "+ Commands",
@@ -84,6 +134,12 @@ local keys = {
         p = {"<Cmd>BufferPin<CR>",                                                                      "Tab Pin"},
         [">"] = { "<Cmd>BufferMoveNext<CR>", "Move Tab Right"},
         ["<"] = { "<Cmd>BufferMovePrevious<CR>", "Move Tab Left"},
+    },
+    j = {
+        f = {'<cmd>lua require("jopvim.telescope").joplin_folders()<cr>',                               "Joplin Folders"},
+        i = {joplin_index,                                                                              "Joplin Start Server and Index"},
+        n = {sync_and_list_notes,                                                                       "Joplin Notes"},
+        s = {joplin_sync,                                                                               "Joplin Sync"}
     },
     ["1"] = { "<Cmd>BufferGoto 1<CR>", "Tab 1"},
     ["2"] = { "<Cmd>BufferGoto 2<CR>", "Tab 2"},

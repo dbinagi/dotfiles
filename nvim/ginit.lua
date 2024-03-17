@@ -9,3 +9,8 @@
 
 " Font and size
 " GuiFont! Hack:h14
+"
+
+if vim.g.neovide then
+    vim.o.guifont = "Hack:h14"
+end

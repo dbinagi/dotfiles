@@ -488,6 +488,18 @@ table.insert(plugins, {
 --     end
 -- })
 
+
+table.insert(plugins, {
+    "ZwodahS/jopvim.nvim",
+    enabled = true,
+    lazy = false,
+    config = function()
+        require('jopvim').setup({
+            token_path = vim.fn.expand('~/.config/joplin_token')
+        })
+    end
+})
+
 -- *==============*
 -- | LAZY PLUGINS |
 -- *==============*
