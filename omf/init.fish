@@ -13,4 +13,4 @@ if test -d /mnt/disk1/dev/repo
 end
 
 # Add path for nvm
-set -gx NVM_DIR ~/nvm
+set -gx NVM_DIR ~/.nvm
