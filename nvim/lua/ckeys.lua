@@ -7,65 +7,65 @@ local wk = require('which-key')
 --        cosmic-ui         --
 ------------------------------
 
-local function pull_and_open_notes()
-    vim.cmd("NotesPull")
-    vim.cmd("Neorg workspace notes")
-end
+-- local function pull_and_open_notes()
+--     vim.cmd("NotesPull")
+--     vim.cmd("Neorg workspace notes")
+-- end
 
-local function push_and_close_notes()
-    vim.cmd("NotesPush")
-    vim.cmd("Neorg return")
-end
+-- local function push_and_close_notes()
+--     vim.cmd("NotesPush")
+--     vim.cmd("Neorg return")
+-- end
 
-local function sync_and_list_notes()
-    vim.cmd("lua require('jopvim.telescope').joplin_notes()")
-end
+-- local function sync_and_list_notes()
+--     vim.cmd("lua require('jopvim.telescope').joplin_notes()")
+-- end
 
-local function joplin_server_already_running(data)
-    for _, valor in pairs(data) do
-        if string.find(string.upper(valor), "SERVER IS ALREADY RUNNING ON PORT") then
-            return true
-        end
-        return false
-    end
-end
+-- local function joplin_server_already_running(data)
+--     for _, valor in pairs(data) do
+--         if string.find(string.upper(valor), "SERVER IS ALREADY RUNNING ON PORT") then
+--             return true
+--         end
+--         return false
+--     end
+-- end
 
-local function joplin_server_started_ok(data)
-    for _, valor in pairs(data) do
-        if string.find(string.upper(valor), "STARTING CLIPPER SERVER ON PORT") then
-            return true
-        end
-        return false
-    end
-end
+-- local function joplin_server_started_ok(data)
+--     for _, valor in pairs(data) do
+--         if string.find(string.upper(valor), "STARTING CLIPPER SERVER ON PORT") then
+--             return true
+--         end
+--         return false
+--     end
+-- end
 
-local function joplin_index()
-    vim.fn.jobstart('joplin server start', {
-        detach = 1,
-        on_exit = function()
-        end,
-        on_stdout = function(_, data, _)
-            if joplin_server_already_running(data) then
-                vim.cmd("JopvimUpdateIndex")
-                print("Sync Complete")
-            else
-                if joplin_server_started_ok(data) then
-                    vim.cmd("JopvimUpdateIndex")
-                    print("Sync Complete")
-                else
-                    for clave, valor in pairs(data) do
-                        print(clave, valor)
-                    end
-                    print("Unexpected error")
-                end
-            end
-        end,
-    })
-end
+-- local function joplin_index()
+--     vim.fn.jobstart('joplin server start', {
+--         detach = 1,
+--         on_exit = function()
+--         end,
+--         on_stdout = function(_, data, _)
+--             if joplin_server_already_running(data) then
+--                 vim.cmd("JopvimUpdateIndex")
+--                 print("Sync Complete")
+--             else
+--                 if joplin_server_started_ok(data) then
+--                     vim.cmd("JopvimUpdateIndex")
+--                     print("Sync Complete")
+--                 else
+--                     for clave, valor in pairs(data) do
+--                         print(clave, valor)
+--                     end
+--                     print("Unexpected error")
+--                 end
+--             end
+--         end,
+--     })
+-- end
 
-local function joplin_sync()
-    io.popen("joplin sync")
-end
+-- local function joplin_sync()
+--     io.popen("joplin sync")
+-- end
 
 local keys = {
     c = {
@@ -111,18 +111,12 @@ local keys = {
         h = {vim.lsp.buf.hover,                                                                         "Hover"},
     },
     n = {
-        name = "+ Notes/Neorg",
-        c = {push_and_close_notes,                                                                      "Close Workspace"},
-        d = {"<cmd>Neorg keybind all core.qol.todo_items.todo.task_done<CR>",                           "Task Done"},
-        e = {"<cmd>Neorg toggle-concealer<CR>",                                                         "Toggle edit mode"},
-        j = {"<cmd>Neorg keybind all core.qol.todo_items.todo.task_cycle<CR>",                          "Task Next"},
-        k = {"<cmd>Neorg keybind all core.qol.todo_items.todo.task_cycle_reverse<CR>",                  "Task Previous"},
-        l = {"<cmd>Neorg keybind all core.esupports.hop.hop-link<CR>",                                  "Open Link"},
-        n = {"<cmd>Neorg keybind all core.dirman.new.note<CR>",                                         "New Note"},
-        o = {pull_and_open_notes,                                                                       "Open Workspace"},
-        t = {"<cmd>put =strftime('# %Y-%m-%d %H:%M:%S')<CR>",                                           "Insert timestamp"},
-        T = {"<cmd>Neorg toc left<CR>",                                                                 "Open TOC"},
-        u = {"<cmd>Neorg keybind all core.qol.todo_items.todo.task_undone<CR>",                         "Task Undone"},
+        name = "+ Notes",
+        g = {"<cmd>ObsidianSearch<CR>",                                                                 "Search in Notes"},
+        f = {"<cmd>ObsidianQuickSwitch<CR>",                                                            "Find Note"},
+        n = {"<cmd>ObsidianNew<CR>",                                                                    "New Note"},
+        t = {"<cmd>ObsidianTags<CR>",                                                                   "Tags Search"},
+        c = {"<cmd>ObsidianToggleCheckbox<CR>",                                                         "Toggle Checkbox"},
     },
     p = {
         name = "+ Project",
@@ -134,12 +128,6 @@ local keys = {
         p = {"<Cmd>BufferPin<CR>",                                                                      "Tab Pin"},
         [">"] = { "<Cmd>BufferMoveNext<CR>", "Move Tab Right"},
         ["<"] = { "<Cmd>BufferMovePrevious<CR>", "Move Tab Left"},
-    },
-    j = {
-        f = {'<cmd>lua require("jopvim.telescope").joplin_folders()<cr>',                               "Joplin Folders"},
-        i = {joplin_index,                                                                              "Joplin Start Server and Index"},
-        n = {sync_and_list_notes,                                                                       "Joplin Notes"},
-        s = {joplin_sync,                                                                               "Joplin Sync"}
     },
     ["1"] = { "<Cmd>BufferGoto 1<CR>", "Tab 1"},
     ["2"] = { "<Cmd>BufferGoto 2<CR>", "Tab 2"},

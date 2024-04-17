@@ -1,3 +1,6 @@
+-- Load custom environment configuration
+local config = require("cconfig")
+
 -- lazy.nvim Plugin Manager (https://github.com/folke/lazy.nvim)
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -395,108 +398,14 @@ table.insert(plugins, {
     build = ':TSUpdate',
     config = function()
         require 'nvim-treesitter.configs'.setup {
-            ensure_installed = { "lua", "vim", "vimdoc", "c_sharp", "javascript", "html", "css", "python", "norg" },
+            ensure_installed = { "lua", "vim", "vimdoc", "c_sharp", "javascript", "html", "css", "python", "norg",
+                "markdown", "markdown_inline" },
             sync_install = false,
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = false,
             },
         }
-    end
-})
-
--- Example for configuring Neovim to load user-installed installed Lua rocks:
--- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
--- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/lib/luarocks/rocks-5.1/?.lua;"
-
--- package.path = package.path .. ";/home/bini/.luarocks/share/lua/5.1/?/init.lua;"
-
--- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
--- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
-
--- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
-
-
-
--- table.insert(plugins, {
---     "edluffy/hologram.nvim",
---     enabled = true,
---     lazy = false,
---     dependencies = {
---         -- "rcarriga/nvim-notify", -- Optional dependency
---     },
---     config = function()
---         require("hologram").setup({
---             rocks = { "magick" },
---         })
---     end,
---     -- opts = {
---     -- rocks = { "magick" } -- Specify LuaRocks packages to install
---     -- }
--- })
-
-
--- table.insert(plugins, {
---     "camspiers/luarocks",
---     enabled = true,
---     lazy = false,
---     dependencies = {
---         "rcarriga/nvim-notify", -- Optional dependency
---     },
---     opts = {
---         rocks = { "magick" } -- Specify LuaRocks packages to install
---     }
--- })
-
--- table.insert(plugins, {
---     'https://github.com/3rd/image.nvim',
---     enabled = true,
---     lazy = false,
---     dependencies = {
---         -- 'nvim-treesitter/nvim-treesitter-context'
---     },
---     -- build = ':TSUpdate',
---     config = function()
---         require("image").setup({
---             backend = "kitty",
---             integrations = {
---                 markdown = {
---                     enabled = true,
---                     clear_in_insert_mode = false,
---                     download_remote_images = true,
---                     only_render_image_at_cursor = false,
---                     filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
---                 },
---                 neorg = {
---                     enabled = true,
---                     clear_in_insert_mode = false,
---                     download_remote_images = true,
---                     only_render_image_at_cursor = false,
---                     filetypes = { "norg" },
---                 },
---             },
---             max_width = nil,
---             max_height = nil,
---             max_width_window_percentage = nil,
---             max_height_window_percentage = 50,
---             window_overlap_clear_enabled = false,                                   -- toggles images when windows are overlapped
---             window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
---             editor_only_render_when_focused = false,                                -- auto show/hide images when the editor gains/looses focus
---             tmux_show_only_in_active_window = false,                                -- auto show/hide images in the correct Tmux window (needs visual-activity off)
---             hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }, -- render image files as images when opened
---         })
---     end
--- })
-
-
-table.insert(plugins, {
-    "ZwodahS/jopvim.nvim",
-    enabled = true,
-    lazy = false,
-    config = function()
-        require('jopvim').setup({
-            token_path = vim.fn.expand('~/.config/joplin_token')
-        })
     end
 })
 
@@ -530,7 +439,7 @@ table.insert(plugins, {
     dependencies = {
         'nvim-telescope/telescope-file-browser.nvim',
         'nvim-telescope/telescope-live-grep-args.nvim',
-        'nvim-telescope/telescope-dap.nvim',
+        -- 'nvim-telescope/telescope-dap.nvim',
         'GustavoKatel/telescope-asynctasks.nvim',
         'nvim-lua/plenary.nvim',
         'ahmedkhalf/project.nvim',
@@ -576,7 +485,7 @@ table.insert(plugins, {
         require("telescope").load_extension('harpoon')
         require('telescope').load_extension('projects')
         require('telescope').load_extension('asynctasks')
-        require('telescope').load_extension('dap')
+        -- require('telescope').load_extension('dap')
     end
 })
 
@@ -639,32 +548,32 @@ table.insert(plugins, { 'Pocco81/true-zen.nvim', enabled = true, lazy = true })
 
 table.insert(plugins, { 'MunifTanjim/nui.nvim', enabled = true, lazy = true })
 
-table.insert(plugins, {
-    'mfussenegger/nvim-dap',
-    enabled = true,
-    lazy = true,
-    config = function()
-        local dap = require("dap")
-        dap.adapters.gdb = {
-            type = "executable",
-            command = "gdb",
-            args = { "-i", "dap" }
-        }
-
-        -- local dap = require("dap")
-        dap.configurations.c = {
-            {
-                name = "Launch",
-                type = "gdb",
-                request = "launch",
-                program = function()
-                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-                end,
-                cwd = "${workspaceFolder}",
-            },
-        }
-    end
-})
+-- table.insert(plugins, {
+--     'mfussenegger/nvim-dap',
+--     enabled = true,
+--     lazy = true,
+--     config = function()
+--         local dap = require("dap")
+--         dap.adapters.gdb = {
+--             type = "executable",
+--             command = "gdb",
+--             args = { "-i", "dap" }
+--         }
+--
+--         -- local dap = require("dap")
+--         dap.configurations.c = {
+--             {
+--                 name = "Launch",
+--                 type = "gdb",
+--                 request = "launch",
+--                 program = function()
+--                     return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+--                 end,
+--                 cwd = "${workspaceFolder}",
+--             },
+--         }
+--     end
+-- })
 
 table.insert(plugins, {
     'CosmicNvim/cosmic-ui',
@@ -727,56 +636,90 @@ table.insert(plugins, {
     end
 })
 
+table.insert(plugins, {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    lazy = true,
+    enabled = true,
+    cmd = { "ObsidianSearch", "ObsidianQuickSwitch", "ObsidianNew", "ObsidianTags", "ObsidianToggleCheckbox"},
+    ft = "markdown",
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    -- event = {
+    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+    --   "BufReadPre path/to/my-vault/**.md",
+    --   "BufNewFile path/to/my-vault/**.md",
+    -- },
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "hrsh7th/nvim-cmp",
+        "nvim-telescope/telescope.nvim",
+        "nvim-treesitter",
+    },
+    opts = {
+        workspaces = {
+            {
+                name = "personal",
+                path = config.NOTES_FOLDER,
+                strict = true,
+            },
+        },
+        daily_notes = {
+            folder = "dailies",
+        },
+    }
+})
+
 -- Testing plugins
 -- Plug 'stevearc/overseer.nvim'
 -- Plug 'rmagatti/auto-session'
 -- Plug 'tpope/vim-fugitive'
 -- Plug 'j-hui/fidget.nvim'
 
-table.insert(plugins, {
-    "nvim-neorg/neorg",
-    build = ":Neorg sync-parsers",
-    lazy = false, -- specify lazy = false because some lazy.nvim distributions set lazy = true by default
-    -- tag = "*",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-        require("neorg").setup {
-            load = {
-                ["core.defaults"] = {}, -- Loads default behaviour
-                ["core.concealer"] = {}, -- Adds pretty icons to your documents
-                ["core.dirman"] = { -- Manages Neorg workspaces
-                    config = {
-                        workspaces = {
-                            notes = "~/notes",
-                        },
-                    },
-                },
-                ["core.completion"] = { -- A wrapper to interface with several different completion engines.
-                    config = {
-                        engine = "nvim-cmp"
-                    },
-                },
-                ["core.export.markdown"] = {},
-                ["core.esupports.hop"] = {},
-                ["core.export"] = {
-                    config = {
-                        export_dir = "~/notes_export_dir"
-                    }
-                },
-                ["core.keybinds"] = {
-                    config = {
-                        default_keybinds = false,
-                    }
-                },
-                ["core.qol.toc"] = {
-                    config = {
-                        close_after_use = true,
-                    }
-                },
-            },
-        }
-    end,
-})
+-- table.insert(plugins, {
+--     "nvim-neorg/neorg",
+--     build = ":Neorg sync-parsers",
+--     lazy = false, -- specify lazy = false because some lazy.nvim distributions set lazy = true by default
+--     -- tag = "*",
+--     dependencies = { "nvim-lua/plenary.nvim" },
+--     config = function()
+--         require("neorg").setup {
+--             load = {
+--                 ["core.defaults"] = {}, -- Loads default behaviour
+--                 ["core.concealer"] = {}, -- Adds pretty icons to your documents
+--                 ["core.dirman"] = { -- Manages Neorg workspaces
+--                     config = {
+--                         workspaces = {
+--                             notes = "~/notes",
+--                         },
+--                     },
+--                 },
+--                 ["core.completion"] = { -- A wrapper to interface with several different completion engines.
+--                     config = {
+--                         engine = "nvim-cmp"
+--                     },
+--                 },
+--                 ["core.export.markdown"] = {},
+--                 ["core.esupports.hop"] = {},
+--                 ["core.export"] = {
+--                     config = {
+--                         export_dir = "~/notes_export_dir"
+--                     }
+--                 },
+--                 ["core.keybinds"] = {
+--                     config = {
+--                         default_keybinds = false,
+--                     }
+--                 },
+--                 ["core.qol.toc"] = {
+--                     config = {
+--                         close_after_use = true,
+--                     }
+--                 },
+--             },
+--         }
+--     end,
+-- })
 
 table.insert(plugins, {
     "kylechui/nvim-surround",
@@ -869,8 +812,10 @@ vim.cmd('au BufRead,BufNewFile *.cs normal zR')
 -- Enable tabs on makefiles
 vim.cmd('au BufRead,BufNewFile FileType make set noexpandtab')
 
--- NORG
--------
+-- NOTE TAKING
+--------------
 
 -- Show links with name on norg files
 vim.cmd('autocmd FileType norg setlocal conceallevel=1')
+
+vim.cmd('autocmd FileType markdown setlocal conceallevel=1')
