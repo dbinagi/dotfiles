@@ -115,7 +115,8 @@ local keys = {
         g = {"<cmd>ObsidianSearch<CR>",                                                                 "Search in Notes"},
         f = {"<cmd>ObsidianQuickSwitch<CR>",                                                            "Find Note"},
         n = {"<cmd>ObsidianNew<CR>",                                                                    "New Note"},
-        t = {"<cmd>ObsidianTags<CR>",                                                                   "Tags Search"},
+        t = {"<cmd>MarkdownHeaders<CR>",                                                                "List Headers"},
+        q = {"<cmd>ObsidianTags<CR>",                                                                   "Query Tags"},
         c = {"<cmd>ObsidianToggleCheckbox<CR>",                                                         "Toggle Checkbox"},
     },
     p = {
@@ -160,5 +161,9 @@ local keys = {
 -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
 -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
 -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+
+
+-- Useful hotkeys
+-- Close Other windows: C-w - o
 
 wk.register(keys, { prefix = "<leader>" })

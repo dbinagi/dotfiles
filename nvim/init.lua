@@ -444,6 +444,7 @@ table.insert(plugins, {
         'nvim-lua/plenary.nvim',
         'ahmedkhalf/project.nvim',
         'ThePrimeagen/harpoon',
+        'crispgm/telescope-heading.nvim',
     },
     config = function()
         local actions = require("telescope.actions")
@@ -477,7 +478,16 @@ table.insert(plugins, {
                 find_files = {
                     find_command = find_files_commands,
                 },
-            }
+            },
+            extensions = {
+                heading = {
+                    treesitter = true,
+                    picker_opts = {
+                        theme = "dropdown",
+                        -- current_buffer_fuzzy_find = { sorting_strategy = 'ascending' },
+                    },
+                },
+            },
         })
 
         require("telescope").load_extension "file_browser"
@@ -485,6 +495,7 @@ table.insert(plugins, {
         require("telescope").load_extension('harpoon')
         require('telescope').load_extension('projects')
         require('telescope').load_extension('asynctasks')
+        require('telescope').load_extension('heading')
         -- require('telescope').load_extension('dap')
     end
 })
@@ -641,7 +652,7 @@ table.insert(plugins, {
     version = "*",
     lazy = true,
     enabled = true,
-    cmd = { "ObsidianSearch", "ObsidianQuickSwitch", "ObsidianNew", "ObsidianTags", "ObsidianToggleCheckbox"},
+    cmd = { "ObsidianSearch", "ObsidianQuickSwitch", "ObsidianNew", "ObsidianTags", "ObsidianToggleCheckbox" },
     ft = "markdown",
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
     -- event = {
@@ -669,6 +680,24 @@ table.insert(plugins, {
         },
     }
 })
+
+table.insert(plugins, {
+    "AntonVanAssche/md-headers.nvim",
+    enabled = true,
+    lazy = false,
+    version = '*',
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        'nvim-treesitter/nvim-treesitter',
+    },
+    config = function()
+        require('md-headers').setup {height = 30}
+    end,
+})
+
+vim.api.nvim_set_hl(0, "MarkdownHeadersTitle", { fg = "#cfc9c2" })
+vim.api.nvim_set_hl(0, "MarkdownHeadersWindow", { fg = "#cfc9c2" })
+vim.api.nvim_set_hl(0, "MarkdownHeadersBorder", { fg = "#cfc9c2" })
 
 -- Testing plugins
 -- Plug 'stevearc/overseer.nvim'
