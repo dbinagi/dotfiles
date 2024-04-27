@@ -1,14 +1,17 @@
-mkdir -p ~/.config/nvim
-cp nvim/init.lua ~/.config/nvim
-cp nvim/ginit.vim ~/.config/nvim
+# NVIM
+cp -R nvim ~/.config
 
-cp -R nvim/autoload ~/.config/nvim
-cp -R nvim/colors ~/.config/nvim
-cp -R nvim/lua ~/.config/nvim
-cp -R nvim/syntax ~/.config/nvim
-
+# FISH
 cp -R fish ~/.config
+dos2unix ~/.config/fish/config.fish
 cp -R omf ~/.config
-cp -R tmux/.tmux.conf ~/
 
-mkdir -p ~/.config/alacritty && cp alacritty/alacritty_linux.yml ~/.config/alacritty/alacritty.yml
+# TMUX
+cp -R tmux/.tmux.conf ~/
+dos2unix ~/.tmux.conf
+
+cp -R tmuxinator ~/.config
+
+# DIRCOLORS
+cp -R dircolors/.dircolors ~/
+

@@ -1,0 +1,12 @@
+name: muninsnest
+root: /mnt/d/dev/muninsnest
+
+windows:
+  - IDE:
+    - nvim
+  - RUN:
+    - DEBUG=express:* npm start
+  - WRITE:
+    - cd writings
+    - nvim
+

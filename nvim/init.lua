@@ -691,7 +691,7 @@ table.insert(plugins, {
         'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-        require('md-headers').setup {height = 30}
+        require('md-headers').setup {height = 30, width = 200}
     end,
 })
 
@@ -848,3 +848,4 @@ vim.cmd('au BufRead,BufNewFile FileType make set noexpandtab')
 vim.cmd('autocmd FileType norg setlocal conceallevel=1')
 
 vim.cmd('autocmd FileType markdown setlocal conceallevel=1')
+

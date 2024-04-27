@@ -12,5 +12,8 @@ if test -d /mnt/disk1/dev/repo
     set -gx PROJECT_PATHS $PROJECT_PATHS /mnt/disk1/dev/repo
 end
 
+alias tp="tmuxinator start"
+alias ts="tmuxinator stop"
+
 # Add path for nvm
 set -gx NVM_DIR ~/.nvm
