@@ -691,13 +691,15 @@ table.insert(plugins, {
         'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-        require('md-headers').setup {height = 30, width = 200}
+        require('md-headers').setup { height = 30, width = 200 }
     end,
 })
 
 vim.api.nvim_set_hl(0, "MarkdownHeadersTitle", { fg = "#cfc9c2" })
 vim.api.nvim_set_hl(0, "MarkdownHeadersWindow", { fg = "#cfc9c2" })
 vim.api.nvim_set_hl(0, "MarkdownHeadersBorder", { fg = "#cfc9c2" })
+
+table.insert(plugins, { 'Scuilion/markdown-drawer', enabled = true, lazy = false })
 
 -- Testing plugins
 -- Plug 'stevearc/overseer.nvim'
@@ -848,4 +850,3 @@ vim.cmd('au BufRead,BufNewFile FileType make set noexpandtab')
 vim.cmd('autocmd FileType norg setlocal conceallevel=1')
 
 vim.cmd('autocmd FileType markdown setlocal conceallevel=1')
-
