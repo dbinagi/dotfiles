@@ -115,7 +115,7 @@ local keys = {
         g = {"<cmd>ObsidianSearch<CR>",                                                                 "Search in Notes"},
         f = {"<cmd>ObsidianQuickSwitch<CR>",                                                            "Find Note"},
         n = {"<cmd>ObsidianNew<CR>",                                                                    "New Note"},
-        t = {"<cmd>MarkdownHeaders<CR>",                                                                "List Headers"},
+        t = {"<cmd>MarkdownToc<CR>",                                                                "List Headers"},
         q = {"<cmd>ObsidianTags<CR>",                                                                   "Query Tags"},
         c = {"<cmd>ObsidianToggleCheckbox<CR>",                                                         "Toggle Checkbox"},
     },
