@@ -25,7 +25,6 @@ markdown_toc.load_markdown_headers = function()
         local header3 = line:match("^###%s+(.+)$")
 
         if header1 then
-
             table.insert(markdown_toc.headers_title, "--------------------")
             table.insert(markdown_toc.headers_line, i)
 
@@ -66,16 +65,26 @@ markdown_toc.jump_to_header = function()
     end
 end
 
-markdown_toc.open = function()
+markdown_toc.changes_on_linked_buffer = function()
+    print("UPDATEEE")
+    markdown_toc.load_markdown_headers()
+    markdown_toc.load_content(markdown_toc.headers_title)
+end
+
+markdown_toc.load_content = function(content)
+    vim.api.nvim_buf_set_option(markdown_toc.temporal_buffer, 'readonly', false)
+    vim.api.nvim_buf_set_lines(markdown_toc.temporal_buffer, 0, -1, false, content)
+    vim.api.nvim_buf_set_option(markdown_toc.temporal_buffer, 'readonly', true)
+end
+
+markdown_toc.create_buffer = function(content)
     local linked_buf = vim.api.nvim_get_current_buf()
     markdown_toc.linked_buffer = linked_buf
     markdown_toc.linked_win = vim.api.nvim_get_current_win()
 
-    markdown_toc.load_markdown_headers()
-
     local bufnr = vim.api.nvim_create_buf(true, true)
     local buflength = markdown_toc.max_title_length + markdown_toc.width_offset
-    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, markdown_toc.headers_title)
+    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, content)
     vim.api.nvim_buf_set_option(bufnr, 'bufhidden', 'wipe')
     vim.api.nvim_buf_set_option(bufnr, 'readonly', true)
     vim.api.nvim_buf_set_option(bufnr, 'buflisted', true)
@@ -87,6 +96,11 @@ markdown_toc.open = function()
         bufnr)
     vim.api.nvim_command(autocmd_cmd)
 
+    vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+        buffer = markdown_toc.linked_buf,
+        command = "lua require('cmarkdown').changes_on_linked_buffer()",
+    })
+
     local vsplit_cmd = string.format("vsplit | vertical resize %s | buffer %s", buflength, bufnr)
     vim.api.nvim_command(vsplit_cmd)
 
@@ -94,6 +108,12 @@ markdown_toc.open = function()
     vim.api.nvim_set_current_win(win_id)
 
     markdown_toc.temporal_buffer = bufnr
+end
+
+markdown_toc.open = function()
+    markdown_toc.load_markdown_headers()
+    print(markdown_toc.headers_title[1])
+    markdown_toc.create_buffer(markdown_toc.headers_title)
 end
 
 command("MarkdownToc", function()
