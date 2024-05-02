@@ -848,6 +848,6 @@ vim.cmd('au BufRead,BufNewFile FileType make set noexpandtab')
 --------------
 
 -- Show links with name on norg files
-vim.cmd('autocmd FileType norg setlocal conceallevel=1')
+-- vim.cmd('autocmd FileType norg setlocal conceallevel=1')
 
-vim.cmd('autocmd FileType markdown setlocal conceallevel=1')
+vim.cmd('autocmd FileType markdown setlocal conceallevel=2')

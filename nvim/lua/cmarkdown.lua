@@ -66,15 +66,14 @@ markdown_toc.jump_to_header = function()
 end
 
 markdown_toc.changes_on_linked_buffer = function()
-    print("UPDATEEE")
     markdown_toc.load_markdown_headers()
     markdown_toc.load_content(markdown_toc.headers_title)
 end
 
 markdown_toc.load_content = function(content)
-    vim.api.nvim_buf_set_option(markdown_toc.temporal_buffer, 'readonly', false)
+    vim.api.nvim_set_option_value('modifiable', true, { buf = markdown_toc.temporal_buffer })
     vim.api.nvim_buf_set_lines(markdown_toc.temporal_buffer, 0, -1, false, content)
-    vim.api.nvim_buf_set_option(markdown_toc.temporal_buffer, 'readonly', true)
+    vim.api.nvim_set_option_value('modifiable', false, { buf = markdown_toc.temporal_buffer })
 end
 
 markdown_toc.create_buffer = function(content)
@@ -85,21 +84,38 @@ markdown_toc.create_buffer = function(content)
     local bufnr = vim.api.nvim_create_buf(true, true)
     local buflength = markdown_toc.max_title_length + markdown_toc.width_offset
     vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, content)
-    vim.api.nvim_buf_set_option(bufnr, 'bufhidden', 'wipe')
-    vim.api.nvim_buf_set_option(bufnr, 'readonly', true)
-    vim.api.nvim_buf_set_option(bufnr, 'buflisted', true)
+    vim.api.nvim_set_option_value('bufhidden', 'wipe', { buf = bufnr })
+    vim.api.nvim_set_option_value('readonly', true, { buf = bufnr })
+    vim.api.nvim_set_option_value('modifiable', false, { buf = bufnr })
+    vim.api.nvim_set_option_value('buflisted', true, { buf = bufnr })
+    vim.api.nvim_set_option_value('filetype', 'markdown', { buf = bufnr })
     vim.api.nvim_buf_set_name(bufnr, "MarkdownTOC")
-    vim.api.nvim_buf_set_option(bufnr, 'filetype', 'markdown')
+
+    vim.api.nvim_create_augroup("markdown_toc", { clear = true })
 
     local autocmd_cmd = string.format(
         "autocmd BufEnter <buffer=%s> nnoremap <buffer> <CR> :lua require('cmarkdown').jump_to_header()<CR>",
         bufnr)
     vim.api.nvim_command(autocmd_cmd)
 
+    -- autocmd_cmd = string.format(
+    --     "autocmd InsertLeave,TextChanged <buffer=%s> lua require('cmarkdown').changes_on_linked_buffer()",
+    --     bufnr)
+    -- vim.api.nvim_command(autocmd_cmd)
+
+    -- vim.api.nvim_buf_attach(markdown_toc.linked_buffer, false, {
+    --     on_lines = function()
+    --         require('cmarkdown').changes_on_linked_buffer()
+    --     end
+    -- })
+
     vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
-        buffer = markdown_toc.linked_buf,
-        command = "lua require('cmarkdown').changes_on_linked_buffer()",
+        group = "markdown_toc",
+        -- pattern = { "*.md" },
+        buffer = markdown_toc.linked_buffer,
+        callback = require('cmarkdown').changes_on_linked_buffer
     })
+
 
     local vsplit_cmd = string.format("vsplit | vertical resize %s | buffer %s", buflength, bufnr)
     vim.api.nvim_command(vsplit_cmd)
@@ -112,7 +128,6 @@ end
 
 markdown_toc.open = function()
     markdown_toc.load_markdown_headers()
-    print(markdown_toc.headers_title[1])
     markdown_toc.create_buffer(markdown_toc.headers_title)
 end
 
