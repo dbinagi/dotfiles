@@ -681,25 +681,25 @@ table.insert(plugins, {
     }
 })
 
-table.insert(plugins, {
-    "AntonVanAssche/md-headers.nvim",
-    enabled = true,
-    lazy = false,
-    version = '*',
-    dependencies = {
-        'nvim-lua/plenary.nvim',
-        'nvim-treesitter/nvim-treesitter',
-    },
-    config = function()
-        require('md-headers').setup { height = 30, width = 200 }
-    end,
-})
-
-vim.api.nvim_set_hl(0, "MarkdownHeadersTitle", { fg = "#cfc9c2" })
-vim.api.nvim_set_hl(0, "MarkdownHeadersWindow", { fg = "#cfc9c2" })
-vim.api.nvim_set_hl(0, "MarkdownHeadersBorder", { fg = "#cfc9c2" })
-
-table.insert(plugins, { 'Scuilion/markdown-drawer', enabled = true, lazy = false })
+-- table.insert(plugins, {
+--     "AntonVanAssche/md-headers.nvim",
+--     enabled = true,
+--     lazy = false,
+--     version = '*',
+--     dependencies = {
+--         'nvim-lua/plenary.nvim',
+--         'nvim-treesitter/nvim-treesitter',
+--     },
+--     config = function()
+--         require('md-headers').setup { height = 30, width = 200 }
+--     end,
+-- })
+--
+-- vim.api.nvim_set_hl(0, "MarkdownHeadersTitle", { fg = "#cfc9c2" })
+-- vim.api.nvim_set_hl(0, "MarkdownHeadersWindow", { fg = "#cfc9c2" })
+-- vim.api.nvim_set_hl(0, "MarkdownHeadersBorder", { fg = "#cfc9c2" })
+--
+-- table.insert(plugins, { 'Scuilion/markdown-drawer', enabled = true, lazy = false })
 
 -- Testing plugins
 -- Plug 'stevearc/overseer.nvim'

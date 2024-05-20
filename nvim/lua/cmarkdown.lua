@@ -96,7 +96,8 @@ markdown_toc.create_buffer = function(content)
     local autocmd_cmd = string.format(
         "autocmd BufEnter <buffer=%s> nnoremap <buffer> <CR> :lua require('cmarkdown').jump_to_header()<CR>",
         bufnr)
-    vim.api.nvim_command(autocmd_cmd)
+    -- vim.api.nvim_command(autocmd_cmd)
+    vim.api.nvim_exec(autocmd_cmd, false)
 
     -- autocmd_cmd = string.format(
     --     "autocmd InsertLeave,TextChanged <buffer=%s> lua require('cmarkdown').changes_on_linked_buffer()",
@@ -111,7 +112,6 @@ markdown_toc.create_buffer = function(content)
 
     vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
         group = "markdown_toc",
-        -- pattern = { "*.md" },
         buffer = markdown_toc.linked_buffer,
         callback = require('cmarkdown').changes_on_linked_buffer
     })
@@ -126,13 +126,25 @@ markdown_toc.create_buffer = function(content)
     markdown_toc.temporal_buffer = bufnr
 end
 
+markdown_toc.close = function()
+    vim.api.nvim_buf_delete(markdown_toc.temporal_buffer, {force = true})
+    markdown_toc.temporal_buffer = nil
+end
+
 markdown_toc.open = function()
+    if markdown_toc.temporal_buffer and vim.api.nvim_buf_is_loaded(markdown_toc.temporal_buffer) then
+        markdown_toc.close()
+    end
     markdown_toc.load_markdown_headers()
     markdown_toc.create_buffer(markdown_toc.headers_title)
 end
 
-command("MarkdownToc", function()
+command("MarkdownTocOpen", function()
     markdown_toc.open()
+end, {})
+
+command("MarkdownTocClose", function()
+    markdown_toc.close()
 end, {})
 
 return markdown_toc
