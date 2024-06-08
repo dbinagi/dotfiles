@@ -851,3 +851,5 @@ vim.cmd('au BufRead,BufNewFile FileType make set noexpandtab')
 -- vim.cmd('autocmd FileType norg setlocal conceallevel=1')
 
 vim.cmd('autocmd FileType markdown setlocal conceallevel=2')
+vim.cmd('autocmd FileType markdown setlocal foldmethod=expr')
+vim.cmd('autocmd FileType markdown setlocal foldexpr=nvim_treesitter#foldexpr()')
