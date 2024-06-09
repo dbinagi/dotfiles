@@ -147,4 +147,8 @@ command("MarkdownTocClose", function()
     markdown_toc.close()
 end, {})
 
+command("MarkdownToc", function()
+    markdown_toc.open()
+end, {})
+
 return markdown_toc
