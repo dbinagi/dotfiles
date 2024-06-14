@@ -25,7 +25,7 @@ markdown_toc.load_markdown_headers = function()
         local header3 = line:match("^###%s+(.+)$")
 
         if header1 then
-            table.insert(markdown_toc.headers_title, "--------------------")
+            -- table.insert(markdown_toc.headers_title, "--------------------")
             table.insert(markdown_toc.headers_line, i)
 
             table.insert(markdown_toc.headers_title, header1)
@@ -34,7 +34,7 @@ markdown_toc.load_markdown_headers = function()
                 markdown_toc.max_title_length = #header1
             end
 
-            table.insert(markdown_toc.headers_title, "--------------------")
+            -- table.insert(markdown_toc.headers_title, "--------------------")
             table.insert(markdown_toc.headers_line, i)
         elseif header2 then
             table.insert(markdown_toc.headers_title, "  " .. header2)

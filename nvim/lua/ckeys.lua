@@ -142,6 +142,8 @@ local keys = {
     ["0"] = { "<Cmd>BufferLast<CR>", "Last Tab"},
     [","] = { "<Cmd>BufferPrevious<CR>", "Previous Buffer"},
     ["."] = { "<Cmd>BufferNext<CR>", "Next Buffer"},
+    ["]"] = { ":execute '/^# '<CR>:noh<CR>", "Next Header 1"},
+    ["["] = { ":execute '?^# '<CR>:noh<CR>", "Previous Header 1"},
 }
 
 -- map('n', '<leader>gpi', '<cmd>lua require("goto-preview").goto_preview_implementation()<CR>', opts)
