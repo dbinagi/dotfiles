@@ -445,6 +445,7 @@ table.insert(plugins, {
         'ahmedkhalf/project.nvim',
         'ThePrimeagen/harpoon',
         'crispgm/telescope-heading.nvim',
+        'jemag/telescope-diff.nvim',
     },
     config = function()
         local actions = require("telescope.actions")
@@ -496,6 +497,7 @@ table.insert(plugins, {
         require('telescope').load_extension('projects')
         require('telescope').load_extension('asynctasks')
         require('telescope').load_extension('heading')
+        require("telescope").load_extension("diff")
         -- require('telescope').load_extension('dap')
     end
 })
@@ -507,11 +509,13 @@ table.insert(plugins, {
     lazy = true,
     config = function()
         require("which-key").setup {
-            window = {
+            preset = 'helix',
+            win = {
                 border = "double",
                 padding = { 2, 3, 2, 3 }
             },
-            triggers = { "<leader>" },
+            delay = 300,
+            sort = {"manual"},
         }
     end
 })
@@ -811,7 +815,7 @@ vim.o.cursorline     = true          -- Highlight current cursorline
 vim.o.splitright     = true
 vim.o.completeopt    = "menu,menuone,noselect"
 vim.o.showcmd        = true
-vim.o.timeoutlen     = 500      -- Reduce timeout for leader (default 1000ms)
+vim.o.timeoutlen     = 200      -- Reduce timeout for leader (default 1000ms)
 vim.o.termguicolors  = true
 vim.o.ignorecase     = true     -- Ignore case when searching
 vim.o.smartcase      = true     -- Switch search to case sensitive when upperletter
