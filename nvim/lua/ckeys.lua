@@ -6,86 +6,87 @@ end
 
 local function configure_group(prefix, group, commands)
     wk.add({ prefix, group = group })
-    for k, v in pairs(commands) do
-        wk.add({ prefix .. k, v[2], desc = v[1] })
+    for _, v in ipairs(commands) do
+        wk.add({ prefix .. v[1], v[3], desc = v[2] })
     end
 end
 
 -- Commands
 configure_group('<leader>c', "Commands", {
-    c = { 'Comment', cmd("lua require('Comment.api').toggle_current_linewise()") },
-    l = { 'Comment Lines', "<CMD>lua require('Comment.api').call('toggle_linewise_op')<CR>g@" },
-    r = { 'Rename Variable', cmd("lua require('cosmic-ui').rename()") },
-    f = { 'Fixed Cursor', cmd("lua if vim.o.scrolloff > 0 then vim.o.scrolloff=0 else vim.o.scrolloff=999 end") },
+    { 'c', 'Comment',         cmd("lua require('Comment.api').toggle_current_linewise()") },
+    { 'l', 'Comment Lines',   "<CMD>lua require('Comment.api').call('toggle_linewise_op')<CR>g@" },
+    { 'r', 'Rename Variable', cmd("lua require('cosmic-ui').rename()") },
+    { 'f', 'Fixed Cursor',    cmd("lua if vim.o.scrolloff > 0 then vim.o.scrolloff=0 else vim.o.scrolloff=999 end") },
 })
 
 -- Files
 configure_group('<leader>f', "Files", {
-    f = { 'Find File', cmd("lua require('telescope.builtin').find_files({layout_strategy='vertical'})") },
-    b = { 'Find Buffer', cmd("Telescope buffers") },
-    g = { 'Search String',
+    { 'f', 'Find File',   cmd("lua require('telescope.builtin').find_files({layout_strategy='vertical'})") },
+    { 'b', 'Find Buffer', cmd("Telescope buffers") },
+    { 'g', 'Search String',
         cmd("lua require('telescope').extensions.live_grep_args.live_grep_args({layout_strategy='vertical'})") },
-    h = { 'Search Help', cmd("Telescope help_tags") },
-    s = { 'Search Git Diff', cmd("lua require('telescope.builtin').git_status({layout_strategy='vertical'})") },
-    t = { 'Show File Tree', cmd("Telescope file_browser") },
-    n = { "Find Note", cmd("lua require('telescope.builtin').find_files({layout_strategy='vertical', cwd='~/notes'})") },
-    c = { "File Compare", cmd("lua require('telescope').extensions.diff.diff_current({ hidden = true })") },
+    { 'h', 'Search Help',     cmd("Telescope help_tags") },
+    { 's', 'Search Git Diff', cmd("lua require('telescope.builtin').git_status({layout_strategy='vertical'})") },
+    { 't', 'Show File Tree',  cmd("Telescope file_browser") },
+    { 'n', "Find Note",       cmd(
+    "lua require('telescope.builtin').find_files({layout_strategy='vertical', cwd='~/notes'})") },
+    { 'c', "File Compare",    cmd("lua require('telescope').extensions.diff.diff_current({ hidden = true })") },
 })
 
 -- LSP
 configure_group('<leader>l', 'LSP', {
-    d = { "Definition", vim.lsp.buf.definition },
-    D = { "Preview Definition", cmd("lua require('goto-preview').goto_preview_definition()") },
-    t = { "TypeDef", vim.lsp.buf.type_definition },
-    T = { "Preview TypeDef", cmd("lua require('goto-preview').goto_preview_type_definition()") },
-    a = { "Actions", cmd('lua require("cosmic-ui").code_actions()') },
-    f = { "Format", cmd("lua vim.lsp.buf.format { async = true }") },
-    r = { "References", cmd("lua require('telescope.builtin').lsp_references()") },
-    R = { "Preview References", cmd("lua require('goto-preview').goto_preview_references()") },
-    s = { "Signature Help", vim.lsp.buf.signature_help },
-    h = { "Hover", vim.lsp.buf.hover },
+    { 'd', "Definition",         vim.lsp.buf.definition },
+    { 'D', "Preview Definition", cmd("lua require('goto-preview').goto_preview_definition()") },
+    { 't', "TypeDef",            vim.lsp.buf.type_definition },
+    { 'T', "Preview TypeDef",    cmd("lua require('goto-preview').goto_preview_type_definition()") },
+    { 'a', "Actions",            cmd('lua require("cosmic-ui").code_actions()') },
+    { 'f', "Format",             cmd("lua vim.lsp.buf.format { async = true }") },
+    { 'r', "References",         cmd("lua require('telescope.builtin').lsp_references()") },
+    { 'R', "Preview References", cmd("lua require('goto-preview').goto_preview_references()") },
+    { 's', "Signature Help",     vim.lsp.buf.signature_help },
+    { 'h', "Hover",              vim.lsp.buf.hover },
 })
 
 -- Notes
 configure_group('<leader>n', 'Notes', {
-    g = { "Search in Notes", cmd("ObsidianSearch") },
-    f = { "Find Note", cmd("ObsidianQuickSwitch") },
-    n = { "New Note", cmd("ObsidianNew") },
-    t = { "List Headers", cmd("MarkdownToc") },
-    q = { "Query Tags", cmd("ObsidianTags") },
-    c = { "Toggle Checkbox", cmd("ObsidianToggleCheckbox") },
+    { 'g', "Search in Notes", cmd("ObsidianSearch") },
+    { 'f', "Find Note",       cmd("ObsidianQuickSwitch") },
+    { 'n', "New Note",        cmd("ObsidianNew") },
+    { 't', "List Headers",    cmd("MarkdownToc") },
+    { 'q', "Query Tags",      cmd("ObsidianTags") },
+    { 'c', "Toggle Checkbox", cmd("ObsidianToggleCheckbox") },
 })
 
 -- Git
 configure_group('<leader>g', 'Git', {
-    n = { "Next Change", cmd('GitGutterNextHunk') },
-    p = { "Prev Change", cmd('GitGutterPrevHunk') },
-    b = { "Git Blame Toggle", cmd('GitBlameToggle') },
+    { 'n', "Next Change",      cmd('GitGutterNextHunk') },
+    { 'p', "Prev Change",      cmd('GitGutterPrevHunk') },
+    { 'b', "Git Blame Toggle", cmd('GitBlameToggle') },
 })
 
 -- Tabs
 configure_group('<leader>t', 'Tabs', {
-    c = { "Tab Close", "<Cmd>BufferClose<CR>" },
-    p = { "Tab Pin", "<Cmd>BufferPin<CR>" },
-    [">"] = { "Move Tab Right", "<Cmd>BufferMoveNext<CR>" },
-    ["<"] = { "Move Tab Left", "<Cmd>BufferMovePrevious<CR>" },
+    { 'c', "Tab Close",      cmd("BufferClose") },
+    { 'p', "Tab Pin",        cmd("BufferPin") },
+    { '>', "Move Tab Right", cmd("BufferMoveNext") },
+    { '<', "Move Tab Left",  cmd("BufferMovePrevious") },
 })
 
 wk.add({
-    { "1", "<Cmd>BufferGoto 1<CR>",       desc = "Tab 1" },
-    { "2", "<Cmd>BufferGoto 2<CR>",       desc = "Tab 2" },
-    { "3", "<Cmd>BufferGoto 3<CR>",       desc = "Tab 3" },
-    { "4", "<Cmd>BufferGoto 4<CR>",       desc = "Tab 4" },
-    { "5", "<Cmd>BufferGoto 5<CR>",       desc = "Tab 5" },
-    { "6", "<Cmd>BufferGoto 6<CR>",       desc = "Tab 6" },
-    { "7", "<Cmd>BufferGoto 7<CR>",       desc = "Tab 7" },
-    { "8", "<Cmd>BufferGoto 8<CR>",       desc = "Tab 8" },
-    { "9", "<Cmd>BufferGoto 9<CR>",       desc = "Tab 9" },
-    { "0", "<Cmd>BufferLast<CR>",         desc = "Last Tab" },
-    { ",", "<Cmd>BufferPrevious<CR>",     desc = "Previous Buffer" },
-    { ".", "<Cmd>BufferNext<CR>",         desc = "Next Buffer" },
-    { "]", ":execute '/^# '<CR>:noh<CR>", desc = "Next Header 1" },
-    { "[", ":execute '?^# '<CR>:noh<CR>", desc = "Previous Header 1" },
+    { "<leader>1", "<Cmd>BufferGoto 1<CR>",       desc = "Tab 1" },
+    { "<leader>2", "<Cmd>BufferGoto 2<CR>",       desc = "Tab 2" },
+    { "<leader>3", "<Cmd>BufferGoto 3<CR>",       desc = "Tab 3" },
+    { "<leader>4", "<Cmd>BufferGoto 4<CR>",       desc = "Tab 4" },
+    { "<leader>5", "<Cmd>BufferGoto 5<CR>",       desc = "Tab 5" },
+    { "<leader>6", "<Cmd>BufferGoto 6<CR>",       desc = "Tab 6" },
+    { "<leader>7", "<Cmd>BufferGoto 7<CR>",       desc = "Tab 7" },
+    { "<leader>8", "<Cmd>BufferGoto 8<CR>",       desc = "Tab 8" },
+    { "<leader>9", "<Cmd>BufferGoto 9<CR>",       desc = "Tab 9" },
+    { "<leader>0", "<Cmd>BufferLast<CR>",         desc = "Last Tab" },
+    { "<leader>,", "<Cmd>BufferPrevious<CR>",     desc = "Previous Buffer" },
+    { "<leader>.", "<Cmd>BufferNext<CR>",         desc = "Next Buffer" },
+    { "<leader>]", ":execute '/^# '<CR>:noh<CR>", desc = "Next Header 1" },
+    { "<leader>[", ":execute '?^# '<CR>:noh<CR>", desc = "Previous Header 1" },
 })
 
 
@@ -110,4 +111,3 @@ wk.add({
 
 -- Useful hotkeys
 -- Close Other windows: C-w - o
-

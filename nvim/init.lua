@@ -479,6 +479,9 @@ table.insert(plugins, {
                 find_files = {
                     find_command = find_files_commands,
                 },
+                colorscheme = {
+                    enable_preview = true
+                },
             },
             extensions = {
                 heading = {
@@ -515,7 +518,7 @@ table.insert(plugins, {
                 padding = { 2, 3, 2, 3 }
             },
             delay = 300,
-            sort = {"manual"},
+            sort = { "manual" },
         }
     end
 })
