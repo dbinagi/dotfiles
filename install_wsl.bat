@@ -19,7 +19,13 @@ xcopy omf_tmp \\wsl$\Ubuntu\home\bini\.config\omf /E/H/C/I/Y
 :: TMUX
 
 vendor\dos2unix -n tmux\.tmux_wsl.conf tmux\.tmux_tmp.conf
-copy tmux\.tmux_tmp.conf \\wsl$\Ubuntu\home\bini\.tmux.conf
+vendor\dos2unix -n tmux\.tmux_common.conf tmux\.tmux_common_tmp.conf
+
+rm -R \\wsl$\Ubuntu\home\bini\.config\tmux
+mkdir \\wsl$\Ubuntu\home\bini\.config\tmux
+
+copy tmux\.tmux_tmp.conf \\wsl$\Ubuntu\home\bini\.config\tmux\.tmux.conf
+copy tmux\.tmux_common_tmp.conf \\wsl$\Ubuntu\home\bini\.config\tmux\.tmux_common.conf
 
 :: TMUXINATOR
 
@@ -53,5 +59,6 @@ xcopy dircolors\.dircolors \\wsl$\Ubuntu\home\bini\.dircolors* /Y
 rmdir /s /q nvim_tmp
 rmdir /s /q omf_tmp
 DEL /F /Q tmux\.tmux_tmp.conf
+DEL /F /Q tmux\.tmux_common_tmp.conf
 DEL /F /Q kitty\kitty_tmp.conf
 set /p DUMMY=Hit ENTER to continue...
