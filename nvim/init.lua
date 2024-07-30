@@ -780,6 +780,17 @@ table.insert(plugins, {
     end
 })
 
+table.insert(plugins, {
+    "mfussenegger/nvim-lint",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+        require('lint').linters_by_ft = {
+            lua = {'luacheck',}
+        }
+    end
+})
+
 -- *===================*
 -- | LUA configuration |
 -- *===================*
@@ -836,6 +847,12 @@ vim.cmd("syntax enable")
 -- *===================*
 -- | LANGUAGE SPECIFIC |
 -- *===================*
+
+-- LUA
+------
+
+vim.cmd('au BufWritePost * lua require("lint").try_lint()')
+
 
 -- C#
 -----
