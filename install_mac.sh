@@ -8,7 +8,12 @@ cp -R nvim/syntax ~/.config/nvim
 
 cp -R fish ~/.config
 cp -R omf ~/.config
-cp -R tmux/.tmux.conf ~/
+
+rm -Rf ~/.config/tmux
+mkdir ~/.config/tmux
+cp tmux/.tmux_wsl.conf ~/.config/tmux/.tmux.conf
+cp tmux/.tmux_common.conf ~/.config/tmux/.tmux_common.conf
+
 cp -R tmuxinator ~/.config
 
 cp wezterm/.wezterm_mac.lua ~/.wezterm.lua 
