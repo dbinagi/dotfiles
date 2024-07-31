@@ -685,7 +685,14 @@ table.insert(plugins, {
         daily_notes = {
             folder = "dailies",
         },
-    }
+        follow_url_func = function(url)
+            if vim.loop.os_uname().sysname == 'Linux' then
+                os.execute('wslview ' .. url .. " > /dev/null 2>&1")
+            else
+                vim.fn.jobstart({"open", url})  -- Mac OS
+            end
+        end,
+    },
 })
 
 -- table.insert(plugins, {
