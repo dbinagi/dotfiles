@@ -876,7 +876,7 @@ vim.cmd("syntax enable")
 -- LUA
 ------
 
-vim.cmd('au BufWritePost * lua require("lint").try_lint()')
+-- vim.cmd('au BufWritePost * lua require("lint").try_lint()')
 
 
 -- C#
