@@ -689,7 +689,7 @@ table.insert(plugins, {
             if vim.loop.os_uname().sysname == 'Linux' then
                 os.execute('wslview ' .. url .. " > /dev/null 2>&1")
             else
-                vim.fn.jobstart({"open", url})  -- Mac OS
+                vim.fn.jobstart({ "open", url }) -- Mac OS
             end
         end,
     },
@@ -790,11 +790,29 @@ table.insert(plugins, {
 table.insert(plugins, {
     "mfussenegger/nvim-lint",
     version = "*",
+    enabled = false,
     event = "VeryLazy",
     config = function()
         require('lint').linters_by_ft = {
-            lua = {'luacheck',}
+            lua = { 'luacheck', }
         }
+    end
+})
+
+table.insert(plugins, {
+    "OXY2DEV/markview.nvim",
+    lazy = false, -- Recommended
+    enabled = true,
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-tree/nvim-web-devicons"
+    },
+    config = function()
+        require("markview").setup({
+            list_items = {
+                enable = false,
+            }
+        });
     end
 })
 
