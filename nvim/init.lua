@@ -692,6 +692,9 @@ table.insert(plugins, {
                 vim.fn.jobstart({ "open", url }) -- Mac OS
             end
         end,
+        ui = {
+            enable = false
+        }
     },
 })
 

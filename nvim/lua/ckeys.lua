@@ -46,6 +46,7 @@ configure_group('<leader>l', 'LSP', {
     { 's', "Signature Help",     vim.lsp.buf.signature_help },
     { 'h', "Hover",              vim.lsp.buf.hover },
     { 'l', "Apply Linter",       cmd("lua require('lint').try_lint()")},
+    { 'm', "Turn On Markview",   cmd("Markview")},
 })
 
 -- Notes
