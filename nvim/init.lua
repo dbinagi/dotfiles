@@ -111,7 +111,7 @@ table.insert(plugins, {
 
         local custom_attach = function(client)
             -- Temporal until fix omnisharp
-            if client.name == 'omnisharp' then
+            if client.name == 'omnisharp' and vim.loop.os_uname().sysname ~= 'Darwin' then
                 local function toSnakeCase(str)
                     return string.gsub(str, "%s*[- ]%s*", "_")
                 end
@@ -198,6 +198,12 @@ table.insert(plugins, {
         if vim.loop.os_uname().sysname == 'Linux' then
             require 'lspconfig'.omnisharp.setup {
                 cmd = { "mono", "/home/bini/.local/share/nvim/mason/packages/omnisharp-mono/omnisharp/OmniSharp.exe" },
+                capabilities = capabilities,
+                on_attach = custom_attach,
+            }
+        elseif vim.loop.os_uname().sysname == 'Darwin' then
+            require 'lspconfig'.omnisharp.setup {
+                cmd = {"mono", "/opt/homebrew/bin/omnisharp/OmniSharp.exe"},
                 capabilities = capabilities,
                 on_attach = custom_attach,
             }
