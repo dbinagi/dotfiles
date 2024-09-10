@@ -207,7 +207,7 @@ table.insert(plugins, {
             }
         elseif vim.loop.os_uname().sysname == 'Darwin' then
             require 'lspconfig'.omnisharp.setup {
-                cmd = {"mono", "/opt/homebrew/bin/omnisharp/OmniSharp.exe"},
+                cmd = { "/opt/homebrew/bin/mono", "/opt/homebrew/bin/omnisharp/OmniSharp.exe" },
                 capabilities = capabilities,
                 on_attach = custom_attach,
             }
@@ -902,9 +902,9 @@ vim.cmd("syntax enable")
 -----
 
 -- Turn manually syntax on on .cs files and include region folding
-vim.cmd('au BufRead,BufNewFile *.cs syntax on')
-vim.cmd('au BufRead,BufNewFile *.cs syn region csregion start=/#region/ end=/#endregion/ transparent fold')
-vim.cmd('au BufRead,BufNewFile *.cs normal zR')
+-- vim.cmd('au BufRead,BufNewFile *.cs syntax on')
+-- vim.cmd('au BufRead,BufNewFile *.cs syn region csregion start=/#region/ end=/#endregion/ transparent fold')
+-- vim.cmd('au BufRead,BufNewFile *.cs normal zR')
 
 -- MAKE
 -------
