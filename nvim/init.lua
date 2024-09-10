@@ -172,6 +172,10 @@ table.insert(plugins, {
             capabilities = capabilities,
             on_attach = custom_attach,
         }
+        require 'lspconfig'.eslint.setup {
+            capabilities = capabilities,
+            on_attach = custom_attach,
+        }
 
         -- HTML
         require 'lspconfig'.html.setup {
@@ -213,6 +217,12 @@ table.insert(plugins, {
                 on_attach = custom_attach,
             }
         end
+
+        -- YAML
+        require 'lspconfig'.yamlls.setup {
+            capabilities = capabilities,
+            on_attach = custom_attach,
+        }
     end
 })
 
@@ -277,7 +287,7 @@ table.insert(plugins, {
             mapping = cmp.mapping.preset.insert({
                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
                 ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                ['<C-Space>'] = cmp.mapping.complete(),
+                ['<C-a>'] = cmp.mapping.complete(),
                 ['<C-e>'] = cmp.mapping.abort(),
                 ['<Tab>'] = cmp.mapping.select_next_item(),
                 ['<S-Tab>'] = cmp.mapping.select_prev_item(),
@@ -404,7 +414,7 @@ table.insert(plugins, {
     build = ':TSUpdate',
     config = function()
         require 'nvim-treesitter.configs'.setup {
-            ensure_installed = { "lua", "vim", "vimdoc", "c_sharp", "javascript", "html", "css", "python", "norg",
+            ensure_installed = { "lua", "vim", "vimdoc", "c_sharp", "javascript", "html", "css", "python", "norg", "tsx",
                 "markdown", "markdown_inline" },
             sync_install = false,
             highlight = {

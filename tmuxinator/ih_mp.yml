@@ -1,0 +1,35 @@
+
+name: ih_mp
+root: ~/dev/repos/
+
+windows:
+  - GAME:
+    - cd mp-quantum
+    - nvim
+  - BACKEND:
+    - cd mp-backend
+    - nvim
+  - BACKOFFICE:
+    - cd mp-backoffice-admin
+    - N
+    - nvim
+  - Run:
+      layout: main-horizontal
+      panes:
+        - backend:
+            - cd mp-backend
+            - npm run dev
+        - backoffice:
+            - cd mp-backoffice-admin
+            - N
+            - npm run dev
+  - Repos:
+      layout: main-horizontal
+      panes:
+        - backend:
+            - cd mp-backend
+        - backoffice:
+            - cd mp-backoffice-admin
+            - N
+        - unity:
+            - cd mp-quantum
