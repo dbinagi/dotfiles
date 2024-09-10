@@ -12,8 +12,8 @@ if test -d /mnt/disk1/dev/repo
     set -gx PROJECT_PATHS $PROJECT_PATHS /mnt/disk1/dev/repo
 end
 
-if test -d ~/Development/Repo
-    set -gx PROJECT_PATHS $PROJECT_PATHS ~/Development/Repo
+if test -d ~/dev/repos
+    set -gx PROJECT_PATHS $PROJECT_PATHS ~/dev/repos
 end
 
 alias tp="tmuxinator start"
