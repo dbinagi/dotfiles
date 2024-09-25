@@ -12,10 +12,12 @@ cp -R omf ~/.config
 
 rm -Rf ~/.config/tmux
 mkdir ~/.config/tmux
-cp tmux/.tmux_wsl.conf ~/.config/tmux/.tmux.conf
+cp tmux/.tmux_mac.conf ~/.config/tmux/.tmux.conf
 cp tmux/.tmux_common.conf ~/.config/tmux/.tmux_common.conf
 
 cp -R tmuxinator ~/.config
+
+cp -R lsd ~/.config
 
 cp wezterm/.wezterm_mac.lua ~/.wezterm.lua 
 cp "backgrounds/Twilight Prophet.jpg" ~/wezterm/background.jpg
