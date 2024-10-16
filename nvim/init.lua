@@ -835,6 +835,15 @@ table.insert(plugins, {
     end
 })
 
+table.insert(plugins, {
+    'ibhagwan/smartyank.nvim',
+    enabled = true,
+    lazy = false,
+    config = function()
+        require('smartyank').setup {highlight = {timeout=200}}
+    end,
+})
+
 -- *===================*
 -- | LUA configuration |
 -- *===================*

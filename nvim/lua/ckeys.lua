@@ -91,6 +91,7 @@ wk.add({
     { "<leader>[", ":execute '?^# '<CR>:noh<CR>", desc = "Previous Header 1" },
 })
 
+vim.keymap.set("x", "p", function() return 'pgv"' .. vim.v.register .. "y" end, { remap = false, expr = true })
 
 -- map('n', '<leader>gpi', '<cmd>lua require("goto-preview").goto_preview_implementation()<CR>', opts)
 -- map('n', '<leader>gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>', opts)
