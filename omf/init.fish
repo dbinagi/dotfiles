@@ -21,3 +21,7 @@ alias ts="tmuxinator stop"
 
 # Add path for nvm
 set -gx NVM_DIR ~/.nvm
+
+# Add local environment variables
+export (cat ~/.config/config_env |xargs -L 1)
+

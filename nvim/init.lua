@@ -840,7 +840,7 @@ table.insert(plugins, {
     enabled = true,
     lazy = false,
     config = function()
-        require('smartyank').setup {highlight = {timeout=200}}
+        require('smartyank').setup { highlight = { timeout = 200 } }
     end,
 })
 
