@@ -89,6 +89,8 @@ wk.add({
     { "<leader>.", "<Cmd>BufferNext<CR>",         desc = "Next Buffer" },
     { "<leader>]", ":execute '/^# '<CR>:noh<CR>", desc = "Next Header 1" },
     { "<leader>[", ":execute '?^# '<CR>:noh<CR>", desc = "Previous Header 1" },
+    { "<leader>J", "<Cmd>:m+<CR>",                desc = "Move Line Down" },
+    { "<leader>K", "<Cmd>:m-2<CR>",               desc = "Move Line Up" },
 })
 
 vim.keymap.set("x", "p", function() return 'pgv"' .. vim.v.register .. "y" end, { remap = false, expr = true })
