@@ -1,4 +1,7 @@
-local config_file = os.getenv("HOME") .. "/.config/config_env"
+local config_file = ""
+if os.getenv("HOME") then
+     config_file = os.getenv("HOME") .. "/.config/config_env"
+end
 
 local f = io.open(config_file, "r")
 

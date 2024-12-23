@@ -6,16 +6,22 @@
 
 1) Install WSL to support Linux terminal
     `wsl --install -d Ubuntu`
-1) Install tmux
+2) Install tmux
     `sudo apt install tmux`
-1) Install Fish
+3) Install Fish
     `sudo apt install fish`
-1) Configure fish as default shell
+4) Configure fish as default shell
     `chsh -s $(which fish)`
-1) Install NeoVim
+5) Configure environment:
+    Variable HOME - ```/home/{user}```
+    Set config_env file in ```$HOME/.config/config_env```
+6) Install NeoVim
     `sudo apt install neovim`
-1) Execute install_wsl.bat
-1) Open nvim from a command prompt and write `:PlugInstall`
+7) Execute install_wsl.bat (from windows)
+
+**NVIM Dependencies**
+
+Install lazygit
 
 ### Windows (Without WSL)
 
@@ -23,6 +29,10 @@
 2) Create folder nvim in `C:\Users\USER-NAME\AppData\Local\nvim`
 3) Execute install_windows.bat
 4) Open nvim from a command prompt and write `:PlugInstall`
+5) Install C compiler: ```choco install mingw```
+6) Install file searcher: ```choco install ripgrep```
+7) Install unzip: ```choco install unzip```
+8) Install dotnet: ```choco install dotnet```
 
 ### MAC
 

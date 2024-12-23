@@ -1,8 +1,8 @@
 -- Load custom environment configuration
 local config = require("cconfig")
+local util = require("cutil")
 
 -- lazy.nvim Plugin Manager (https://github.com/folke/lazy.nvim)
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -22,17 +22,6 @@ local plugins = {}
 -- | NON-LAZY PLUGINS |
 -- *==================*
 
--- Welcome screen
-table.insert(plugins, {
-    'goolord/alpha-nvim',
-    enabled = true,
-    lazy = false,
-    priority = 700,
-    config = function()
-        require('alpha').setup(require('dashboard').config)
-    end
-})
-
 -- Transparent Background
 table.insert(plugins, {
     'xiyaowong/nvim-transparent',
@@ -43,17 +32,15 @@ table.insert(plugins, {
 })
 
 -- Color scheme
-table.insert(plugins,
-    {
-        'folke/tokyonight.nvim',
-        enabled = true,
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.cmd('colorscheme tokyonight-night')
-        end
-    }
-)
+table.insert(plugins, {
+    'folke/tokyonight.nvim',
+    enabled = true,
+    lazy = false,
+    priority = 1000,
+    config = function()
+        vim.cmd('colorscheme tokyonight-night')
+    end
+})
 
 -- LSP
 table.insert(plugins, {
@@ -61,7 +48,6 @@ table.insert(plugins, {
     enabled = true,
     lazy = false,
     dependencies = {
-        'williamboman/nvim-lsp-installer',
         'Issafalcon/lsp-overloads.nvim'
     },
     config = function()
@@ -71,7 +57,7 @@ table.insert(plugins, {
 
         local custom_attach = function(client)
             -- Temporal until fix omnisharp
-            if client.name == 'omnisharp' and vim.loop.os_uname().sysname ~= 'Darwin' then
+            if client.name == 'omnisharp' and not util.is_mac() then
                 local function toSnakeCase(str)
                     return string.gsub(str, "%s*[- ]%s*", "_")
                 end
@@ -128,7 +114,7 @@ table.insert(plugins, {
         }
 
         -- JavaScript
-        require 'lspconfig'.tsserver.setup {
+        require 'lspconfig'.ts_ls.setup {
             capabilities = capabilities,
             on_attach = custom_attach,
             root_dir = require('lspconfig').util.root_pattern('tsconfig.json', '.git'), -- Define que `tsconfig.json` sea el archivo raíz del proyecto
@@ -137,11 +123,6 @@ table.insert(plugins, {
                     tsconfig = "./tsconfig.json" -- Asegura que use `tsconfig.json` desde la raíz si es necesario
                 }
             },
-            -- root_dir = function(fname)
-            --     return util.root_pattern('tsconfig.json')(fname)
-            --         or util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
-            --         or util.path.dirname(fname)
-            -- end,
         }
         require 'lspconfig'.eslint.setup {
             capabilities = capabilities,
@@ -170,13 +151,13 @@ table.insert(plugins, {
         }
 
         -- C#
-        if vim.loop.os_uname().sysname == 'Linux' then
+        if util.is_linux() then
             require 'lspconfig'.omnisharp.setup {
                 cmd = { "mono", "/home/bini/.local/share/nvim/mason/packages/omnisharp-mono/omnisharp/OmniSharp.exe" },
                 capabilities = capabilities,
                 on_attach = custom_attach,
             }
-        elseif vim.loop.os_uname().sysname == 'Darwin' then
+        elseif util.is_mac() then
             require 'lspconfig'.omnisharp.setup {
                 cmd = { "/opt/homebrew/bin/mono", "/opt/homebrew/bin/omnisharp/OmniSharp.exe" },
                 capabilities = capabilities,
@@ -184,6 +165,7 @@ table.insert(plugins, {
             }
         else
             require 'lspconfig'.omnisharp.setup {
+                cmd = { "dotnet", "C:\\Users\\SirDi\\AppData\\Local\\nvim-data\\mason\\packages\\omnisharp\\libexec\\Omnisharp.dll" },
                 capabilities = capabilities,
                 on_attach = custom_attach,
             }
@@ -215,21 +197,6 @@ table.insert(plugins, {
         require("mason-lspconfig").setup {
             ensure_installed = { "lua_ls" },
         }
-    end
-})
-
-table.insert(plugins, {
-    'airblade/vim-gitgutter',
-    enabled = true,
-    lazy = false,
-    config = function()
-        vim.g.gitgutter_enabled = 1
-        vim.g.gitgutter_map_keys = 0 -- Disables all keys
-
-        local set = vim.opt
-
-        set.signcolumn = "yes"
-        set.updatetime = 100
     end
 })
 
@@ -360,8 +327,8 @@ table.insert(plugins, {
                 lualine_x = {
                     require('nomodoro').status, 'filename'
                 },
-                lualine_y = {'encoding', 'fileformat', 'filetype'},
-                lualine_z = {'progress', 'location'},
+                lualine_y = { 'encoding', 'fileformat', 'filetype' },
+                lualine_z = { 'progress', 'location' },
             }
         })
     end
@@ -397,7 +364,7 @@ table.insert(plugins, {
     build = ':TSUpdate',
     config = function()
         require 'nvim-treesitter.configs'.setup {
-            ensure_installed = { "lua", "vim", "vimdoc", "c_sharp", "javascript", "html", "css", "python", "norg", "tsx",
+            ensure_installed = { "lua", "vim", "vimdoc", "c_sharp", "javascript", "html", "css", "python", "tsx",
                 "markdown", "markdown_inline" },
             sync_install = false,
             highlight = {
@@ -424,14 +391,19 @@ table.insert(plugins, {
         },
         indent = { enabled = true },
         lazygit = { enabled = true },
-        scratch = {enabled = true},
+        scratch = { enabled = true },
+        dim = {
+            enabled = true,
+            scope = {
+                max_size = 30,
+            },
+        },
+        dashboard = require("cdashboard"),
 
         -- test
 
         -- bigfile = { enabled = true },
         -- bufdelete = { enabled = true },
-        dim = { enabled = true },
-        -- dashboard = { enabled = true },
         -- input = { enabled = true },
         -- notifier = { enabled = true },
         -- quickfile = { enabled = true },
@@ -442,6 +414,23 @@ table.insert(plugins, {
         statuscolumn = { enabled = false },
     },
 })
+
+table.insert(plugins, {
+    'lewis6991/gitsigns.nvim',
+    enabled = true,
+    lazy = false,
+    config = function()
+        require('gitsigns').setup({
+            signs = {
+                change = { text = '~' },
+            },
+            signs_staged = {
+                change = { text = '~' },
+            }
+        })
+    end
+})
+
 
 -- *==============*
 -- | LAZY PLUGINS |
@@ -600,6 +589,9 @@ table.insert(plugins, { 'Pocco81/true-zen.nvim', enabled = true, lazy = true })
 
 table.insert(plugins, { 'MunifTanjim/nui.nvim', enabled = true, lazy = true })
 
+table.insert(plugins, { 'echasnovski/mini.icons', enabled = true, lazy = true })
+
+
 -- table.insert(plugins, {
 --     'mfussenegger/nvim-dap',
 --     enabled = true,
@@ -664,15 +656,15 @@ table.insert(plugins, {
     end
 })
 
-table.insert(plugins, {
-    'f-person/git-blame.nvim',
-    enabled = true,
-    lazy = true,
-    cmd = { 'GitBlameToggle' },
-    config = function()
-        vim.g.gitblame_enabled = " "
-    end
-})
+-- table.insert(plugins, {
+--     'f-person/git-blame.nvim',
+--     enabled = true,
+--     lazy = true,
+--     cmd = { 'GitBlameToggle' },
+--     config = function()
+--         vim.g.gitblame_enabled = " "
+--     end
+-- })
 
 table.insert(plugins, {
     'skywind3000/asynctasks.vim',
@@ -904,6 +896,25 @@ table.insert(plugins, {
         })
     end
 })
+-- table.insert(plugins, {
+--     'OmniSharp/omnisharp-vim',
+--     enabled = true,
+--     lazy = false,
+--     config = function()
+--     end,
+-- })
+
+
+-- Welcome screen
+-- table.insert(plugins, {
+--     'goolord/alpha-nvim',
+--     enabled = true,
+--     lazy = false,
+--     priority = 700,
+--     config = function()
+--         require('alpha').setup(require('dashboard').config)
+--     end
+-- })
 
 -- *===================*
 -- | LUA configuration |
@@ -928,28 +939,30 @@ require('cmarkdown')
 -- | GENERAL CONFIGURATION |
 -- *=======================*
 
-vim.o.number         = true          -- Show line number
-vim.o.relativenumber = true          -- Show relative from cursor to other lines
-vim.o.showmatch      = true          -- Show matching
-vim.o.hlsearch       = true          -- Highlight search
-vim.o.clipboard      = "unnamedplus" -- Copy and Paste from system clipboard
-vim.o.tabstop        = 4             -- Columns occupied by tab
-vim.o.softtabstop    = 4             -- Multiple spaces as tab
-vim.o.shiftwidth     = 4             -- Width for autoindents
-vim.o.expandtab      = true          -- Converts tab to spaces
-vim.o.autoindent     = true          -- Indent a new lines the same as before
-vim.o.mouse          = "a"           -- Enable mouse click
-vim.o.cursorline     = true          -- Highlight current cursorline
-vim.o.splitright     = true
-vim.o.completeopt    = "menu,menuone,noselect"
-vim.o.showcmd        = true
-vim.o.timeoutlen     = 200      -- Reduce timeout for leader (default 1000ms)
-vim.o.termguicolors  = true
-vim.o.ignorecase     = true     -- Ignore case when searching
-vim.o.smartcase      = true     -- Switch search to case sensitive when upperletter
-vim.o.foldmethod     = "syntax" -- Fold based on syntax
+vim.o.number                    = true          -- Show line number
+vim.o.relativenumber            = true          -- Show relative from cursor to other lines
+vim.o.showmatch                 = true          -- Show matching
+vim.o.hlsearch                  = true          -- Highlight search
+vim.o.clipboard                 = "unnamedplus" -- Copy and Paste from system clipboard
+vim.o.tabstop                   = 4             -- Columns occupied by tab
+vim.o.softtabstop               = 4             -- Multiple spaces as tab
+vim.o.shiftwidth                = 4             -- Width for autoindents
+vim.o.expandtab                 = true          -- Converts tab to spaces
+vim.o.autoindent                = true          -- Indent a new lines the same as before
+vim.o.mouse                     = "a"           -- Enable mouse click
+vim.o.cursorline                = true          -- Highlight current cursorline
+vim.o.splitright                = true
+vim.o.completeopt               = "menu,menuone,noselect"
+vim.o.showcmd                   = true
+vim.o.timeoutlen                = 200      -- Reduce timeout for leader (default 1000ms)
+vim.o.termguicolors             = true
+vim.o.ignorecase                = true     -- Ignore case when searching
+vim.o.smartcase                 = true     -- Switch search to case sensitive when upperletter
+vim.o.foldmethod                = "syntax" -- Fold based on syntax
 -- vim.o.foldmethod        = "indent"                      -- Fold based on indention levels
 -- vim.o.foldnestmax       = 3                             -- Fold up to 3 nested levels
+
+vim.g.OmniSharp_server_use_net6 = true
 
 vim.cmd("noswapfile") -- Disable creating swap file
 vim.cmd("set cc=80")
@@ -992,3 +1005,8 @@ vim.cmd('autocmd FileType markdown setlocal conceallevel=2')
 vim.cmd('autocmd FileType markdown setlocal foldmethod=expr')
 vim.cmd('autocmd FileType markdown setlocal foldexpr=nvim_treesitter#foldexpr()')
 vim.cmd('autocmd FileType markdown setlocal foldlevel=8')
+
+if vim.g.neovide then
+    -- Put anything you want to happen only in Neovide here
+    vim.o.guifont = "Hack Nerd Font:h14" -- text below applies for VimScript
+end
