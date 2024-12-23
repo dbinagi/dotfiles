@@ -17,6 +17,7 @@ configure_group('<leader>c', "Commands", {
     { 'l', 'Comment Lines',   "<CMD>lua require('Comment.api').call('toggle_linewise_op')<CR>g@" },
     { 'r', 'Rename Variable', cmd("lua require('cosmic-ui').rename()") },
     { 'f', 'Fixed Cursor',    cmd("lua if vim.o.scrolloff > 0 then vim.o.scrolloff=0 else vim.o.scrolloff=999 end") },
+    { 'd', 'Dim Scope',    cmd("lua if Snacks.dim.enabled then Snacks.dim.disable() else Snacks.dim.enable() end") },
 })
 
 -- Files
@@ -47,6 +48,8 @@ configure_group('<leader>l', 'LSP', {
     { 'h', "Hover",              vim.lsp.buf.hover },
     { 'l', "Apply Linter",       cmd("lua require('lint').try_lint()")},
     { 'm', "Turn On Markview",   cmd("Markview")},
+    { 'c', "Completion",         vim.lsp.buf.completion},
+    { 'i', "Implementation",         vim.lsp.buf.implementation},
 })
 
 -- Notes
@@ -57,13 +60,16 @@ configure_group('<leader>n', 'Notes', {
     { 't', "List Headers",    cmd("MarkdownToc") },
     { 'q', "Query Tags",      cmd("ObsidianTags") },
     { 'c', "Toggle Checkbox", cmd("ObsidianToggleCheckbox") },
+    { 's', "Toggle Scratch",  cmd("lua Snacks.scratch()") },
+    { 'l', "List Scratches",  cmd("lua Snacks.scratch.select()") },
 })
 
 -- Git
 configure_group('<leader>g', 'Git', {
-    { 'n', "Next Change",      cmd('GitGutterNextHunk') },
-    { 'p', "Prev Change",      cmd('GitGutterPrevHunk') },
-    { 'b', "Git Blame Toggle", cmd('GitBlameToggle') },
+    { 'n', "Next Change",       cmd('GitGutterNextHunk') },
+    { 'p', "Prev Change",       cmd('GitGutterPrevHunk') },
+    { 'b', "Git Blame Toggle",  cmd('GitBlameToggle') },
+    { 'l', "Lazygit",           cmd('lua Snacks.lazygit()') },
 })
 
 -- Tabs

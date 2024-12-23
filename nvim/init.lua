@@ -33,46 +33,6 @@ table.insert(plugins, {
     end
 })
 
--- Indent colors
-table.insert(plugins, {
-    'lukas-reineke/indent-blankline.nvim',
-    enabled = true,
-    lazy = false,
-    priority = 800,
-    main = "ibl",
-    config = function()
-        require("ibl").setup()
-        -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent7 guifg=#E06C75 gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent8 guifg=#E5C07B gui=nocombine]]
-        --
-        -- vim.opt.list = true
-        -- vim.opt.listchars:append "space:⋅"
-        -- --vim.opt.listchars:append "eol:↴"
-        --
-        -- require("indent_blankline").setup {
-        --     space_char_blankline = " ",
-        --     show_current_context = true,
-        --     show_current_context_start = true,
-        --     char_highlight_list = {
-        --         "IndentBlanklineIndent1",
-        --         "IndentBlanklineIndent2",
-        --         "IndentBlanklineIndent3",
-        --         "IndentBlanklineIndent4",
-        --         "IndentBlanklineIndent5",
-        --         "IndentBlanklineIndent6",
-        --         "IndentBlanklineIndent7",
-        --         "IndentBlanklineIndent8",
-        --     },
-        -- }
-    end
-})
-
 -- Transparent Background
 table.insert(plugins, {
     'xiyaowong/nvim-transparent',
@@ -171,6 +131,17 @@ table.insert(plugins, {
         require 'lspconfig'.tsserver.setup {
             capabilities = capabilities,
             on_attach = custom_attach,
+            root_dir = require('lspconfig').util.root_pattern('tsconfig.json', '.git'), -- Define que `tsconfig.json` sea el archivo raíz del proyecto
+            settings = {
+                typescript = {
+                    tsconfig = "./tsconfig.json" -- Asegura que use `tsconfig.json` desde la raíz si es necesario
+                }
+            },
+            -- root_dir = function(fname)
+            --     return util.root_pattern('tsconfig.json')(fname)
+            --         or util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
+            --         or util.path.dirname(fname)
+            -- end,
         }
         require 'lspconfig'.eslint.setup {
             capabilities = capabilities,
@@ -296,11 +267,21 @@ table.insert(plugins, {
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
                 { name = 'vsnip' }, -- For vsnip users.
-            }, {
+                -- }, {
                 { name = 'buffer' },
-                { name = 'nvim_lsp_signature_help' }
-            }, {
-                { name = "neorg" },
+                { name = 'path' },
+                { name = 'nvim_lsp_signature_help' },
+                {
+                    name = 'omni',
+                    option = {
+                        disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' }
+                    }
+                },
+                sources = {
+                    { name = 'treesitter' }
+                }
+                -- }, {
+                -- { name = "neorg" },
             }),
             preselect = cmp.PreselectMode.None,
         })
@@ -377,8 +358,10 @@ table.insert(plugins, {
             sections = {
                 lualine_c = { current_session() },
                 lualine_x = {
-                    require('nomodoro').status,
+                    require('nomodoro').status, 'filename'
                 },
+                lualine_y = {'encoding', 'fileformat', 'filetype'},
+                lualine_z = {'progress', 'location'},
             }
         })
     end
@@ -423,6 +406,41 @@ table.insert(plugins, {
             },
         }
     end
+})
+
+table.insert(plugins, {
+    'folke/snacks.nvim',
+    enabled = true,
+    priority = 1000,
+    lazy = false,
+    opts = {
+        -- yes
+        scroll = {
+            enabled = true,
+            animate = {
+                duration = { step = 30, total = 300 },
+                easing = "outQuad",
+            },
+        },
+        indent = { enabled = true },
+        lazygit = { enabled = true },
+        scratch = {enabled = true},
+
+        -- test
+
+        -- bigfile = { enabled = true },
+        -- bufdelete = { enabled = true },
+        dim = { enabled = true },
+        -- dashboard = { enabled = true },
+        -- input = { enabled = true },
+        -- notifier = { enabled = true },
+        -- quickfile = { enabled = true },
+        -- words = { enabled = true },
+
+        -- no
+        git = { enabled = false },
+        statuscolumn = { enabled = false },
+    },
 })
 
 -- *==============*
@@ -626,15 +644,15 @@ table.insert(plugins, {
         local telescope_themes = require('telescope.themes')
 
         require('goto-preview').setup {
-            width = 120,                                         -- Width of the floating window
-            height = 15,                                         -- Height of the floating window
+            width = 120, -- Width of the floating window
+            height = 15, -- Height of the floating window
             border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" }, -- Border characters of the floating window
-            default_mappings = false,                            -- Bind default mappings
-            debug = false,                                       -- Print debug information
-            opacity = nil,                                       -- 0-100 opacity level of the floating window where 100 is fully transparent.
-            resizing_mappings = false,                           -- Binds arrow keys to resizing the floating window.
-            post_open_hook = nil,                                -- A function taking two arguments, a buffer and a window to be ran as a hook.
-            references = {                                       -- Configure the telescope UI for slowing the references cycling window.
+            default_mappings = false, -- Bind default mappings
+            debug = false, -- Print debug information
+            opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
+            resizing_mappings = false, -- Binds arrow keys to resizing the floating window.
+            post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
+            references = { -- Configure the telescope UI for slowing the references cycling window.
                 telescope = telescope_themes.get_dropdown({ hide_preview = false })
             },
             -- These two configs can also be passed down to the goto-preview definition and implementation calls for one off "peak" functionality.
@@ -797,16 +815,6 @@ table.insert(plugins, {
 })
 
 table.insert(plugins, {
-    "karb94/neoscroll.nvim",
-    version = "*",
-    event = "VeryLazy",
-    config = function()
-        require('neoscroll').setup({
-        })
-    end
-})
-
-table.insert(plugins, {
     "mfussenegger/nvim-lint",
     version = "*",
     enabled = false,
@@ -842,6 +850,59 @@ table.insert(plugins, {
     config = function()
         require('smartyank').setup { highlight = { timeout = 200 } }
     end,
+})
+
+-- Not in use
+
+-- Indent colors
+table.insert(plugins, {
+    'lukas-reineke/indent-blankline.nvim',
+    enabled = false,
+    lazy = false,
+    priority = 800,
+    main = "ibl",
+    config = function()
+        require("ibl").setup()
+        -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent7 guifg=#E06C75 gui=nocombine]]
+        -- vim.cmd [[highlight IndentBlanklineIndent8 guifg=#E5C07B gui=nocombine]]
+        --
+        -- vim.opt.list = true
+        -- vim.opt.listchars:append "space:⋅"
+        -- --vim.opt.listchars:append "eol:↴"
+        --
+        -- require("indent_blankline").setup {
+        --     space_char_blankline = " ",
+        --     show_current_context = true,
+        --     show_current_context_start = true,
+        --     char_highlight_list = {
+        --         "IndentBlanklineIndent1",
+        --         "IndentBlanklineIndent2",
+        --         "IndentBlanklineIndent3",
+        --         "IndentBlanklineIndent4",
+        --         "IndentBlanklineIndent5",
+        --         "IndentBlanklineIndent6",
+        --         "IndentBlanklineIndent7",
+        --         "IndentBlanklineIndent8",
+        --     },
+        -- }
+    end
+})
+
+table.insert(plugins, {
+    "karb94/neoscroll.nvim",
+    enabled = false,
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+        require('neoscroll').setup({
+        })
+    end
 })
 
 -- *===================*
