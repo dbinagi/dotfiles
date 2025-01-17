@@ -933,7 +933,11 @@ require("lazy").setup(plugins, {
 
 require('ckeys')
 require('cnotes')
-require('cmarkdown')
+
+local markdown = require('cmarkdown')
+markdown.setup({})
+
+
 
 -- *=======================*
 -- | GENERAL CONFIGURATION |
