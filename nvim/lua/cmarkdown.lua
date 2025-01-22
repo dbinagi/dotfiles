@@ -239,7 +239,12 @@ markdown_toc.open = function()
     configure_highlights()
 
     markdown_toc.load_markdown_headers()
-    markdown_toc.create_buffer(markdown_toc.headers_title)
+
+    if (markdown_toc.headers_title ~= nil and #markdown_toc.headers_title == 0) then
+        print("No content to show")
+    else
+        markdown_toc.create_buffer(markdown_toc.headers_title)
+    end
 end
 
 function markdown_toc.setup(options)

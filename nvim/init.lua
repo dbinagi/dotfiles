@@ -720,6 +720,9 @@ table.insert(plugins, {
         end,
         ui = {
             enable = false
+        },
+        templates = {
+            folder = "templates",
         }
     },
 })
