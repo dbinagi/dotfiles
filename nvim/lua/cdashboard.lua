@@ -15,7 +15,7 @@ Neovim (by ilbini)              ]]
 
 local dashboard = {
     enabled = true,
-    width = 80,
+    width = 100,
     preset = {
         header = header,
     },

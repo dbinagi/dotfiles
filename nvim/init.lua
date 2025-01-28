@@ -399,6 +399,12 @@ table.insert(plugins, {
             },
         },
         dashboard = require("cdashboard"),
+        zen = {
+            enabled = true,
+            win = {
+                width = 100,
+            }
+        },
 
         -- test
 
@@ -584,8 +590,6 @@ table.insert(plugins, {
 })
 
 table.insert(plugins, { 'rcarriga/nvim-notify', enabled = true, lazy = true })
-
-table.insert(plugins, { 'Pocco81/true-zen.nvim', enabled = true, lazy = true })
 
 table.insert(plugins, { 'MunifTanjim/nui.nvim', enabled = true, lazy = true })
 
@@ -802,6 +806,7 @@ table.insert(plugins, {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
+    enabled = true,
     config = function()
         require("nvim-surround").setup({
             -- Configuration here, or leave empty to use defaults
@@ -809,17 +814,17 @@ table.insert(plugins, {
     end
 })
 
-table.insert(plugins, {
-    "mfussenegger/nvim-lint",
-    version = "*",
-    enabled = false,
-    event = "VeryLazy",
-    config = function()
-        require('lint').linters_by_ft = {
-            lua = { 'luacheck', }
-        }
-    end
-})
+-- table.insert(plugins, {
+--     "mfussenegger/nvim-lint",
+--     version = "*",
+--     enabled = false,
+--     event = "VeryLazy",
+--     config = function()
+--         require('lint').linters_by_ft = {
+--             lua = { 'luacheck', }
+--         }
+--     end
+-- })
 
 table.insert(plugins, {
     "OXY2DEV/markview.nvim",
@@ -849,56 +854,58 @@ table.insert(plugins, {
 
 -- Not in use
 
--- Indent colors
-table.insert(plugins, {
-    'lukas-reineke/indent-blankline.nvim',
-    enabled = false,
-    lazy = false,
-    priority = 800,
-    main = "ibl",
-    config = function()
-        require("ibl").setup()
-        -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent7 guifg=#E06C75 gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent8 guifg=#E5C07B gui=nocombine]]
-        --
-        -- vim.opt.list = true
-        -- vim.opt.listchars:append "space:⋅"
-        -- --vim.opt.listchars:append "eol:↴"
-        --
-        -- require("indent_blankline").setup {
-        --     space_char_blankline = " ",
-        --     show_current_context = true,
-        --     show_current_context_start = true,
-        --     char_highlight_list = {
-        --         "IndentBlanklineIndent1",
-        --         "IndentBlanklineIndent2",
-        --         "IndentBlanklineIndent3",
-        --         "IndentBlanklineIndent4",
-        --         "IndentBlanklineIndent5",
-        --         "IndentBlanklineIndent6",
-        --         "IndentBlanklineIndent7",
-        --         "IndentBlanklineIndent8",
-        --     },
-        -- }
-    end
-})
+-- table.insert(plugins, { 'Pocco81/true-zen.nvim', enabled = false, lazy = true })
 
-table.insert(plugins, {
-    "karb94/neoscroll.nvim",
-    enabled = false,
-    version = "*",
-    event = "VeryLazy",
-    config = function()
-        require('neoscroll').setup({
-        })
-    end
-})
+-- Indent colors
+-- table.insert(plugins, {
+--     'lukas-reineke/indent-blankline.nvim',
+--     enabled = false,
+--     lazy = false,
+--     priority = 800,
+--     main = "ibl",
+--     config = function()
+--         require("ibl").setup()
+--         -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+--         -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+--         -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+--         -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+--         -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+--         -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+--         -- vim.cmd [[highlight IndentBlanklineIndent7 guifg=#E06C75 gui=nocombine]]
+--         -- vim.cmd [[highlight IndentBlanklineIndent8 guifg=#E5C07B gui=nocombine]]
+--         --
+--         -- vim.opt.list = true
+--         -- vim.opt.listchars:append "space:⋅"
+--         -- --vim.opt.listchars:append "eol:↴"
+--         --
+--         -- require("indent_blankline").setup {
+--         --     space_char_blankline = " ",
+--         --     show_current_context = true,
+--         --     show_current_context_start = true,
+--         --     char_highlight_list = {
+--         --         "IndentBlanklineIndent1",
+--         --         "IndentBlanklineIndent2",
+--         --         "IndentBlanklineIndent3",
+--         --         "IndentBlanklineIndent4",
+--         --         "IndentBlanklineIndent5",
+--         --         "IndentBlanklineIndent6",
+--         --         "IndentBlanklineIndent7",
+--         --         "IndentBlanklineIndent8",
+--         --     },
+--         -- }
+--     end
+-- })
+
+-- table.insert(plugins, {
+--     "karb94/neoscroll.nvim",
+--     enabled = false,
+--     version = "*",
+--     event = "VeryLazy",
+--     config = function()
+--         require('neoscroll').setup({
+--         })
+--     end
+-- })
 -- table.insert(plugins, {
 --     'OmniSharp/omnisharp-vim',
 --     enabled = true,
@@ -935,12 +942,10 @@ require("lazy").setup(plugins, {
 })
 
 require('ckeys')
-require('cnotes')
+-- require('cnotes')
 
 local markdown = require('cmarkdown')
 markdown.setup({})
-
-
 
 -- *=======================*
 -- | GENERAL CONFIGURATION |
@@ -972,11 +977,34 @@ vim.o.foldmethod                = "syntax" -- Fold based on syntax
 vim.g.OmniSharp_server_use_net6 = true
 
 vim.cmd("noswapfile") -- Disable creating swap file
-vim.cmd("set cc=80")
 vim.cmd("set autoread")
 vim.cmd("set ffs=unix,dos")
 vim.cmd("set nofoldenable")
 vim.cmd("syntax enable")
+
+-- Color column marker
+vim.cmd("hi ColorColumn guibg=#111111")
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.colorcolumn = ""
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "python", "yaml", "json" },
+  callback = function()
+    vim.opt_local.colorcolumn = "80"
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "javascript", "typescript", "lua", "markdown", "html", "css" },
+  callback = function()
+    vim.opt_local.colorcolumn = "100"
+  end,
+})
 
 -- *===================*
 -- | LANGUAGE SPECIFIC |
