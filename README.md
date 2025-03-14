@@ -1,23 +1,32 @@
 # My personal Dotfiles
 
+## Tools
+
+### fzf
+
+```sh
+sudo apt install fzf  # Debian/Ubuntu  
+brew install fzf      # macOS
+```
+
 ## Setup environments
 
 ### Windows (With WSL)
 
-1) Install WSL to support Linux terminal
+1. Install WSL to support Linux terminal
     `wsl --install -d Ubuntu`
-2) Install tmux
+2. Install tmux
     `sudo apt install tmux`
-3) Install Fish
+3. Install Fish
     `sudo apt install fish`
-4) Configure fish as default shell
+4. Configure fish as default shell
     `chsh -s $(which fish)`
-5) Configure environment:
+5. Configure environment:
     Variable HOME - ```/home/{user}```
     Set config_env file in ```$HOME/.config/config_env```
-6) Install NeoVim
+6. Install NeoVim
     `sudo apt install neovim`
-7) Execute install_wsl.bat (from windows)
+7. Execute install_wsl.bat (from windows)
 
 **NVIM Dependencies**
 
@@ -25,48 +34,48 @@ Install lazygit
 
 ### Windows (Without WSL)
 
-1) Install NeoVim
-2) Create folder nvim in `C:\Users\USER-NAME\AppData\Local\nvim`
-3) Execute install_windows.bat
-4) Open nvim from a command prompt and write `:PlugInstall`
-5) Install C compiler: ```choco install mingw```
-6) Install file searcher: ```choco install ripgrep```
-7) Install unzip: ```choco install unzip```
-8) Install dotnet: ```choco install dotnet```
+1. Install NeoVim
+2. Create folder nvim in `C:\Users\USER-NAME\AppData\Local\nvim`
+3. Execute install_windows.bat
+4. Open nvim from a command prompt and write `:PlugInstall`
+5. Install C compiler: ```choco install mingw```
+6. Install file searcher: ```choco install ripgrep```
+7. Install unzip: ```choco install unzip```
+8. Install dotnet: ```choco install dotnet```
 
 ### MAC
 
-1) Install Alacritty from web: https://github.com/alacritty/alacritty/releases
-1) Install tmux: `brew install tmux`
-1) Install fish: `brew install fish`
-1) Run `./install_mac.sh`
-1) Set fish as default shell (https://gist.github.com/gagarine/cf3f65f9be6aa0e105b184376f765262)
+1. Install Alacritty from web: https://github.com/alacritty/alacritty/releases
+1. Install tmux: `brew install tmux`
+1. Install fish: `brew install fish`
+1. Run `./install_mac.sh`
+1. Set fish as default shell (https://gist.github.com/gagarine/cf3f65f9be6aa0e105b184376f765262)
 
 ## Troubleshooting
 
 ### Error with VCRUNTIME140.DLL
 
-1) Install c++ 2015: https://www.microsoft.com/en-us/download/details.aspx?id=52685
+1. Install c++ 2015: https://www.microsoft.com/en-us/download/details.aspx?id=52685
 
 ### Error "No C compiler found!"
 
 **On Windows**
-1) Install: `choco install mingw`
+1. Install: `choco install mingw`
 
 **On Linux**
-1) Install: `sudo apt install build-essential`
+1. Install: `sudo apt install build-essential`
 
 ### No fonts on MAC
 
-1) Install patched font, complete version: https://www.nerdfonts.com/font-downloads
+1. Install patched font, complete version: https://www.nerdfonts.com/font-downloads
 
 ### Click not working in Alacritty
 
-1) Close all running cmd program, like cmd or running alacritty.
-1) Rename your original conhost.exe to other names like conhost.exe_bak in C:\Windows\System32\
-1) Go to Windows Terminal path C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_<VERSION information>\OpenConsole.exe
-    1) e.g.:C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.0.1811.0_x64__8wekyb3d8bbwe\OpenConsole.exe
-1) Copy and rename OpenConsole.exe to C:\Windows\System32\conhost.exe
+1. Close all running cmd program, like cmd or running alacritty.
+1. Rename your original conhost.exe to other names like conhost.exe_bak in C:\Windows\System32\
+1. Go to Windows Terminal path C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_<VERSION information>\OpenConsole.exe
+    1. e.g.:C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.0.1811.0_x64__8wekyb3d8bbwe\OpenConsole.exe
+1. Copy and rename OpenConsole.exe to C:\Windows\System32\conhost.exe
 
 Reference: https://github.com/alacritty/alacritty/issues/1663
 
@@ -93,8 +102,8 @@ Install: `sudo apt-get install unzip`
 
 ### NVIM: Python LSP not working
 
-1) Install `pip install neovim`
-1) Install dependency: https://github.com/williamboman/nvim-lsp-installer/blob/main/lua/nvim-lsp-installer/servers/pylsp/README.md
+1. Install `pip install neovim`
+1. Install dependency: https://github.com/williamboman/nvim-lsp-installer/blob/main/lua/nvim-lsp-installer/servers/pylsp/README.md
 
 ### NVIM: Fix trailing characters ^M in WSL files
 
