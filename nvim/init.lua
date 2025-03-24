@@ -511,6 +511,9 @@ table.insert(plugins, {
             ".meta",
             ".prefab",
             ".shader",
+            ".pdb",
+            ".dll",
+            ".asset",
         }
 
         local find_files_commands = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" }
