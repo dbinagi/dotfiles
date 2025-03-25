@@ -6,6 +6,11 @@ local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
 local file_path = "~/.config/flashcard.csv"
+local column_question = 1
+local column_answer = 2
+local column_filter = 4
+local filter_string = "no"
+local file_separator = ";"
 
 local function shuffle(t)
     math.randomseed(os.time())
@@ -18,10 +23,10 @@ end
 local function parse_csv(filepath)
     local items = {}
     for line in io.lines(filepath) do
-        local parts = vim.split(line, ";", { trimempty = true })
+        local parts = vim.split(line, file_separator, { trimempty = true })
         if #parts >= 2 then
-            if (parts[3] ~= "no") then
-              table.insert(items, { key = parts[1], value = parts[2] })
+            if (parts[column_filter] ~= filter_string) then
+              table.insert(items, { key = parts[column_question], value = parts[column_answer] })
             end
         end
     end
@@ -32,18 +37,13 @@ end
 local function move_to_end(line)
   local filepath = vim.fn.expand(file_path)
   local lines = {}
-  -- Leer el archivo y filtrar la línea seleccionada
   for current_line in io.lines(filepath) do
     if current_line ~= line then
       table.insert(lines, current_line)
     end
   end
-  -- Agregar la línea seleccionada al final
   table.insert(lines, line)
 
-  print(line)
-
-  -- Escribir el archivo nuevamente con el orden modificado
   local file = io.open(filepath, "w")
   if file then
     for _, l in ipairs(lines) do
@@ -54,7 +54,12 @@ local function move_to_end(line)
 end
 
 local function custom_picker()
-    local filepath = vim.fn.expand(file_path) -- Cambia esto por tu archivo CSV
+    local filepath = vim.fn.expand(file_path)
+
+    if (io.open(filepath, "r") == nil) then
+        print("Flashcard: File " .. filepath .. " not found")
+        return
+    end
 
     local items = parse_csv(filepath)
     table.insert(items, 1, {key = "COMENZAR", value = "COMENZAR"})
@@ -90,11 +95,11 @@ local function custom_picker()
             end)
             return true
         end,
-        layout_strategy = "vertical",   -- 📌 Esto lo hace vertical
+        layout_strategy = "vertical",
         layout_config = {
-          height = 0.9,  -- 90% de la altura de la pantalla
-          width = 0.5,   -- 50% del ancho de la pantalla
-          prompt_position = "top", -- Ubicación de la barra de búsqueda
+          height = 0.9,
+          width = 0.5,
+          prompt_position = "top",
         },
     }):find()
 end
