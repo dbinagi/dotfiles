@@ -975,6 +975,7 @@ require("lazy").setup(plugins, {
 
 require('ckeys')
 -- require('cnotes')
+require('cflashcard')
 
 local markdown = require('cmarkdown')
 markdown.setup({})

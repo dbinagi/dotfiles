@@ -65,6 +65,7 @@ configure_group('<leader>n', 'Notes', {
     { 'q', "Query Tags",      cmd("ObsidianTags") },
     { 'c', "Toggle Checkbox", cmd("lua require('obsidian').util.toggle_checkbox()") },
     { 's', "Toggle Scratch",  cmd("lua Snacks.scratch()") },
+    { 'S', "Study",           cmd("Study") },
     { 'l', "List Scratches",  cmd("lua Snacks.scratch.select()") },
 })
 
