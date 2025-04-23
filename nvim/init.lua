@@ -176,6 +176,12 @@ table.insert(plugins, {
             capabilities = capabilities,
             on_attach = custom_attach,
         }
+
+        -- Odin
+        require 'lspconfig'.ols.setup {
+            capabilities = capabilities,
+            on_attach = custom_attach,
+        }
     end
 })
 
@@ -365,7 +371,7 @@ table.insert(plugins, {
     config = function()
         require 'nvim-treesitter.configs'.setup {
             ensure_installed = { "lua", "vim", "vimdoc", "c_sharp", "javascript", "html", "css", "python", "tsx",
-                "markdown", "markdown_inline" },
+                "markdown", "markdown_inline", "rust" },
             sync_install = false,
             highlight = {
                 enable = true,
@@ -514,6 +520,8 @@ table.insert(plugins, {
             ".pdb",
             ".dll",
             ".asset",
+            ".mat",
+            ".fbx",
         }
 
         local find_files_commands = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" }
