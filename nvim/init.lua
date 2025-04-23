@@ -129,6 +129,11 @@ table.insert(plugins, {
             on_attach = custom_attach,
         }
 
+        require 'lspconfig'.jsonls.setup {
+            capabilities = capabilities,
+            on_attach = custom_attach,
+        }
+
         -- HTML
         require 'lspconfig'.html.setup {
             capabilities = capabilities,
@@ -294,42 +299,13 @@ table.insert(plugins, {
     enabled = true,
     lazy = false,
     config = function()
-        local function current_session()
-            return ''
-            --if require('auto-session-library') then
-            --	return require('auto-session-library').current_session_name
-            --end
-        end
-
-        local function overseer_line()
-            local overseer = require 'overseer'
-
-            return
-            {
-                "overseer",
-                label = '',     -- Prefix for task counts
-                colored = true, -- Color the task icons and counts
-                symbols = {
-                    [overseer.STATUS.FAILURE] = "F:",
-                    [overseer.STATUS.CANCELED] = "C:",
-                    [overseer.STATUS.SUCCESS] = "S:",
-                    [overseer.STATUS.RUNNING] = "R:",
-                },
-                unique = false,     -- Unique-ify non-running task count by name
-                name = nil,         -- List of task names to search for
-                name_not = false,   -- When true, invert the name search
-                status = nil,       -- List of task statuses to display
-                status_not = false, -- When true, invert the status search
-            }
-        end
-
         local lualine = require 'lualine'
         lualine.setup({
             options = {
                 theme = 'tokyonight'
             },
             sections = {
-                lualine_c = { current_session() },
+                lualine_c = {},
                 lualine_x = {
                     require('nomodoro').status, 'filename'
                 },
@@ -443,33 +419,6 @@ table.insert(plugins, {
     end
 })
 
-table.insert(plugins, {
-    'mrcjkb/rustaceanvim',
-    enabled = true,
-    version = '^5',
-    lazy = false,
-    config = function()
-        local bufnr = vim.api.nvim_get_current_buf()
-        vim.keymap.set(
-          "n",
-          "<leader>a",
-          function()
-            vim.cmd.RustLsp('codeAction') -- supports rust-analyzer's grouping
-            -- or vim.lsp.buf.codeAction() if you don't want grouping.
-          end,
-          { silent = true, buffer = bufnr }
-        )
-        vim.keymap.set(
-          "n",
-          "K",  -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
-          function()
-            vim.cmd.RustLsp({'hover', 'actions'})
-          end,
-          { silent = true, buffer = bufnr }
-        )
-    end
-})
-
 
 -- *==============*
 -- | LAZY PLUGINS |
@@ -501,10 +450,8 @@ table.insert(plugins, {
     dependencies = {
         'nvim-telescope/telescope-file-browser.nvim',
         'nvim-telescope/telescope-live-grep-args.nvim',
-        -- 'nvim-telescope/telescope-dap.nvim',
         'GustavoKatel/telescope-asynctasks.nvim',
         'nvim-lua/plenary.nvim',
-        'ahmedkhalf/project.nvim',
         'ThePrimeagen/harpoon',
         'crispgm/telescope-heading.nvim',
         'jemag/telescope-diff.nvim',
@@ -564,11 +511,9 @@ table.insert(plugins, {
         require("telescope").load_extension "file_browser"
         require("telescope").load_extension "live_grep_args"
         require("telescope").load_extension('harpoon')
-        require('telescope').load_extension('projects')
         require('telescope').load_extension('asynctasks')
         require('telescope').load_extension('heading')
         require("telescope").load_extension("diff")
-        -- require('telescope').load_extension('dap')
     end
 })
 
@@ -633,34 +578,6 @@ table.insert(plugins, { 'MunifTanjim/nui.nvim', enabled = true, lazy = true })
 
 table.insert(plugins, { 'echasnovski/mini.icons', enabled = true, lazy = true })
 
-
--- table.insert(plugins, {
---     'mfussenegger/nvim-dap',
---     enabled = true,
---     lazy = true,
---     config = function()
---         local dap = require("dap")
---         dap.adapters.gdb = {
---             type = "executable",
---             command = "gdb",
---             args = { "-i", "dap" }
---         }
---
---         -- local dap = require("dap")
---         dap.configurations.c = {
---             {
---                 name = "Launch",
---                 type = "gdb",
---                 request = "launch",
---                 program = function()
---                     return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
---                 end,
---                 cwd = "${workspaceFolder}",
---             },
---         }
---     end
--- })
-
 table.insert(plugins, {
     'CosmicNvim/cosmic-ui',
     enabled = true,
@@ -697,16 +614,6 @@ table.insert(plugins, {
         }
     end
 })
-
--- table.insert(plugins, {
---     'f-person/git-blame.nvim',
---     enabled = true,
---     lazy = true,
---     cmd = { 'GitBlameToggle' },
---     config = function()
---         vim.g.gitblame_enabled = " "
---     end
--- })
 
 table.insert(plugins, {
     'skywind3000/asynctasks.vim',
@@ -769,77 +676,6 @@ table.insert(plugins, {
     },
 })
 
--- table.insert(plugins, {
---     "AntonVanAssche/md-headers.nvim",
---     enabled = true,
---     lazy = false,
---     version = '*',
---     dependencies = {
---         'nvim-lua/plenary.nvim',
---         'nvim-treesitter/nvim-treesitter',
---     },
---     config = function()
---         require('md-headers').setup { height = 30, width = 200 }
---     end,
--- })
---
--- vim.api.nvim_set_hl(0, "MarkdownHeadersTitle", { fg = "#cfc9c2" })
--- vim.api.nvim_set_hl(0, "MarkdownHeadersWindow", { fg = "#cfc9c2" })
--- vim.api.nvim_set_hl(0, "MarkdownHeadersBorder", { fg = "#cfc9c2" })
---
--- table.insert(plugins, { 'Scuilion/markdown-drawer', enabled = true, lazy = false })
-
--- Testing plugins
--- Plug 'stevearc/overseer.nvim'
--- Plug 'rmagatti/auto-session'
--- Plug 'tpope/vim-fugitive'
--- Plug 'j-hui/fidget.nvim'
-
--- table.insert(plugins, {
---     "nvim-neorg/neorg",
---     build = ":Neorg sync-parsers",
---     lazy = false, -- specify lazy = false because some lazy.nvim distributions set lazy = true by default
---     -- tag = "*",
---     dependencies = { "nvim-lua/plenary.nvim" },
---     config = function()
---         require("neorg").setup {
---             load = {
---                 ["core.defaults"] = {}, -- Loads default behaviour
---                 ["core.concealer"] = {}, -- Adds pretty icons to your documents
---                 ["core.dirman"] = { -- Manages Neorg workspaces
---                     config = {
---                         workspaces = {
---                             notes = "~/notes",
---                         },
---                     },
---                 },
---                 ["core.completion"] = { -- A wrapper to interface with several different completion engines.
---                     config = {
---                         engine = "nvim-cmp"
---                     },
---                 },
---                 ["core.export.markdown"] = {},
---                 ["core.esupports.hop"] = {},
---                 ["core.export"] = {
---                     config = {
---                         export_dir = "~/notes_export_dir"
---                     }
---                 },
---                 ["core.keybinds"] = {
---                     config = {
---                         default_keybinds = false,
---                     }
---                 },
---                 ["core.qol.toc"] = {
---                     config = {
---                         close_after_use = true,
---                     }
---                 },
---             },
---         }
---     end,
--- })
-
 table.insert(plugins, {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -851,18 +687,6 @@ table.insert(plugins, {
         })
     end
 })
-
--- table.insert(plugins, {
---     "mfussenegger/nvim-lint",
---     version = "*",
---     enabled = false,
---     event = "VeryLazy",
---     config = function()
---         require('lint').linters_by_ft = {
---             lua = { 'luacheck', }
---         }
---     end
--- })
 
 table.insert(plugins, {
     "OXY2DEV/markview.nvim",
@@ -892,80 +716,6 @@ table.insert(plugins, {
     end,
 })
 
--- Not in use
-
--- table.insert(plugins, { 'Pocco81/true-zen.nvim', enabled = false, lazy = true })
-
--- Indent colors
--- table.insert(plugins, {
---     'lukas-reineke/indent-blankline.nvim',
---     enabled = false,
---     lazy = false,
---     priority = 800,
---     main = "ibl",
---     config = function()
---         require("ibl").setup()
---         -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
---         -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
---         -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
---         -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
---         -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
---         -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
---         -- vim.cmd [[highlight IndentBlanklineIndent7 guifg=#E06C75 gui=nocombine]]
---         -- vim.cmd [[highlight IndentBlanklineIndent8 guifg=#E5C07B gui=nocombine]]
---         --
---         -- vim.opt.list = true
---         -- vim.opt.listchars:append "space:⋅"
---         -- --vim.opt.listchars:append "eol:↴"
---         --
---         -- require("indent_blankline").setup {
---         --     space_char_blankline = " ",
---         --     show_current_context = true,
---         --     show_current_context_start = true,
---         --     char_highlight_list = {
---         --         "IndentBlanklineIndent1",
---         --         "IndentBlanklineIndent2",
---         --         "IndentBlanklineIndent3",
---         --         "IndentBlanklineIndent4",
---         --         "IndentBlanklineIndent5",
---         --         "IndentBlanklineIndent6",
---         --         "IndentBlanklineIndent7",
---         --         "IndentBlanklineIndent8",
---         --     },
---         -- }
---     end
--- })
-
--- table.insert(plugins, {
---     "karb94/neoscroll.nvim",
---     enabled = false,
---     version = "*",
---     event = "VeryLazy",
---     config = function()
---         require('neoscroll').setup({
---         })
---     end
--- })
--- table.insert(plugins, {
---     'OmniSharp/omnisharp-vim',
---     enabled = true,
---     lazy = false,
---     config = function()
---     end,
--- })
-
-
--- Welcome screen
--- table.insert(plugins, {
---     'goolord/alpha-nvim',
---     enabled = true,
---     lazy = false,
---     priority = 700,
---     config = function()
---         require('alpha').setup(require('dashboard').config)
---     end
--- })
-
 -- *===================*
 -- | LUA configuration |
 -- *===================*
@@ -983,7 +733,22 @@ require("lazy").setup(plugins, {
 
 require('ckeys')
 -- require('cnotes')
-require('cflashcard')
+local simpleflashcards = require('cflashcard')
+simpleflashcards.setup({
+    sources = {
+        {
+            path = '~/.config/flashcard.csv',
+            col_front = 1,
+            col_back = 2,
+            col_filter = 3,
+            col_difficulty = 4,
+            col_timestamp = 5,
+            separator = ';',
+            filter_ignore = 'no',
+        }
+    },
+    minutes_offset = { 30, 2 * 60, 3 * 60 * 24 },
+})
 
 local markdown = require('cmarkdown')
 markdown.setup({})
@@ -1027,24 +792,24 @@ vim.cmd("syntax enable")
 vim.cmd("hi ColorColumn guibg=#111111")
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function()
-    vim.opt_local.colorcolumn = ""
-  end,
+    pattern = "*",
+    callback = function()
+        vim.opt_local.colorcolumn = ""
+    end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "python", "yaml", "json" },
-  callback = function()
-    vim.opt_local.colorcolumn = "80"
-  end,
+    pattern = { "python", "yaml", "json" },
+    callback = function()
+        vim.opt_local.colorcolumn = "80"
+    end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "javascript", "typescript", "lua", "markdown", "html", "css" },
-  callback = function()
-    vim.opt_local.colorcolumn = "100"
-  end,
+    pattern = { "javascript", "typescript", "lua", "markdown", "html", "css" },
+    callback = function()
+        vim.opt_local.colorcolumn = "100"
+    end,
 })
 
 -- *===================*

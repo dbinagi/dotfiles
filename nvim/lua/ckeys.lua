@@ -20,6 +20,7 @@ configure_group('<leader>c', "Commands", {
     { 'f', 'Fixed Cursor',          cmd("lua if vim.o.scrolloff > 0 then vim.o.scrolloff=0 else vim.o.scrolloff=999 end") },
     { 'd', 'Dim Scope',             cmd("lua if Snacks.dim.enabled then Snacks.dim.disable() else Snacks.dim.enable() end") },
     { 't', 'Toggle Transparency',   cmd("TransparentToggle") },
+    { 's', "Study Flashcards",      cmd("SimpleFlashcard") },
 
 })
 
@@ -65,7 +66,6 @@ configure_group('<leader>n', 'Notes', {
     { 'q', "Query Tags",      cmd("ObsidianTags") },
     { 'c', "Toggle Checkbox", cmd("lua require('obsidian').util.toggle_checkbox()") },
     { 's', "Toggle Scratch",  cmd("lua Snacks.scratch()") },
-    { 'S', "Study",           cmd("Study") },
     { 'l', "List Scratches",  cmd("lua Snacks.scratch.select()") },
 })
 
