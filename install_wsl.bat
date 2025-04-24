@@ -54,6 +54,9 @@ xcopy fonts \\wsl$\Ubuntu\home\bini\.fonts /E/H/C/I/Y
 
 xcopy dircolors\.dircolors \\wsl$\Ubuntu\home\bini\.dircolors* /Y
 
+:: LSD
+
+xcopy lsd \\wsl$\Ubuntu\home\bini\.config\lsd /E/H/C/I/Y
 :: Clean temp folders
 
 rmdir /s /q nvim_tmp
