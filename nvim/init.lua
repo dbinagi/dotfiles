@@ -707,15 +707,6 @@ table.insert(plugins, {
     end
 })
 
-table.insert(plugins, {
-    'ibhagwan/smartyank.nvim',
-    enabled = true,
-    lazy = false,
-    config = function()
-        require('smartyank').setup { highlight = { timeout = 200 } }
-    end,
-})
-
 -- *===================*
 -- | LUA configuration |
 -- *===================*
@@ -811,6 +802,8 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.colorcolumn = "100"
     end,
 })
+
+vim.cmd[[au TextYankPost * silent! lua vim.highlight.on_yank()]]
 
 -- *===================*
 -- | LANGUAGE SPECIFIC |

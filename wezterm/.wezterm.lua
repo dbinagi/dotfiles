@@ -1,5 +1,10 @@
 local wezterm = require 'wezterm'
 
+local image_path = "C:/Users/SirDi/wezterm/background.jpg"
+if os.getenv("HOME") then
+     image_path = os.getenv("HOME") .. "/wezterm/background.jpg"
+end
+
 local config = {}
 
 if wezterm.config_builder then
@@ -46,7 +51,8 @@ config.keys = {
 config.background = {
     {
         source = {
-            File = 'C:/Users/Bini/wezterm/background.jpg'
+            -- File = 'C:/Users/Bini/wezterm/background.jpg'
+            File = image_path
         },
         hsb = {
             brightness = 0.03,

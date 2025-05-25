@@ -45,7 +45,7 @@ local DEFAULT_OPTIONS = {
         {
             name = 'Easy',
             key = 1,
-            minutes = 30,
+            minutes = 8 * 60 * 24,
         },
         {
             name = 'Medium',
@@ -55,7 +55,7 @@ local DEFAULT_OPTIONS = {
         {
             name = 'Hard',
             key = 3,
-            minutes = 8 * 60 * 24,
+            minutes = 30,
         },
         {
             name = 'Remove',
