@@ -124,10 +124,11 @@ table.insert(plugins, {
                 }
             },
         }
-        require 'lspconfig'.eslint.setup {
-            capabilities = capabilities,
-            on_attach = custom_attach,
-        }
+
+        -- require 'lspconfig'.eslint.setup {
+        --     capabilities = capabilities,
+        --     on_attach = custom_attach,
+        -- }
 
         require 'lspconfig'.jsonls.setup {
             capabilities = capabilities,
@@ -188,6 +189,10 @@ table.insert(plugins, {
             on_attach = custom_attach,
         }
     end
+})
+
+vim.diagnostic.config({
+  virtual_lines = true
 })
 
 table.insert(plugins, {
@@ -697,8 +702,12 @@ table.insert(plugins, {
         "nvim-tree/nvim-web-devicons"
     },
     config = function()
+        local presets = require("markview.presets").headings;
+        local presets_rules = require("markview.presets").horizontal_rules;
         require("markview").setup({
             markdown = {
+                headings = presets.glow,
+                horizontal_rules = presets_rules.thick,
                 list_items = {
                     enable = false,
                 }
@@ -770,6 +779,7 @@ vim.o.smartcase                 = true     -- Switch search to case sensitive wh
 vim.o.foldmethod                = "syntax" -- Fold based on syntax
 -- vim.o.foldmethod        = "indent"                      -- Fold based on indention levels
 -- vim.o.foldnestmax       = 3                             -- Fold up to 3 nested levels
+vim.o.sidescrolloff             = 30
 
 vim.g.OmniSharp_server_use_net6 = true
 
@@ -786,6 +796,7 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
     callback = function()
         vim.opt_local.colorcolumn = ""
+        vim.cmd("TSContext enable")
     end,
 })
 
@@ -797,7 +808,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "javascript", "typescript", "lua", "markdown", "html", "css" },
+    pattern = { "javascript", "typescript", "lua", "markdown", "html", "css", "cs" },
     callback = function()
         vim.opt_local.colorcolumn = "100"
     end,

@@ -13,30 +13,33 @@ end
 
 -- Commands
 configure_group('<leader>c', "Commands", {
-    { 'c', 'Comment',               cmd("lua require('Comment.api').toggle_current_linewise()") },
+    { 'c', 'Comment',             cmd("lua require('Comment.api').toggle_current_linewise()") },
     -- { 'l', 'Comment Lines',         "<CMD>lua require('Comment.api').call('toggle_linewise_op')<CR>g@" },
-    { 'l', 'Comment Lines',         cmd("lua require('Comment.api').call('toggle_linewise_op')") .. "g@" },
-    { 'r', 'Rename Variable',       cmd("lua require('cosmic-ui').rename()") },
-    { 'f', 'Fixed Cursor',          cmd("lua if vim.o.scrolloff > 0 then vim.o.scrolloff=0 else vim.o.scrolloff=999 end") },
-    { 'd', 'Dim Scope',             cmd("lua if Snacks.dim.enabled then Snacks.dim.disable() else Snacks.dim.enable() end") },
-    { 't', 'Toggle Transparency',   cmd("TransparentToggle") },
-    { 's', "Study Flashcards",      cmd("SimpleFlashcard") },
+    { 'l', 'Comment Lines',       cmd("lua require('Comment.api').call('toggle_linewise_op')") .. "g@" },
+    { 'r', 'Rename Variable',     cmd("lua require('cosmic-ui').rename()") },
+    { 'f', 'Fixed Cursor',        cmd("lua if vim.o.scrolloff > 0 then vim.o.scrolloff=0 else vim.o.scrolloff=999 end") },
+    { 'd', 'Dim Scope',           cmd("lua if Snacks.dim.enabled then Snacks.dim.disable() else Snacks.dim.enable() end") },
+    { 't', 'Toggle Transparency', cmd("TransparentToggle") },
+    { 's', "Study Flashcards",    cmd("SimpleFlashcard") },
+    { 'w', "Change wrap",         cmd("set wrap!") },
 
 })
 
 -- Files
 configure_group('<leader>f', "Files", {
-    { 'f', 'Find File',   cmd("lua require('telescope.builtin').find_files({layout_strategy='vertical'})") },
-    { 'b', 'Find Buffer', cmd("Telescope buffers") },
+    { 'f', 'Find File',                   cmd("lua require('telescope.builtin').find_files({layout_strategy='vertical'})") },
+    { 'F', 'Find File from Current File', cmd("lua require('telescope').extensions.file_browser.file_browser({ path = '%:p:h' })") },
+    { 'b', 'Find Buffer',                 cmd("Telescope buffers") },
     { 'g', 'Search String',
         cmd("lua require('telescope').extensions.live_grep_args.live_grep_args({layout_strategy='vertical'})") },
     { 'h', 'Search Help',     cmd("Telescope help_tags") },
     { 's', 'Search Git Diff', cmd("lua require('telescope.builtin').git_status({layout_strategy='vertical'})") },
     { 't', 'Show File Tree',  cmd("Telescope file_browser") },
-    { 'n', "Find Note",       cmd(
-    "lua require('telescope.builtin').find_files({layout_strategy='vertical', cwd='~/notes'})") },
-    { 'c', "File Compare",    cmd("lua require('telescope').extensions.diff.diff_current({ hidden = true })") },
+    { 'n', "Find Note", cmd(
+        "lua require('telescope.builtin').find_files({layout_strategy='vertical', cwd='~/notes'})") },
+    { 'c', "File Compare", cmd("lua require('telescope').extensions.diff.diff_current({ hidden = true })") },
 })
+
 
 -- LSP
 configure_group('<leader>l', 'LSP', {
@@ -50,10 +53,10 @@ configure_group('<leader>l', 'LSP', {
     { 'R', "Preview References", cmd("lua require('goto-preview').goto_preview_references()") },
     { 's', "Signature Help",     vim.lsp.buf.signature_help },
     { 'h', "Hover",              vim.lsp.buf.hover },
-    { 'l', "Apply Linter",       cmd("lua require('lint').try_lint()")},
-    { 'm', "Turn On Markview",   cmd("Markview")},
-    { 'c', "Completion",         vim.lsp.buf.completion},
-    { 'i', "Implementation",         vim.lsp.buf.implementation},
+    { 'l', "Apply Linter",       cmd("lua require('lint').try_lint()") },
+    { 'm', "Turn On Markview",   cmd("Markview") },
+    -- { 'c', "Completion",         vim.lsp.buf.completion },
+    { 'i', "Implementation",     vim.lsp.buf.implementation },
 })
 
 -- Notes
@@ -71,12 +74,12 @@ configure_group('<leader>n', 'Notes', {
 
 -- Git
 configure_group('<leader>g', 'Git', {
-    { 'n', "Next Change",       cmd("lua require('gitsigns').nav_hunk('next')") },
-    { 'p', "Prev Change",       cmd("lua require('gitsigns').nav_hunk('prev')") },
-    { 'b', "Git Blame Toggle",  cmd('Gitsigns toggle_current_line_blame') },
-    { 'B', "Git Blame",         cmd('Gitsigns blame') },
-    { 'l', "Lazygit",           cmd('lua Snacks.lazygit()') },
-    { 's', "Show Changes",      cmd('Gitsigns toggle_linehl') },
+    { 'n', "Next Change",      cmd("lua require('gitsigns').nav_hunk('next')") },
+    { 'p', "Prev Change",      cmd("lua require('gitsigns').nav_hunk('prev')") },
+    { 'b', "Git Blame Toggle", cmd('Gitsigns toggle_current_line_blame') },
+    { 'B', "Git Blame",        cmd('Gitsigns blame') },
+    { 'l', "Lazygit",          cmd('lua Snacks.lazygit()') },
+    { 's', "Show Changes",     cmd('Gitsigns toggle_linehl') },
 
 })
 
@@ -106,9 +109,18 @@ wk.add({
     { "<leader>J", "<Cmd>:m+<CR>",                  desc = "Move Line Down" },
     { "<leader>K", "<Cmd>:m-2<CR>",                 desc = "Move Line Up" },
     { "<leader>z", "<Cmd>lua Snacks.zen.zen()<CR>", desc = "Toggle Zen" },
+    { "<leader>o", "o<ESC>k",                       desc = "New Line After" },
+    { "<leader>O", "O<ESC>j",                       desc = "New Line Before" },
+    { "<C-l>",     "zL",                            desc = "Move Screen Right" },
+    { "<C-h>",     "zH",                            desc = "Move Screen Left" },
 })
 
 vim.keymap.set("x", "p", function() return 'pgv"' .. vim.v.register .. "y" end, { remap = false, expr = true })
+
+vim.keymap.set('n', '<leader>le', function()
+    local new_config = not vim.diagnostic.config().virtual_lines
+    vim.diagnostic.config({ virtual_lines = new_config })
+end, { desc = 'Toggle diagnostic virtual_lines' })
 
 -- map('n', '<leader>gpi', '<cmd>lua require("goto-preview").goto_preview_implementation()<CR>', opts)
 -- map('n', '<leader>gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>', opts)
