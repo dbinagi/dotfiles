@@ -20,12 +20,6 @@ local column_difficulty = 4
 local column_timestamp = 5
 local filter_string = "no"
 local file_separator = ";"
--- local minutes_to_show = 60
-
-local minutes_offset = {}
-minutes_offset[1] = 30
-minutes_offset[2] = 2 * 60
-minutes_offset[3] = 8 * 60
 
 --- The default options
 local DEFAULT_OPTIONS = {
@@ -45,21 +39,25 @@ local DEFAULT_OPTIONS = {
         {
             name = 'Easy',
             key = 1,
-            minutes = 8 * 60 * 24,
+            difficulty = 1,
+            minutes = 7 * 60 * 24,
         },
         {
             name = 'Medium',
             key = 2,
+            difficulty = 2,
             minutes = 2 * 60,
         },
         {
             name = 'Hard',
             key = 3,
+            difficulty = 3,
             minutes = 30,
         },
         {
             name = 'Remove',
             key = 0,
+            difficulty = 0,
             minutes = nil,
         }
     },
@@ -67,7 +65,6 @@ local DEFAULT_OPTIONS = {
         hidden = false,
         key_text = "REFERENCE",
     },
-    minutes_offset = { 30, 2 * 60, 8 * 60 },
 }
 
 
@@ -78,6 +75,15 @@ local function shuffle(t)
         local j = math.random(i)
         t[i], t[j] = t[j], t[i]
     end
+end
+
+local function minutes_from_difficulty(difficulty)
+    for i, option in ipairs(vim.g.simpleflashcards.options) do
+        if (option.difficulty == difficulty) then
+            return option.minutes
+        end
+    end
+    return nil
 end
 
 local function line_to_card(line)
@@ -112,8 +118,8 @@ local function parse_csv(filepath)
                     -- print(minutes_from_now(card.timestamp))
                 end
                 if (card.timestamp ~= nil and card.difficulty ~= nil) then
-                    -- if ((minutes_from_now(card.timestamp)) >= minutes_offset[tonumber(card.difficulty)]) then
-                    if ((minutes_from_now(card.timestamp)) >= vim.g.simpleflashcards.minutes_offset[tonumber(card.difficulty)]) then
+                    local minutes = minutes_from_difficulty(tonumber(card.difficulty))
+                    if ((minutes_from_now(card.timestamp)) >= minutes) then
                         table.insert(items, { key = card.question, value = card.answer })
                     end
                 else
@@ -172,7 +178,7 @@ local function load_source(source_data)
 
     local items = parse_csv(filepath)
 
-    print(vim.inspect(source_data))
+    -- print(vim.inspect(source_data))
 
     return source
 end

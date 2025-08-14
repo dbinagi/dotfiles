@@ -192,7 +192,7 @@ table.insert(plugins, {
 })
 
 vim.diagnostic.config({
-  virtual_lines = true
+    virtual_lines = true
 })
 
 table.insert(plugins, {
@@ -424,6 +424,69 @@ table.insert(plugins, {
     end
 })
 
+table.insert(plugins, {
+    "OXY2DEV/markview.nvim",
+    lazy = false, -- Recommended
+    enabled = true,
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-tree/nvim-web-devicons"
+    },
+    config = function()
+        local presets = require("markview.presets").headings;
+        local presets_rules = require("markview.presets").horizontal_rules;
+        require("markview").setup({
+            markdown = {
+                headings = presets.glow,
+                horizontal_rules = presets_rules.thick,
+                list_items = {
+                    enable = false,
+                }
+            }
+        });
+    end
+})
+
+table.insert(plugins, {
+    "olimorris/codecompanion.nvim",
+    enabled = true,
+    lazy = false,
+    opts = {},
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+        require('codecompanion').setup({
+            strategies = {
+                chat = {
+                    adapter = "gemini",
+                },
+                inline = {
+                    adapter = "copilot",
+                },
+            },
+            adapters = {
+                gemini = function()
+                    return require("codecompanion.adapters").extend("gemini", {
+                        env = {
+                            api_key = config.GEMINI_API_KEY
+                        },
+                    })
+                end,
+            },
+        })
+    end
+})
+
+table.insert(plugins, {
+    "zbirenbaum/copilot.lua",
+    enabled = true,
+    lazy = false,
+    config = function()
+        require("copilot").setup({})
+    end
+})
 
 -- *==============*
 -- | LAZY PLUGINS |
@@ -693,26 +756,27 @@ table.insert(plugins, {
     end
 })
 
+
 table.insert(plugins, {
-    "OXY2DEV/markview.nvim",
-    lazy = false, -- Recommended
+    'nvim-tree/nvim-tree.lua',
     enabled = true,
-    dependencies = {
-        "nvim-treesitter/nvim-treesitter",
-        "nvim-tree/nvim-web-devicons"
-    },
+    lazy = true,
+    cmd = { 'NvimTreeOpen' },
     config = function()
-        local presets = require("markview.presets").headings;
-        local presets_rules = require("markview.presets").horizontal_rules;
-        require("markview").setup({
-            markdown = {
-                headings = presets.glow,
-                horizontal_rules = presets_rules.thick,
-                list_items = {
-                    enable = false,
-                }
-            }
-        });
+        require("nvim-tree").setup({
+            sort = {
+                sorter = "case_sensitive",
+            },
+            view = {
+                width = 30,
+            },
+            renderer = {
+                group_empty = true,
+            },
+            filters = {
+                dotfiles = true,
+            },
+        })
     end
 })
 
@@ -814,7 +878,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-vim.cmd[[au TextYankPost * silent! lua vim.highlight.on_yank()]]
+vim.cmd [[au TextYankPost * silent! lua vim.highlight.on_yank()]]
 
 -- *===================*
 -- | LANGUAGE SPECIFIC |

@@ -34,7 +34,8 @@ configure_group('<leader>f', "Files", {
         cmd("lua require('telescope').extensions.live_grep_args.live_grep_args({layout_strategy='vertical'})") },
     { 'h', 'Search Help',     cmd("Telescope help_tags") },
     { 's', 'Search Git Diff', cmd("lua require('telescope.builtin').git_status({layout_strategy='vertical'})") },
-    { 't', 'Show File Tree',  cmd("Telescope file_browser") },
+    -- { 't', 'Show File Tree',  cmd("Telescope file_browser") },
+    { 't', 'Show File Tree',  cmd("NvimTreeOpen") },
     { 'n', "Find Note", cmd(
         "lua require('telescope.builtin').find_files({layout_strategy='vertical', cwd='~/notes'})") },
     { 'c', "File Compare", cmd("lua require('telescope').extensions.diff.diff_current({ hidden = true })") },

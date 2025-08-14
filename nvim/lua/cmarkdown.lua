@@ -31,8 +31,10 @@ local DEFAULT_OPTIONS = {
         enable_highlights = true,
         header1 = {
             highlight_name = "MarkdownTocHeader1",
-            fg = "#81A1C1",
-            bg = "#3B4252",
+            -- fg = "#81A1C1",
+            -- bg = "#3B4252",
+            fg = nil,
+            bg = nil,
             bold = true,
             prefix = "",
         },
