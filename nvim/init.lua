@@ -32,14 +32,21 @@ table.insert(plugins, {
 })
 
 -- Color scheme
+
 table.insert(plugins, {
     'folke/tokyonight.nvim',
     enabled = true,
     lazy = false,
     priority = 1000,
-    config = function()
-        vim.cmd('colorscheme tokyonight-night')
-    end
+    opts = {},
+})
+
+table.insert(plugins, {
+    "eldritch-theme/eldritch.nvim",
+    enabled = true,
+    lazy = false,
+    priority = 1000,
+    opts = {},
 })
 
 -- LSP
@@ -185,6 +192,12 @@ table.insert(plugins, {
 
         -- Odin
         require 'lspconfig'.ols.setup {
+            cmd = { "/mnt/d/dev/vendors/ols/ols" },
+            init_options = {
+                checker_args = "-custom-attribute:api",
+                collections = {
+                },
+            },
             capabilities = capabilities,
             on_attach = custom_attach,
         }
@@ -307,7 +320,8 @@ table.insert(plugins, {
         local lualine = require 'lualine'
         lualine.setup({
             options = {
-                theme = 'tokyonight'
+                -- theme = "tokyonight"
+                theme = "eldritch"
             },
             sections = {
                 lualine_c = {},
@@ -879,6 +893,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.cmd [[au TextYankPost * silent! lua vim.highlight.on_yank()]]
+
+-- vim.cmd('colorscheme tokyonight-night')
+vim.cmd('colorscheme eldritch')
 
 -- *===================*
 -- | LANGUAGE SPECIFIC |

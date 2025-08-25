@@ -32,6 +32,8 @@ brew install fzf      # macOS
 
 Install lazygit
 
+Obsidian follow links: `sudo apt install wslu`
+
 ### Windows (Without WSL)
 
 1. Install NeoVim
