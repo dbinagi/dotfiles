@@ -38,7 +38,7 @@ rmdir /s /q tmuxinator_tmp
 
 :: WEZTERM
 
-xcopy "backgrounds\Twilight Prophet.jpg" C:\Users\Bini\wezterm\background.jpg* /I /Y
+xcopy "backgrounds\background.jpg" C:\Users\Bini\wezterm\background.jpg /I /Y
 copy wezterm\.wezterm.lua %USERPROFILE%
 
 :: KITTY
