@@ -86,13 +86,13 @@ table.insert(plugins, {
         end
 
         -- VIM
-        require 'lspconfig'.vimls.setup {
+        vim.lsp.config('vimls', {
             capabilities = capabilities,
             on_attach = custom_attach,
-        }
+        })
 
         -- LUA
-        require 'lspconfig'.lua_ls.setup {
+        vim.lsp.config('lua_ls', {
             settings = {
                 Lua = {
                     runtime = {
@@ -112,16 +112,16 @@ table.insert(plugins, {
             },
             capabilities = capabilities,
             on_attach = custom_attach,
-        }
+        })
 
         -- PYTHON
-        require 'lspconfig'.pylsp.setup {
+        vim.lsp.config('pylsp', {
             capabilities = capabilities,
             on_attach = custom_attach,
-        }
+        })
 
         -- JavaScript
-        require 'lspconfig'.ts_ls.setup {
+        vim.lsp.config('ts_ls', {
             capabilities = capabilities,
             on_attach = custom_attach,
             root_dir = require('lspconfig').util.root_pattern('tsconfig.json', '.git'), -- Define que `tsconfig.json` sea el archivo raíz del proyecto
@@ -130,68 +130,76 @@ table.insert(plugins, {
                     tsconfig = "./tsconfig.json" -- Asegura que use `tsconfig.json` desde la raíz si es necesario
                 }
             },
-        }
+        })
 
         -- require 'lspconfig'.eslint.setup {
         --     capabilities = capabilities,
         --     on_attach = custom_attach,
         -- }
 
-        require 'lspconfig'.jsonls.setup {
+        vim.lsp.config('jsonls', {
             capabilities = capabilities,
             on_attach = custom_attach,
-        }
+        })
 
         -- HTML
-        require 'lspconfig'.html.setup {
+        vim.lsp.config('html', {
             capabilities = capabilities,
             on_attach = custom_attach,
             cmd = {
                 "vscode-eslint-language-server", "--stdio"
             }
-        }
+        })
 
         -- CSS, JS
-        require 'lspconfig'.cssls.setup {
+        vim.lsp.config('cssls', {
             capabilities = capabilities,
             on_attach = custom_attach,
-        }
+        })
 
         -- C++
-        require 'lspconfig'.clangd.setup {
+        vim.lsp.config('clangd', {
             capabilities = capabilities,
             on_attach = custom_attach,
-        }
+        })
 
         -- C#
         if util.is_linux() then
-            require 'lspconfig'.omnisharp.setup {
+            vim.lsp.config('omnisharp', {
                 cmd = { "mono", "/home/bini/.local/share/nvim/mason/packages/omnisharp-mono/omnisharp/OmniSharp.exe" },
                 capabilities = capabilities,
                 on_attach = custom_attach,
-            }
+            })
         elseif util.is_mac() then
-            require 'lspconfig'.omnisharp.setup {
+            vim.lsp.config('omnisharp', {
                 cmd = { "/opt/homebrew/bin/mono", "/opt/homebrew/bin/omnisharp/OmniSharp.exe" },
                 capabilities = capabilities,
                 on_attach = custom_attach,
-            }
-        else
-            require 'lspconfig'.omnisharp.setup {
-                cmd = { "dotnet", "C:\\Users\\SirDi\\AppData\\Local\\nvim-data\\mason\\packages\\omnisharp\\libexec\\Omnisharp.dll" },
+            })
+        elseif vim.g.neovide then
+            vim.lsp.config('omnisharp', {
+                cmd = { "dotnet",
+                    "C:\\Users\\Bini\\AppData\\Local\\nvim-data\\mason\\packages\\omnisharp\\libexec\\Omnisharp.dll" },
                 capabilities = capabilities,
                 on_attach = custom_attach,
-            }
+            })
+        else
+            vim.lsp.config('omnisharp', {
+                cmd = { "dotnet",
+                    "C:\\Users\\SirDi\\AppData\\Local\\nvim-data\\mason\\packages\\omnisharp\\libexec\\Omnisharp.dll" },
+                capabilities = capabilities,
+                on_attach = custom_attach,
+            })
         end
 
         -- YAML
-        require 'lspconfig'.yamlls.setup {
+        vim.lsp.config('yamlls', {
             capabilities = capabilities,
             on_attach = custom_attach,
-        }
+        })
 
         -- Odin
-        require 'lspconfig'.ols.setup {
+        vim.lsp.config('ols', {
             cmd = { "/mnt/d/dev/vendors/ols/ols" },
             init_options = {
                 checker_args = "-custom-attribute:api",
@@ -200,7 +208,7 @@ table.insert(plugins, {
             },
             capabilities = capabilities,
             on_attach = custom_attach,
-        }
+        })
     end
 })
 
@@ -406,7 +414,6 @@ table.insert(plugins, {
                 width = 100,
             }
         },
-
         -- test
 
         -- bigfile = { enabled = true },
@@ -677,15 +684,15 @@ table.insert(plugins, {
         local telescope_themes = require('telescope.themes')
 
         require('goto-preview').setup {
-            width = 120, -- Width of the floating window
-            height = 15, -- Height of the floating window
+            width = 120,                                         -- Width of the floating window
+            height = 15,                                         -- Height of the floating window
             border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" }, -- Border characters of the floating window
-            default_mappings = false, -- Bind default mappings
-            debug = false, -- Print debug information
-            opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
-            resizing_mappings = false, -- Binds arrow keys to resizing the floating window.
-            post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
-            references = { -- Configure the telescope UI for slowing the references cycling window.
+            default_mappings = false,                            -- Bind default mappings
+            debug = false,                                       -- Print debug information
+            opacity = nil,                                       -- 0-100 opacity level of the floating window where 100 is fully transparent.
+            resizing_mappings = false,                           -- Binds arrow keys to resizing the floating window.
+            post_open_hook = nil,                                -- A function taking two arguments, a buffer and a window to be ran as a hook.
+            references = {                                       -- Configure the telescope UI for slowing the references cycling window.
                 telescope = telescope_themes.get_dropdown({ hide_preview = false })
             },
             -- These two configs can also be passed down to the goto-preview definition and implementation calls for one off "peak" functionality.
